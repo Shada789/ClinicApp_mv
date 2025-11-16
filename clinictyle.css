@@ -27,13 +27,14 @@ body#bodDoc {
     text-align: center;
     padding: 10px;
 }
+
 textarea {
-    width: 100%; 
-    height: 300px; 
+    width: 100%;
+    height: 300px;
     padding: 10px;
     font-size: 16px;
-    resize: vertical; 
-    box-sizing: border-box; 
+    resize: vertical;
+    box-sizing: border-box;
 }
 
 #tablasDia table,
@@ -78,6 +79,7 @@ textarea {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
+
 /*PatientMain*/
 /*historyManagement*/
 #genDoc2 {
@@ -85,7 +87,7 @@ textarea {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    margin-left: 200px; 
+    margin-left: 200px;
 }
 
 #hist {
@@ -110,36 +112,38 @@ textarea {
 /*historyManagement*/
 
 /* docAppts */
-#apt1{
+#apt1 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
 /* docAppts */
 
 #formRegistroDoctor {
-  display: grid;
-  grid-template-columns: max-content max-content; 
-  gap: 15px; 
-  column-gap: 50px;
-  justify-content: center;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    gap: 15px;
+    column-gap: 50px;
+    justify-content: center;
 }
 
 #formRegistroDoctor label,
 #formRegistroDoctor input {
-  width: 100%;
-  text-align: left;
+    width: 100%;
+    text-align: left;
 }
 
 #formRegistroDoctor button {
-  grid-column: 1 / -1; 
-  justify-self: center; 
-  padding: 10px 20px;
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 10px 20px;
 }
+
 nav {
     width: 200px;
     height: 100vh;
     background-color: #2c3e50;
-    
+
     position: fixed;
     top: 0;
     left: 0;
@@ -149,30 +153,30 @@ nav {
 nav ul {
     display: flex;
     flex-direction: column;
-    justify-content: space-around; 
-    height: 90vh; 
+    justify-content: space-around;
+    height: 90vh;
     padding: 0;
     margin: 0;
 }
 
 nav li {
-    list-style: none; 
+    list-style: none;
 }
 
 nav a {
     color: #FFFFFF;
-    text-decoration: none; 
+    text-decoration: none;
     font-weight: bold;
     font-size: 22px;
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
 }
 
 nav a img {
-    width: 50px; 
+    width: 50px;
     height: 50px;
-    filter:invert(100%);
+    filter: invert(100%);
     margin-bottom: 5px;
 }
 
@@ -226,11 +230,13 @@ footer {
 form {
     text-align: center;
 }
-#formCita{
+
+#formCita {
     text-align: justify;
     padding: 10px;
-    
+
 }
+
 #calendar {
     width: 100%;
     border-collapse: collapse;
@@ -242,9 +248,8 @@ form {
     border: 1px solid black;
     padding: 10px;
     text-align: center;
-    font-size: 1em; 
-    font-weight: normal; 
+    font-size: 1em;
+    font-weight: normal;
     color: black;
-    background-color: white;}
-
-
+    background-color: white;
+}
