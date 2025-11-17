@@ -189,7 +189,58 @@ textarea {
     width: 100%;
     padding: 75px;
 }
+/*repetido pero por que esta el #hist del aside */
+#hist aside::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #A80139,rgb(16, 51, 121));
+}
 
+/*barra de busqueda*/
+.container{
+    background-image: linear-gradient(rgba(0,0,0,5),rgba(0,0,0,5),url(img_fondo.jpg)) ;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#hist form , #buscarTratamiento form{
+    background-color: #ffffff;
+    border-radius: 30px;
+    border: 1px solid #333333;
+    display: flex;
+    align-items: center;
+    padding-left: 22px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#hist form input, #buscarTratamiento form input{
+    font-size: 15px;
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+}
+#hist form button, #buscarTratamiento form button{
+    background: linear-gradient(90deg, #A80139,rgb(16, 51, 121));
+    border: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    
+}
+#hist button i, #buscarTratamiento button i{
+    color: #ffffff;
+    font-size: 15px;
+}
+/*barra de busqueda*/
 /*historyManagement*/
 
 /* docAppts */
@@ -278,10 +329,10 @@ section,
 article,
 aside,
 footer {
-    border: 1px solid #f5ede5;
+    border: 1px solid #ffffff;
     padding: 15px;
     border-radius: 5px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     color: white;
 }
 
@@ -332,7 +383,7 @@ article {
 }
 
 aside {
-    background: linear-gradient(145deg, #EAE1D7 0%, #f5ede5 100%);
+    background-color: #ffffff;
     color: black;
     padding: 30px;
     border-radius: 12px;
@@ -384,9 +435,27 @@ form {
     color: black;
     background-color: white;}
 
-
-button{
-    color: white;
-    background: linear-gradient(90deg, #A80139,rgb(16, 51, 121));
-
+.boton{
+    background: transparent !important;
+    color: #A80139 !important;
+    border: 2px solid #A80139 !important;
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin: 5px;
+    display: block;
+    width: auto;
+    text-align: center;
+    display: inline-block;
+}
+.boton:hover {
+    background: #A80139 !important;
+    color: white !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(31, 119, 178, 0.3);
 }

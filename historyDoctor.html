@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
+    <script src="https://kit.fontawesome.com/f8d03bf483.js" crossorigin="anonymous"></script>
     <title>Historial Clínico</title>
 </head>
 
@@ -36,12 +37,12 @@
         <section id="hist">
             <article>
                 <h2>Citas del Día</h2>
-                <form method="get" id="search-form">
-                    <input type="text" id="search-input" placeholder="Buscar">
-                    <input type="submit" value="Buscar"><button type="button"
-                        onclick="location.href='editHistory.html'">Editar</button>
-                    <i class="search-icon"></i>
-                </form>
+                <div class="container">
+                    <form>
+                        <input type="text" placeholder="Buscar">
+                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
                 <br>
                 <p>Nombre del paciente</p>
             </article>
