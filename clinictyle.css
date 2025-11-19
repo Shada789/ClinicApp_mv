@@ -316,16 +316,13 @@ nav a:hover img {
 }
 
 main {
-    margin-left: 220px;
+    margin-left: 220px; 
     padding: 30px;
-    gap: 25px;
-    min-height: 100vh;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 
 header,
-section,
 article,
 aside,
 footer {
@@ -359,6 +356,7 @@ header {
     transition: all 0.4s ease;
     border: none;
     position: relative;
+    
 }
 
 .section:hover {
