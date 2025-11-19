@@ -240,10 +240,7 @@ textarea {
     color: #ffffff;
     font-size: 15px;
 }
-/*barra de busqueda*/
-/*historyManagement*/
 
-/* docAppts */
 #apt1{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -456,4 +453,26 @@ form {
     color: white !important;
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(31, 119, 178, 0.3);
+}
+#indMain{
+    margin-left: 0 !important;
+    text-align: center;
+}
+
+#formRegistroDoctor.two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
+    gap: 20px;
+}
+
+#formRegistroDoctor .field {
+    display: flex;
+    flex-direction: column;
+}
+
+#formRegistroDoctor button {
+    grid-column: span 2;
+    width: 60%;
+    justify-self: center;
+    padding: 12px 20px;
 }
