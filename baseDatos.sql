@@ -6,11 +6,12 @@ use chambs;
 /*Usuario    2*/
 create table usuario(
 id_usuario int AUTO_INCREMENT PRIMARY KEY,
-contraseña int,
 nombre VARCHAR(50)NOT NULL,
 paterno varchar(50) NOT NULL,
 materno varchar(50) NOT NULL,
 gmail varchar(50)NOT NULL,
+usuario varchar(50)not null,
+contraseña varchar(50)not null,
 cedula varchar(50),
 fechaNac date,
 id_tipo int,
@@ -74,8 +75,7 @@ precio int
 /*Citas      4*/
 create table citas(
 id_cita int AUTO_INCREMENT PRIMARY KEY,
-fecha VARCHAR(20)NOT NULL,
-hora VARCHAR(5)NOT NULL
+fecha_hora datetime(6)NOT NULL
 );
 
 /*Historial      5*/

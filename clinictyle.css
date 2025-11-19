@@ -253,12 +253,15 @@ textarea {
   gap: 15px; 
   column-gap: 50px;
   justify-content: center;
+  border: none;
 }
 
 #formRegistroDoctor label,
 #formRegistroDoctor input {
   width: 100%;
   text-align: left;
+  border: none;
+  color:black
 }
 
 #formRegistroDoctor button {
