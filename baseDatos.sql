@@ -8,7 +8,11 @@ create table usuario(
 id_usuario int AUTO_INCREMENT PRIMARY KEY,
 contraseña int,
 nombre VARCHAR(50)NOT NULL,
-gmail VARCHAR(50)NOT NULL,
+paterno varchar(50) NOT NULL,
+materno varchar(50) NOT NULL,
+gmail varchar(50)NOT NULL,
+cedula varchar(50),
+fechaNac date,
 id_tipo int,
 FOREIGN KEY (id_tipo) REFERENCES usuarioTipo(id_tipo)
 );
