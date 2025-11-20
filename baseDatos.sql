@@ -2,6 +2,14 @@ create database chambs;
 use chambs;
 /* Crea las tablas segun el orden de los numeros */
 
+ /*Tipo de usuario    1*/
+    create table usuarioTipo
+    (
+        id_tipo int
+        AUTO_INCREMENT PRIMARY KEY,
+tipo VARCHAR
+        (50)NOT NULL
+);
 
 /*Usuario    2*/
 create table usuario
@@ -18,7 +26,7 @@ gmail varchar
     (50)NOT NULL,
 usuario varchar
     (50)not null,
-contraseña varchar
+contrasena varchar
     (50)not null,
 cedula varchar
     (50),
@@ -29,15 +37,39 @@ FOREIGN KEY
     (id_tipo)
 );
 
-    /*Tipo de usuario    1*/
-    create table usuarioTipo
-    (
-        id_tipo int
-        AUTO_INCREMENT PRIMARY KEY,
-tipo VARCHAR
-        (50)NOT NULL
+   /*Tratamientos     3*/
+                        create table tratamientos
+                        (
+                            id_tratamiento int
+                            AUTO_INCREMENT PRIMARY KEY,
+descripcion VARCHAR
+                            (50)NOT NULL,
+precio int
 );
 
+  /*Citas      4*/
+                            create table citas
+                            (
+                                id_cita int
+                                AUTO_INCREMENT PRIMARY KEY,
+fecha_hora datetime
+                                (6)NOT NULL
+);
+
+   /*Historial      5*/
+                                create table historial
+                                (
+                                    id_historial int
+                                    AUTO_INCREMENT PRIMARY KEY,
+id_tratamiento int,
+FOREIGN KEY
+                                    (id_tratamiento) REFERENCES tratamientos
+                                    (id_tratamiento),
+id_cita int,
+FOREIGN KEY
+                                    (id_cita) REFERENCES citas
+                                    (id_cita)
+);
 
         /*Medico     6*/
         create table medico
@@ -105,36 +137,6 @@ FOREIGN KEY
 );
 
 
-                        /*Tratamientos     3*/
-                        create table tratamientos
-                        (
-                            id_tratamiento int
-                            AUTO_INCREMENT PRIMARY KEY,
-descripcion VARCHAR
-                            (50)NOT NULL,
-precio int
-);
+                          
 
-                            /*Citas      4*/
-                            create table citas
-                            (
-                                id_cita int
-                                AUTO_INCREMENT PRIMARY KEY,
-fecha_hora datetime
-                                (6)NOT NULL
-);
-
-                                /*Historial      5*/
-                                create table historial
-                                (
-                                    id_historial int
-                                    AUTO_INCREMENT PRIMARY KEY,
-id_tratamiento int,
-FOREIGN KEY
-                                    (id_tratamiento) REFERENCES tratamientos
-                                    (id_tratamiento),
-id_cita int,
-FOREIGN KEY
-                                    (id_cita) REFERENCES citas
-                                    (id_cita)
-);
+                             

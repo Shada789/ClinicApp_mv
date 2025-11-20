@@ -12,7 +12,7 @@ body#bodDoc {
 
 #tablasDia {
     display: grid;
-    gap: 70px; 
+    gap: 70px;
     align-items: flex-start;
     grid-template-columns: 2fr 2fr 1fr;
     margin: 20px 0;
@@ -21,7 +21,7 @@ body#bodDoc {
 #tablasDia article {
     width: 100%;
     padding: 25px;
-    margin: 0; 
+    margin: 0;
     background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
@@ -30,10 +30,12 @@ body#bodDoc {
     position: relative;
     overflow: hidden;
 }
+
 #tablasDia article:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
+
 #tablasDia article::before {
     content: '';
     position: absolute;
@@ -41,8 +43,9 @@ body#bodDoc {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #A80139,rgb(16, 51, 121));
+    background: linear-gradient(90deg, #A80139, rgb(16, 51, 121));
 }
+
 #tablasDia article h2 {
     color: #333333;
     margin-top: 0;
@@ -60,10 +63,12 @@ table {
     border-radius: 8px;
     overflow: hidden;
 }
+
 #tablasDia thead {
     background: linear-gradient(135deg, #A80139 0%, rgb(16, 51, 121)100%);
-     color: #FFFFFF
+    color: #FFFFFF
 }
+
 #tablasDia thead th {
     color: #FFFFFF !important;
     padding: 14px 12px;
@@ -79,15 +84,17 @@ table {
     position: relative;
     overflow: hidden;
 }
- #reloj::before {
+
+#reloj::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #A80139,rgb(16, 51, 121));
+    background: linear-gradient(90deg, #A80139, rgb(16, 51, 121));
 }
+
 #reloj h3 {
     color: #333333;
     margin-top: 0;
@@ -110,13 +117,14 @@ table {
     padding: 8px;
 
 }
+
 textarea {
-    width: 100%; 
-    height: 300px; 
+    width: 100%;
+    height: 300px;
     padding: 10px;
     font-size: 16px;
-    resize: vertical; 
-    box-sizing: border-box; 
+    resize: vertical;
+    box-sizing: border-box;
 }
 
 #tablasDia table,
@@ -161,6 +169,7 @@ textarea {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
+
 /*PatientMain*/
 /*historyManagement*/
 #genDoc2 {
@@ -168,7 +177,7 @@ textarea {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    margin-left: 200px; 
+    margin-left: 200px;
 }
 
 #hist {
@@ -189,6 +198,7 @@ textarea {
     width: 100%;
     padding: 75px;
 }
+
 /*repetido pero por que esta el #hist del aside */
 #hist aside::before {
     content: '';
@@ -197,19 +207,21 @@ textarea {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #A80139,rgb(16, 51, 121));
+    background: linear-gradient(90deg, #A80139, rgb(16, 51, 121));
 }
 
 /*barra de busqueda*/
-.container{
-    background-image: linear-gradient(rgba(0,0,0,5),rgba(0,0,0,5),url(img_fondo.jpg)) ;
+.container {
+    background-image: linear-gradient(rgba(0, 0, 0, 5), rgba(0, 0, 0, 5), url(img_fondo.jpg));
     background-position: center;
     background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-#hist form , #buscarTratamiento form{
+
+#hist form,
+#buscarTratamiento form {
     background-color: #ffffff;
     border-radius: 30px;
     border: 1px solid #333333;
@@ -220,103 +232,123 @@ textarea {
     padding-top: 5px;
     padding-bottom: 5px;
 }
-#hist form input, #buscarTratamiento form input{
+
+#hist form input,
+#buscarTratamiento form input {
     font-size: 15px;
     flex: 1;
     border: 0;
     outline: 0;
     background-color: transparent;
 }
-#hist form button, #buscarTratamiento form button{
-    background: linear-gradient(90deg, #A80139,rgb(16, 51, 121));
+
+#hist form button,
+#buscarTratamiento form button {
+    background: linear-gradient(90deg, #A80139, rgb(16, 51, 121));
     border: 0;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    
+
 }
-#hist button i, #buscarTratamiento button i{
+
+#hist button i,
+#buscarTratamiento button i {
     color: #ffffff;
     font-size: 15px;
 }
 
-#apt1{
+#apt1 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
 /* docAppts */
 
 #formRegistroDoctor {
-  display: grid;
-  grid-template-columns: max-content max-content; 
-  gap: 15px; 
-  column-gap: 50px;
-  justify-content: center;
-  border: none;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    gap: 15px;
+    column-gap: 50px;
+    margin: 0 auto;
+    justify-content: center;
+    border: none;
 }
 
 #formRegistroDoctor label,
 #formRegistroDoctor input {
-  width: 100%;
-  text-align: left;
-  border: none;
-  color:black
+    width: 100%;
+    text-align: left;
+    border: none;
+    color: black;
+    font-size: 16px;
 }
 
 #formRegistroDoctor button {
-  grid-column: 1 / -1; 
-  justify-self: center; 
-  padding: 10px 20px;
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 10px 20px;
+    font-size: 18px;
 }
 
 nav {
     width: 200px;
     height: 100vh;
-    background-color: #3A4A6A;
+    background: rgb(16, 51, 121);
     position: fixed;
     top: 0;
     left: 0;
     text-align: center;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 0 15px 15px 0;
+    padding-top: 20px;
 }
 
 nav ul {
     display: flex;
     flex-direction: column;
-    justify-content: space-around; 
-    height: 90vh; 
+    justify-content: space-around;
+    height: 90vh;
     padding: 0;
     margin: 0;
 }
 
 nav li {
-    list-style: none; 
+    list-style: none;
 }
 
 nav a {
-    color: #FFFFFF;
-    text-decoration: none; 
+    color: #fff;
+    text-decoration: none;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 20px;
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 0;
+    transition: all 0.3s ease;
 }
-nav a:hover {
-    text-decoration: underline;
-}
+
 nav a img {
-    width: 50px; 
+    width: 50px;
     height: 50px;
-    filter:invert(100%);
     margin-bottom: 5px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: invert(100%);
 }
+
+nav a:hover {
+    transform: translateX(10px);
+    border-radius: 10px;
+}
+
 nav a:hover img {
-    transform: scale(1.1);
+    transform: scale(1.2) rotate(-10deg);
 }
 
 main {
-    margin-left: 220px; 
+    margin-left: 220px;
     padding: 30px;
     display: flex;
     justify-content: center;
@@ -346,7 +378,8 @@ header {
     position: relative;
     overflow: hidden;
 }
- section {
+
+section {
     background-color: #fafafa;
     color: black;
     padding: 35px;
@@ -356,25 +389,28 @@ header {
     transition: all 0.4s ease;
     border: none;
     position: relative;
-    
+    width: 70%;
+    justify-content: center;
 }
 
 .section:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
+
 .content-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
     margin: 20px 0;
 }
+
 article {
     color: black;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
     border: 1px solid #ffffff;
-    margin: 15px; 
+    margin: 15px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -391,9 +427,12 @@ aside {
     position: relative;
     overflow: hidden;
 }
-article:hover, aside:hover {
+
+article:hover,
+aside:hover {
     transform: translateY(-3px);
 }
+
 article::before {
     content: '';
     position: absolute;
@@ -401,8 +440,9 @@ article::before {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #A80139,rgb(16, 51, 121));
+    background: linear-gradient(90deg, #A80139, rgb(16, 51, 121));
 }
+
 footer {
     text-align: center;
     background-color: #333333;
@@ -412,11 +452,13 @@ footer {
 form {
     text-align: center;
 }
-#formCita{
+
+#formCita {
     text-align: justify;
     padding: 10px;
-    
+
 }
+
 #calendar {
     width: 100%;
     border-collapse: collapse;
@@ -428,12 +470,13 @@ form {
     border: 1px solid black;
     padding: 10px;
     text-align: center;
-    font-size: 1em; 
-    font-weight: normal; 
+    font-size: 1em;
+    font-weight: normal;
     color: black;
-    background-color: white;}
+    background-color: white;
+}
 
-.boton{
+.boton {
     background: transparent !important;
     color: #A80139 !important;
     border: 2px solid #A80139 !important;
@@ -451,34 +494,36 @@ form {
     text-align: center;
     display: inline-block;
 }
+
 .boton:hover {
     background: #A80139 !important;
     color: white !important;
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(31, 119, 178, 0.3);
 }
-#indMain{
+
+#indMain {
     margin-left: 0 !important;
     text-align: center;
 }
 
 #formRegistroDoctor.two-columns {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
-    gap: 20px;
+    grid-template-columns: 1fr 1fr;
 }
 
 #formRegistroDoctor .field {
     display: flex;
     flex-direction: column;
+
 }
 
 #formRegistroDoctor button {
     grid-column: span 2;
     width: 60%;
-    justify-self: center;
     padding: 12px 20px;
 }
+
 #tablasDia thead th {
     background: linear-gradient(135deg, #A80139, rgb(16, 51, 121)) !important;
     color: #fff !important;
