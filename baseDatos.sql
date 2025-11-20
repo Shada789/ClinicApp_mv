@@ -4,85 +4,137 @@ use chambs;
 
 
 /*Usuario    2*/
-create table usuario(
-id_usuario int AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(50)NOT NULL,
-paterno varchar(50) NOT NULL,
-materno varchar(50) NOT NULL,
-gmail varchar(50)NOT NULL,
-usuario varchar(50)not null,
-contraseña varchar(50)not null,
-cedula varchar(50),
+create table usuario
+(
+    id_usuario int
+    AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR
+    (50)NOT NULL,
+paterno varchar
+    (50) NOT NULL,
+materno varchar
+    (50) NOT NULL,
+gmail varchar
+    (50)NOT NULL,
+usuario varchar
+    (50)not null,
+contraseña varchar
+    (50)not null,
+cedula varchar
+    (50),
 fechaNac date,
 id_tipo int,
-FOREIGN KEY (id_tipo) REFERENCES usuarioTipo(id_tipo)
+FOREIGN KEY
+    (id_tipo) REFERENCES usuarioTipo
+    (id_tipo)
 );
 
-/*Tipo de usuario    1*/
-create table usuarioTipo(
-id_tipo int AUTO_INCREMENT PRIMARY KEY,
-tipo VARCHAR(50)NOT NULL
+    /*Tipo de usuario    1*/
+    create table usuarioTipo
+    (
+        id_tipo int
+        AUTO_INCREMENT PRIMARY KEY,
+tipo VARCHAR
+        (50)NOT NULL
 );
 
 
-/*Medico     6*/
-create table medico(
-id_medico int AUTO_INCREMENT PRIMARY KEY,
+        /*Medico     6*/
+        create table medico
+        (
+            id_medico int
+            AUTO_INCREMENT PRIMARY KEY,
 id_usuario int,
-FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+FOREIGN KEY
+            (id_usuario) REFERENCES usuario
+            (id_usuario)
 );
 
-/*Cliente     7*/
-create table cliente(
-id_cliente int AUTO_INCREMENT PRIMARY KEY,
+            /*Cliente     7*/
+            create table cliente
+            (
+                id_cliente int
+                AUTO_INCREMENT PRIMARY KEY,
 id_usuario int,
-FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+FOREIGN KEY
+                (id_usuario) REFERENCES usuario
+                (id_usuario)
 );
 
 
-/*Información del Medico     8*/
-create table infoMedico(
-id_infoMed int AUTO_INCREMENT PRIMARY KEY,
+                /*Información del Medico     8*/
+                create table infoMedico
+                (
+                    id_infoMed int
+                    AUTO_INCREMENT PRIMARY KEY,
 id_tratamiento int,
-FOREIGN KEY (id_tratamiento) REFERENCES tratamientos(id_tratamiento),
+FOREIGN KEY
+                    (id_tratamiento) REFERENCES tratamientos
+                    (id_tratamiento),
 id_cita int,
-FOREIGN KEY (id_cita) REFERENCES citas(id_cita),
+FOREIGN KEY
+                    (id_cita) REFERENCES citas
+                    (id_cita),
 id_cliente int,
-FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+FOREIGN KEY
+                    (id_cliente) REFERENCES cliente
+                    (id_cliente),
 id_medico int,
-FOREIGN KEY (id_medico) REFERENCES medico(id_medico)
+FOREIGN KEY
+                    (id_medico) REFERENCES medico
+                    (id_medico)
 );
- 
-/*Información del Cliente     9*/
-create table infoCliente(
-id_infoCli int AUTO_INCREMENT PRIMARY KEY,
+
+                    /*Información del Cliente     9*/
+                    create table infoCliente
+                    (
+                        id_infoCli int
+                        AUTO_INCREMENT PRIMARY KEY,
 id_medico int,
-FOREIGN KEY (id_medico) REFERENCES medico(id_medico),
+FOREIGN KEY
+                        (id_medico) REFERENCES medico
+                        (id_medico),
 id_historial int,
-FOREIGN KEY (id_historial) REFERENCES historial(id_historial),
+FOREIGN KEY
+                        (id_historial) REFERENCES historial
+                        (id_historial),
 id_cliente int,
-FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
+FOREIGN KEY
+                        (id_cliente) REFERENCES cliente
+                        (id_cliente)
 );
 
 
-/*Tratamientos     3*/
-create table tratamientos(
-id_tratamiento int AUTO_INCREMENT PRIMARY KEY,
-descripcion VARCHAR(50)NOT NULL,
+                        /*Tratamientos     3*/
+                        create table tratamientos
+                        (
+                            id_tratamiento int
+                            AUTO_INCREMENT PRIMARY KEY,
+descripcion VARCHAR
+                            (50)NOT NULL,
 precio int
 );
 
-/*Citas      4*/
-create table citas(
-id_cita int AUTO_INCREMENT PRIMARY KEY,
-fecha_hora datetime(6)NOT NULL
+                            /*Citas      4*/
+                            create table citas
+                            (
+                                id_cita int
+                                AUTO_INCREMENT PRIMARY KEY,
+fecha_hora datetime
+                                (6)NOT NULL
 );
 
-/*Historial      5*/
-create table historial(
-id_historial int AUTO_INCREMENT PRIMARY KEY,
+                                /*Historial      5*/
+                                create table historial
+                                (
+                                    id_historial int
+                                    AUTO_INCREMENT PRIMARY KEY,
 id_tratamiento int,
-FOREIGN KEY (id_tratamiento) REFERENCES tratamientos(id_tratamiento),
+FOREIGN KEY
+                                    (id_tratamiento) REFERENCES tratamientos
+                                    (id_tratamiento),
 id_cita int,
-FOREIGN KEY (id_cita) REFERENCES citas(id_cita)
+FOREIGN KEY
+                                    (id_cita) REFERENCES citas
+                                    (id_cita)
 );
