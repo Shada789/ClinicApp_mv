@@ -535,3 +535,15 @@ display: block !important;
 #indecs section {
     margin-bottom: 60px;
 }
+
+.image{
+    width: 120%;
+    height: 120%;
+    transform: translate(34.5%,8%);
+}
+.content{
+    width: 100%;
+
+    text-align: center;
+    margin-top: 20px;
+}
