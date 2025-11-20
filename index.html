@@ -9,42 +9,93 @@
 
 <body id="bodDoc">
     <header>
-        <h1>ClinicApp</h1>
+        <h1>ClinicApp
+        <a href="inDoc.html">Soy Doctor</a>
+                <a href="inPac.html">Soy Paciente</a>
+</h1>
     </header>
 
     <main id="indecs">
-      
-       <section>
-         <h2>¿Qué ofrecemos?</h2>
-         <article>
+<h1>¿Qué ofrecemos?</h1>
+        <section id="ofrecemos">
+            
 
-         </article>
-       </section>
-           
+            <div id="itemsOfrecer">
+                <article class="item" data-img="security-free-material-svgrepo-com.svg"
+                    data-desc="Los datos de los pacientes estén protegidos y solo son accesibles por usuarios autorizados.">
+                    <h3>Seguridad y Privacidad</h3>
+                </article>
 
-            <section>
-             <h2>¿Quiénes Somos?</h2>
+                <article class="item" data-img="medical-medical-record-svgrepo-com.svg"
+                    data-desc="Tener una sección donde se listen todas sus citas anteriores, tratamientos realizados y notas.">
+                    <h3>Historial Moderno</h3>
+                </article>
+
+                <article class="item" data-img="agenda-calendar-date-svgrepo-com.svg"
+                    data-desc="Al agendar una cita, el sistema bloquea el horario y previene que se agende otra a la misma hora.">
+                    <h3>Agenda Inteligente</h3>
+                </article>
+
+                <article class="item" data-img="interface-ui-layout-app-svgrepo-com.svg"
+                    data-desc="La interfaz es fácil e intuitiva, permitiendo que cualquier usuario pueda usar la aplicación.">
+                    <h3>Interfaz Intuitiva</h3>
+                </article>
+                <article class="item" data-img=""
+                data-desc="Después de la cita poder seleccionar el tratamiento realizado.">
+                    <h3>Registro de Tratamientos</h3>
+                </article>
+                <article class="item" data-img=""
+                data-desc="tanto médicos como pacientes deben poder acceder a sus funciones sin tantos obstáculos
+">
+                    <h3>Usabilidad</h3>
+                </article>
+            </div>
+
+            <aside id="preview">
+                <img id="previewImg" src="" alt="">
+                <p id="previewDesc"></p>
+            </aside>
+        </section>
+<h1>¿Quiénes Somos?</h1>
+        <section>
+            
+
             <article>
-               <h3>Visión</h3>
-               Error 404 aspira a ser un referente en el desarrollo de software, creando soluciones tecnológicas innovadoras que transformen la interacción del público con la tecnología. Buscamos ser reconocidos como una empresa líder, caracterizada por la excelencia y la adaptabilidad, ofreciendo productos de alta calidad que se ajusten a las demandas del mercado. Nuestro objetivo es potenciar la eficiencia de los usuarios, destacándose por valores como la innovación, la calidad y el compromiso con las necesidades de nuestros clientes, consolidándonos como una marca confiable y vanguardista en el sector tecnológico.
-
+                <h3>Visión</h3>
+                Error 404 aspira a ser un referente en el desarrollo de software, creando soluciones tecnológicas innovadoras que transformen la interacción del público con la tecnología. Buscamos ser reconocidos como una empresa líder, caracterizada por la excelencia y la adaptabilidad, ofreciendo productos de alta calidad que se ajusten a las demandas del mercado.
             </article>
+
             <article>
                 <h3>Misión</h3>
-                Error 404 es una empresa conformada por un equipo comprometido con el desarrollo de software accesible, creando soluciones tecnológicas de calidad que optimizan procesos y mejoran la eficiencia operativa. Nos dedicamos a diseñar herramientas intuitivas y adaptables, impulsando la transformación digital para el público en general. Lo hacemos a través de un enfoque centrado en la responsabilidad, la accesibilidad y el compromiso, garantizando productos que cumplen con las necesidades específicas de nuestros clientes y promueven su desempeño en un entorno tecnológico inclusivo.
+                Error 404 es una empresa comprometida con el desarrollo de software accesible, creando soluciones tecnológicas que optimizan procesos y mejoran la eficiencia operativa. Diseñamos herramientas intuitivas y adaptables que impulsan la transformación digital.
             </article>
+
             <article>
                 <h3>Nuestro Objetivo</h3>
-                Desarrollar una aplicación de gestión integral para cualquier clínica que centralice y digitalice el registro de pacientes, la agenda de citas y los historiales clínicos, con el fin de eliminar traslapes, evitar duplicidades y pérdida de información, y mejorar la comunicación con los pacientes a través de recordatorios automatizados, optimizando así la administración de la clínica y la calidad del servicio.
-
+                Desarrollar una aplicación de gestión integral para clínicas que centralice pacientes, citas e historiales clínicos, evitando duplicidades y pérdida de información.
             </article>
         </section>
     </main>
-    
 
     <footer>
         <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
     </footer>
-</body>
 
+<script>
+document.querySelectorAll('.item').forEach(item => {
+  item.addEventListener('mouseover', () => {
+    const img = item.getAttribute('data-img');
+    const desc = item.getAttribute('data-desc');
+    document.getElementById('previewImg').src = img;
+    document.getElementById('previewDesc').textContent = desc;
+    document.getElementById('preview').style.display = "flex";
+  });
+
+  item.addEventListener('mouseout', () => {
+    document.getElementById('preview').style.display = "none";
+  });
+});
+</script>
+
+</body>
 </html>
