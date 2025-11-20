@@ -9,7 +9,6 @@ body#bodDoc {
     flex-direction: column;
 }
 
-
 #tablasDia {
     display: grid;
     gap: 70px;
@@ -365,8 +364,10 @@ footer {
     color: white;
 }
 
-
 header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     background: linear-gradient(135deg, #A80139 0%, #8a0130 100%);
     text-align: center;
     padding: 35px 25px;
@@ -375,7 +376,6 @@ header {
     color: white;
     margin-bottom: 10px;
     border: none;
-    position: relative;
     overflow: hidden;
 }
 
@@ -389,7 +389,6 @@ section {
     transition: all 0.4s ease;
     border: none;
     position: relative;
-    width: 70%;
     justify-content: center;
 }
 
@@ -446,7 +445,6 @@ article::before {
 footer {
     text-align: center;
     background-color: #333333;
-    margin-top: auto;
 }
 
 form {
@@ -527,4 +525,13 @@ form {
 #tablasDia thead th {
     background: linear-gradient(135deg, #A80139, rgb(16, 51, 121)) !important;
     color: #fff !important;
+}
+#indecs{
+        margin-left: 0 !important;
+display: block !important;
+  
+
+}
+#indecs section {
+    margin-bottom: 60px;
 }
