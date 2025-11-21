@@ -571,21 +571,21 @@ form {
 }
 
 /* PREVIEW FIJO (NO DESAPARECE) */
-#preview {
+#previewImg,
+#previewDesc {
     width: 260px;
     min-height: 260px;
     padding: 15px;
     background: white;
     border-radius: 12px;
     box-shadow: 0 0 12px rgba(0,0,0,0.1);
-    display: flex;        /* SIEMPRE visible */
+    display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-left: auto;
     justify-content: flex-start;
 }
 
-#preview img {
+#previewImg img {
     width: 100%;
     height: auto;
     border-radius: 8px;

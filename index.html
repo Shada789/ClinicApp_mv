@@ -10,15 +10,15 @@
 <body id="bodDoc">
     <header>
         <h1>ClinicApp
-        <a href="inDoc.html">Soy Doctor</a>
-                <a href="inPac.html">Soy Paciente</a>
-</h1>
+            <a href="inDoc.html">Soy Doctor</a>
+            <a href="inPac.html">Soy Paciente</a>
+        </h1>
     </header>
 
     <main id="indecs">
-<h1>¿Qué ofrecemos?</h1>
+        <h1>¿Qué ofrecemos?</h1>
         <section id="ofrecemos">
-            
+
 
             <div id="itemsOfrecer">
                 <article class="item" data-img="security-free-material-svgrepo-com.svg"
@@ -41,38 +41,45 @@
                     <h3>Interfaz Intuitiva</h3>
                 </article>
                 <article class="item" data-img=""
-                data-desc="Después de la cita poder seleccionar el tratamiento realizado.">
+                    data-desc="Después de la cita poder seleccionar el tratamiento realizado.">
                     <h3>Registro de Tratamientos</h3>
                 </article>
-                <article class="item" data-img=""
-                data-desc="tanto médicos como pacientes deben poder acceder a sus funciones sin tantos obstáculos
+                <article class="item" data-img="" data-desc="tanto médicos como pacientes deben poder acceder a sus funciones sin tantos obstáculos
 ">
                     <h3>Usabilidad</h3>
                 </article>
             </div>
+            <aside id="previewDs">
+                <p id="previewDesc">Hola</p>
 
+            </aside>
             <aside id="preview">
                 <img id="previewImg" src="" alt="">
-                <p id="previewDesc"></p>
             </aside>
         </section>
-<h1>¿Quiénes Somos?</h1>
-        <section>
-            
+        <h1>¿Quiénes Somos?</h1>
+        <section id="ofrecemos">
+
 
             <article>
                 <h3>Visión</h3>
-                Error 404 aspira a ser un referente en el desarrollo de software, creando soluciones tecnológicas innovadoras que transformen la interacción del público con la tecnología. Buscamos ser reconocidos como una empresa líder, caracterizada por la excelencia y la adaptabilidad, ofreciendo productos de alta calidad que se ajusten a las demandas del mercado.
+                Error 404 aspira a ser un referente en el desarrollo de software, creando soluciones tecnológicas
+                innovadoras que transformen la interacción del público con la tecnología. Buscamos ser reconocidos como
+                una empresa líder, caracterizada por la excelencia y la adaptabilidad, ofreciendo productos de alta
+                calidad que se ajusten a las demandas del mercado.
             </article>
 
             <article>
                 <h3>Misión</h3>
-                Error 404 es una empresa comprometida con el desarrollo de software accesible, creando soluciones tecnológicas que optimizan procesos y mejoran la eficiencia operativa. Diseñamos herramientas intuitivas y adaptables que impulsan la transformación digital.
+                Error 404 es una empresa comprometida con el desarrollo de software accesible, creando soluciones
+                tecnológicas que optimizan procesos y mejoran la eficiencia operativa. Diseñamos herramientas intuitivas
+                y adaptables que impulsan la transformación digital.
             </article>
 
             <article>
                 <h3>Nuestro Objetivo</h3>
-                Desarrollar una aplicación de gestión integral para clínicas que centralice pacientes, citas e historiales clínicos, evitando duplicidades y pérdida de información.
+                Desarrollar una aplicación de gestión integral para clínicas que centralice pacientes, citas e
+                historiales clínicos, evitando duplicidades y pérdida de información.
             </article>
         </section>
     </main>
@@ -81,21 +88,20 @@
         <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
     </footer>
 
-<script>
-document.querySelectorAll('.item').forEach(item => {
-  item.addEventListener('mouseover', () => {
-    const img = item.getAttribute('data-img');
-    const desc = item.getAttribute('data-desc');
-    document.getElementById('previewImg').src = img;
-    document.getElementById('previewDesc').textContent = desc;
-    document.getElementById('preview').style.display = "flex";
-  });
+    <script>
+        document.querySelectorAll('.item').forEach(item => {
+            item.addEventListener('mouseover', () => {
+                const img = item.getAttribute('data-img');
+                const desc = item.getAttribute('data-desc');
+                document.getElementById('previewImg').src = img;
+                document.getElementById('previewDesc').textContent = desc;
+                document.getElementById('previewDs').style.display = "flex";
+            });
 
-  item.addEventListener('mouseout', () => {
-    document.getElementById('preview').style.display = "none";
-  });
-});
-</script>
+           
+        });
+    </script>
 
 </body>
+
 </html>
