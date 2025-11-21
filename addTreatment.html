@@ -8,7 +8,6 @@
 </head>
 
 <body id="bodDoc">
-
     <nav id="navDoc">
         <ul>
             <li><a href="doctorMain.html">
@@ -30,22 +29,26 @@
     </nav>
 
 
+
+
     <main id="genDoc2">
         <header>
             <h1>ClinicApp</h1>
         </header>
+
         <section id="formTrat">
             <h2>Registrar Nuevo Tratamiento</h2>
-            <form id="formCita">
+            <form id="formRegistroDoctor">
 
-                <label for="fecha">Nombre:</label>
-                <input type="number" id="fecha" name="fecha"><br><br>
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre"><br><br>
 
-                <label for="hora">Descripción:</label>
-                <input type="text" id="hora" name="hora"><br><br>
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio"><br><br>
 
-                <label for="fecha">Precio:</label>
-                <input type="number" id="fecha" name="fecha"><br><br>
+                <label for="descripcion">Descripción:</label><br>
+                <textarea id="descripcion" name="descripcion" cols="50"></textarea><br><br>
+            
 
                 <button type="button" class="boton" onclick="location.href='docTreatments.html'">Registrar Tratamiento</button>
             </form>
@@ -64,12 +67,10 @@
                 </tbody>
             </table>
         </section>
+
         <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
         </footer>
     </main>
-
-
 </body>
-
 </html>
