@@ -549,7 +549,9 @@ form {
     gap: 20px;
     margin-right: auto; 
 }
-
+h1{
+    text-align: center;
+}
 /* TARJETAS */
 #itemsOfrecer article {
     height: 100px;
@@ -589,4 +591,25 @@ form {
     width: 100%;
     height: auto;
     border-radius: 8px;
+}
+#indecs > section:last-of-type {
+    display: flex;                 
+    gap: 20px;                     
+    justify-content: space-between; 
+    flex-wrap: wrap;          
+    border: none;
+}
+
+#indecs > section:last-of-type article {
+    flex: 1 ;                
+    min-width: 250px;            
+    background-color: #ffffff;  
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    text-align: justify;           
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    line-height: 1.5;
 }

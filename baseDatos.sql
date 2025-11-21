@@ -10,6 +10,7 @@ use chambs;
 tipo VARCHAR
         (50)NOT NULL
 );
+insert into 
 
 /*Usuario    2*/
 create table usuario
