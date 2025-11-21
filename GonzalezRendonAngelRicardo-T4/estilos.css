@@ -1,63 +1,89 @@
-		body{
-		font-family:Arial,Helvetica,sans-serif;
-		margin:0;
-		line-height:1.5;
-		background-color: 	#A452C4;
-		color: #333;
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			margin: 0;
+			line-height: 1.5;
+			background-color: #A452C4;
+			color: #333;
 		}
-		header, nav, main, section, article, aside, footer{
-		border: 1px solid #ccc;
-		margin:10px;
-		padding:15px;
-		border-radius: 5px;
-		background-color: #9D3CB5;
+
+		header,
+		nav,
+		main,
+		section,
+		article,
+		aside,
+		footer {
+			border: 1px solid #ccc;
+			margin: 10px;
+			padding: 15px;
+			border-radius: 5px;
+			background-color: #9D3CB5;
 		}
-		header{
-		background-color:#684EE6;
-		color:white;
-		text-align: center;
+
+		header {
+			background-color: #684EE6;
+			color: white;
+			text-align: center;
+			position: relative;
+			text-align: center;
 		}
-		nav{
-		background-color: #4874D9;
-		text-align:center;
+
+		header a {
+			position: absolute;
+			left: 20px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: white;
+			text-decoration: none;
+			font-weight: bold;
 		}
-		nav a{
-		margin: 0 10px;
-		text-decoration:none;
-		color:#fff;
-		font-weight:bold;
+
+		nav {
+			background-color: #4874D9;
+			text-align: center;
 		}
-		main{
-		display:flex;
-		flex-wrap: wrap;
-		gap:10px;
+
+		nav a {
+			margin: 0 10px;
+			text-decoration: none;
+			color: #fff;
+			font-weight: bold;
 		}
-		section{
-		flex: 2;
-		background-color:#BE50C7;
+
+		main {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
 		}
-		aside{
-		flex:2;
-		background-color:#fff
+
+		section {
+			flex: 2;
+			background-color: #BE50C7;
 		}
-		footer{
-		text-align: center;
-		background-color: #45BEE6;
-		color: white;
+
+		aside {
+			flex: 2;
+			background-color: #fff
 		}
-		#formulario{
-			background-color:#E487FA;
-			font-size:20px;
-			text-align:center;
+
+		footer {
+			text-align: center;
+			background-color: #45BEE6;
+			color: white;
 		}
-		section{
-			background-color:#D93BD1;
+
+		#formulario {
+			background-color: #E487FA;
+			font-size: 20px;
+			text-align: center;
 		}
-		#academia, #exp{
-			background-color:#FF57B2;
-			
+
+		section {
+			background-color: #D93BD1;
 		}
-		
-		
-		
-		
+
+		#academia,
+		#exp {
+			background-color: #FF57B2;
+
+		}

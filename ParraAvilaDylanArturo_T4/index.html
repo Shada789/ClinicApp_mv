@@ -13,6 +13,7 @@
 		line-height: 1.6;
 		background-color: #8DD5E3;
 		color: #000000;
+	
 	}
 	
 	header, nav, main, section, article, aside, footer{
@@ -22,11 +23,23 @@
 		border-radius: 5px;
 		background-color: #565a75;
 	}
-	header{
-		background-color: #F2a0a7;
-		color: white;
-		text-align: center;
-	}
+	header {
+    position: relative;     
+    background-color: #F2a0a7;
+    color: white;
+    padding: 15px;
+    text-align: center;     
+}
+
+header .regresar {
+    position: absolute;
+    left: 20px;          
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
 	
 	nav{
 		background-color: #a2d0a7;
@@ -74,7 +87,8 @@
  </head>
  <body>
 	<header>
-		<h1>Datos personales </h1>
+	<a class="regresar" href="../index.html">REGRESAR</a>
+	<h1>Datos personales </h1>
 	</header>
 	<nav>
 	<a href="academica.html"> Estudios </a>
