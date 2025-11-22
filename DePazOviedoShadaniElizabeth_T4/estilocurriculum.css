@@ -17,6 +17,16 @@ body {
 		background-color:#754988;
 		color:white;
 		text-align: center;
+		position: relative;
+	}
+	header a{
+		position: absolute;
+    left: 20px;      
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 	}
 	
 	nav{

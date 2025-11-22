@@ -613,3 +613,21 @@ h1{
     gap: 10px;
     line-height: 1.5;
 }
+#curriculums {
+    display: flex;
+    gap: 20px;            
+    justify-content: center; 
+    flex-wrap: wrap;  
+    margin-top: 20px;  
+}
+
+#curriculums img {
+    width: 180px;   
+    height: 180px;          
+    object-fit: cover;      
+    border-radius: 10px;  
+    transition: 0.3s;
+}
+.miembro{
+    text-align: center;
+}
