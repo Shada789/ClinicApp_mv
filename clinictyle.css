@@ -368,9 +368,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: linear-gradient(135deg, #A80139 0%, #8a0130 100%);
+    background: #8a0130;
     text-align: center;
-    border-radius: 0 0  15px 15px;
+    border-radius: 0 0 15px 15px;
     box-shadow: 0 8px 25px rgba(168, 1, 57, 0.3);
     color: white;
     margin-bottom: 10px;
@@ -525,6 +525,7 @@ form {
     background: linear-gradient(135deg, #A80139, rgb(16, 51, 121)) !important;
     color: #fff !important;
 }
+
 #indecs {
     margin-left: 0 !important;
     display: block !important;
@@ -542,17 +543,18 @@ form {
     overflow: hidden;
 }
 
-/* GRID 2×2 PEGADO A LA IZQUIERDA */
+
 #itemsOfrecer {
     display: grid;
     grid-template-columns: repeat(3, 200px);
     gap: 20px;
-    margin-right: auto; 
+    margin-right: auto;
 }
-h1{
+
+h1 {
     text-align: center;
 }
-/* TARJETAS */
+
 #itemsOfrecer article {
     height: 100px;
     padding: 12px;
@@ -572,7 +574,7 @@ h1{
     transform: translateY(-4px);
 }
 
-/* PREVIEW FIJO (NO DESAPARECE) */
+
 #previewImg,
 #previewDesc {
     width: 260px;
@@ -580,7 +582,7 @@ h1{
     padding: 15px;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -592,42 +594,82 @@ h1{
     height: auto;
     border-radius: 8px;
 }
-#indecs > section:last-of-type {
-    display: flex;                 
-    gap: 20px;                     
-    justify-content: space-between; 
-    flex-wrap: wrap;          
+
+#indecs>section:last-of-type {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
     border: none;
 }
 
-#indecs > section:last-of-type article {
-    flex: 1 ;                
-    min-width: 250px;            
-    background-color: #ffffff;  
+#indecs>section:last-of-type article {
+    flex: 1;
+    min-width: 250px;
+    background-color: #ffffff;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    text-align: justify;           
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    text-align: justify;
     display: flex;
     flex-direction: column;
     gap: 10px;
     line-height: 1.5;
 }
+
 #curriculums {
     display: flex;
-    gap: 20px;            
-    justify-content: center; 
-    flex-wrap: wrap;  
-    margin-top: 20px;  
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 #curriculums img {
-    width: 180px;   
-    height: 180px;          
-    object-fit: cover;      
-    border-radius: 10px;  
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
     transition: 0.3s;
 }
-.miembro{
+
+.miembro {
     text-align: center;
+}
+
+.quienes-somos {
+    display: flex;
+    gap: 20px;
+
+}
+
+.grid-quienes {
+    flex: 3;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.logo-aside {
+    flex: 1;
+    min-width: 200px;
+}
+
+
+.grid-quienes article,
+.logo-aside {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: none;
+        background: transparent;
+
+}
+
+/* aside */
+.logo-aside img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
