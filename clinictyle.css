@@ -369,13 +369,45 @@ header {
     top: 0;
     z-index: 1000;
     background: #8a0130;
-    text-align: center;
+    color: white;
+border: none;
+    padding: 25px 30px;
+    min-height: 110px;
+text-align: center;
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+
     border-radius: 0 0 15px 15px;
     box-shadow: 0 8px 25px rgba(168, 1, 57, 0.3);
+}
+
+
+/* LOGO */
+header .logo {
+    height: 100px;
+    width: auto;
+}
+
+/* TITLE */
+header h1 {
+    margin: 0;
+    text-align: center;
     color: white;
-    margin-bottom: 10px;
-    border: none;
-    overflow: hidden;
+    font-size: 60px;
+}
+
+/* LINKS DERECHA */
+.refs a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.refs a:hover {
+    text-decoration: underline;
 }
 
 section {
