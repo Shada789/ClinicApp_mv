@@ -396,7 +396,7 @@ header h1 {
     text-align: center;
     color: white;
     font-size: 60px;
-}
+} 
 
 /* LINKS DERECHA */
 .refs a {
@@ -588,17 +588,26 @@ h1 {
 }
 
 #itemsOfrecer article {
-    height: 100px;
+    height: 140px;
     padding: 12px;
     background: #f2f2f2;
     border-radius: 12px;
     display: flex;
+    flex-direction: column; /* Imagen arriba, texto abajo */
     justify-content: center;
     align-items: center;
     text-align: center;
     cursor: pointer;
     transition: 0.25s;
     font-size: 16px;
+}
+
+#itemsOfrecer article img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-bottom: 8px;
+
 }
 
 #itemsOfrecer article:hover {
@@ -672,6 +681,7 @@ h1 {
 .quienes-somos {
     display: flex;
     gap: 20px;
+    align-items: center;
 
 }
 

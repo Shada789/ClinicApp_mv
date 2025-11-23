@@ -10,15 +10,15 @@
 
 <body id="bodDoc">
     <header>
-    <img class="logo" src="imgs/image.png" alt="Logo">
+        <img class="logo" src="imgs/image.png" alt="Logo">
 
-    <h1>ClinicApp</h1>
+        <h1>ClinicApp</h1>
 
-    <div class="refs">
-        <a href="inDoc.html">Soy Doctor</a>
-        <a href="inPac.html">Soy Paciente</a>
-    </div>
-</header>
+        <div class="refs">
+            <a href="inDoc.html">Soy Doctor</a>
+            <a href="inPac.html">Soy Paciente</a>
+        </div>
+    </header>
 
     <main id="indecs">
         <h1>¿Qué es ClinicApp?</h1>
@@ -26,31 +26,37 @@
 
 
             <div id="itemsOfrecer">
-                <article class="item" data-img="security-free-material-svgrepo-com.svg"
+                <article class="item" data-img="imgs/Privadita.jpg"
                     data-desc="Los datos de los pacientes estén protegidos y solo son accesibles por usuarios autorizados.">
+                    <img src="imgs/security-free-material-svgrepo-com.svg">
                     <h3>Seguridad y Privacidad</h3>
                 </article>
 
                 <article class="item" data-img="imgs/medical-medical-record-svgrepo-com.svg"
                     data-desc="Tener una sección donde se listen todas sus citas anteriores, tratamientos realizados y notas.">
+                   <img src="imgs/medical-medical-record-svgrepo-com.svg">
                     <h3>Historial Moderno</h3>
                 </article>
 
                 <article class="item" data-img="imgs/agenda-calendar-date-svgrepo-com.svg"
                     data-desc="Al agendar una cita, el sistema bloquea el horario y previene que se agende otra a la misma hora.">
+                    <img src="imgs/agenda-calendar-date-svgrepo-com.svg">
                     <h3>Agenda Inteligente</h3>
                 </article>
 
                 <article class="item" data-img="imgs/interface-ui-layout-app-svgrepo-com.svg"
                     data-desc="La interfaz es fácil e intuitiva, permitiendo que cualquier usuario pueda usar la aplicación.">
+                    <img src="imgs/interface-ui-layout-app-svgrepo-com.svg">
                     <h3>Interfaz Intuitiva</h3>
                 </article>
                 <article class="item" data-img=""
                     data-desc="Después de la cita poder seleccionar el tratamiento realizado.">
+                    <img src="imgs/medicine-bottle-svgrepo-com.svg">
                     <h3>Registro de Tratamientos</h3>
                 </article>
                 <article class="item" data-img=""
                     data-desc="tanto médicos como pacientes deben poder acceder a sus funciones sin tantos obstáculos">
+                    <img src="imgs/interface-ui-window-application-app-button-cta-svgrepo-com.svg">
                     <h3>Usabilidad</h3>
                 </article>
             </div>
@@ -97,7 +103,7 @@
             </div>
 
             <aside class="logo-aside">
-   
+
                 <img src="imgs/logoError404-removebg-preview.png">
             </aside>
 
@@ -149,17 +155,19 @@
     </footer>
 
     <script>
-        document.querySelectorAll('.item').forEach(item => {
-            item.addEventListener('mouseover', () => {
-                const img = item.getAttribute('data-img');
-                const desc = item.getAttribute('data-desc');
-                document.getElementById('previewImg').src = img;
-                document.getElementById('previewDesc').textContent = desc;
-                document.getElementById('previewDs').style.display = "flex";
-            });
+       document.querySelectorAll('.item').forEach(item => {
+    item.addEventListener('mouseover', () => {
+        const img = item.getAttribute('data-img');
+        const desc = item.getAttribute('data-desc');
+        document.getElementById('previewImg').src = img;
+        document.getElementById('previewDesc').textContent = desc;
+    });
 
-
-        });
+    item.addEventListener('mouseout', () => {
+        document.getElementById('previewImg').src = "";
+        document.getElementById('previewDesc').textContent = "Hola";
+    });
+});
     </script>
 
 </body>
