@@ -616,7 +616,6 @@ h1 {
 }
 
 
-#previewImg,
 #previewDesc {
     width: 260px;
     min-height: 260px;
@@ -629,11 +628,23 @@ h1 {
     gap: 12px;
     justify-content: flex-start;
 }
+#previewImg {
+    width: 260px;
+    min-height: 260px;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #previewImg img {
     width: 100%;
     height: auto;
     border-radius: 8px;
+  
 }
 
 #indecs>section:last-of-type {
