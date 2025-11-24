@@ -1,11 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.SQLException"%>
 
 <%
+// Declaración de variables
+String id_usuario = "";
 String nombres = "";
 String apP = "";
 String apM = "";
@@ -15,6 +16,8 @@ String password = "";
 String user = "";
 String confirmar = "";
 
+// Obtener parámetros del formulario
+id_usuario = request.getParameter("id_usuario");
 nombres = request.getParameter("nombre");
 apP = request.getParameter("apellidoP");
 apM = request.getParameter("apellidoM");
@@ -26,19 +29,21 @@ confirmar = request.getParameter("confirmar");
 
 Connection conecta = null;
 PreparedStatement st = null;
-PreparedStatement stCliente = null;
 
 try {
+    // Validar que las contraseñas coincidan
     if (!password.equals(confirmar)) {
         out.println("<script>alert('Las contraseñas no coinciden'); window.history.back();</script>");
         return;
     }
     
+    // Cargar driver y conectar
     Class.forName("com.mysql.cj.jdbc.Driver");
     conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs", "root", "n0m3l0");
     
-    String sqlUsuario = "INSERT INTO usuario (nombre, paterno, materno, gmail, fechaNac, usuario, contrasena, id_tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    st = conecta.prepareStatement(sqlUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+    // Actualizar en la tabla usuario
+    String sqlUsuario = "UPDATE usuario SET nombre = ?, paterno = ?, materno = ?, gmail = ?, fechaNac = ?, usuario = ?, contrasena = ? WHERE id_usuario = ?";
+    st = conecta.prepareStatement(sqlUsuario);
     st.setString(1, nombres);
     st.setString(2, apP);
     st.setString(3, apM);
@@ -46,44 +51,25 @@ try {
     st.setString(5, fechaN);
     st.setString(6, user);
     st.setString(7, password);
-    st.setInt(8, 1); // 1 = tipo paciente
+    st.setString(8, id_usuario);
     
     int filasAfectadas = st.executeUpdate();
     
     if (filasAfectadas > 0) {
-        // Obtener el ID del usuario recién insertado
-        ResultSet generatedKeys = st.getGeneratedKeys();
-        int idUsuario = 0;
-        if (generatedKeys.next()) {
-            idUsuario = generatedKeys.getInt(1);
-            
-            // Insertar en la tabla cliente
-            String sqlCliente = "INSERT INTO cliente (id_usuario) VALUES (?)";
-            stCliente = conecta.prepareStatement(sqlCliente);
-            stCliente.setInt(1, idUsuario);
-            stCliente.executeUpdate();
-            
-            out.println("<html><head><title>Registro Exitoso</title>");
-            out.println("<script>");
-            out.println("alert('Paciente registrado exitosamente');");
-            out.println("window.location.href = 'patientManagement.html';");
-            out.println("</script>");
-            out.println("</head><body></body></html>");
-        }
+        out.println("<html><head><title>Actualización Exitosa</title>");
+        out.println("<script>");
+        out.println("alert('Paciente actualizado exitosamente');");
+        out.println("window.location.href = 'buscarPaciente.jsp';");
+        out.println("</script>");
+        out.println("</head><body></body></html>");
+    } else {
+        out.println("<script>alert('Error: No se pudo actualizar el paciente'); window.history.back();</script>");
     }
-    
-} catch (ClassNotFoundException e) {
-    out.println("<p>Error: Driver no encontrado - " + e.getMessage() + "</p>");
-} catch (SQLException e) {
-    out.println("<p>Error de base de datos: " + e.getMessage() + "</p>");
-    e.printStackTrace();
 } catch (Exception e) {
     out.println("<p>Error general: " + e.getMessage() + "</p>");
 } finally {
-    // Cerrar recursos
     try {
         if (st != null) st.close();
-        if (stCliente != null) stCliente.close();
         if (conecta != null) conecta.close();
     } catch (SQLException e) {
         out.println("<p>Error al cerrar conexión: " + e.getMessage() + "</p>");
