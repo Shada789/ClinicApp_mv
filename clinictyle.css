@@ -370,35 +370,51 @@ header {
     z-index: 1000;
     background: #8a0130;
     color: white;
-    border: none;
     padding: 25px 30px;
     min-height: 110px;
-    text-align: center;
-
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-
     border-radius: 0 0 15px 15px;
     box-shadow: 0 8px 25px rgba(168, 1, 57, 0.3);
+border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-
-/* LOGO */
 header .logo {
-    height: 100px;
-    width: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100px; 
 }
 
-/* TITLE */
 header h1 {
     margin: 0;
-    text-align: center;
-    color: white;
-    font-size: 60px;
+    font-size: 36px;
+}
+header .refs a {
+    text-decoration: none;
+    padding: 10px 22px;
+    background: white;
+    color: #8a0130;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: 0.25s;
+    margin-left: 12px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.25);
+    border: 2px solid transparent;
 }
 
-/* LINKS DERECHA */
+header .refs a:hover {
+    background: #ffe2ec;
+    border-color: white;
+    transform: translateY(-2px);
+}
+
+header .refs a:active {
+    transform: translateY(0);
+    background: #ffd3e3;
+}
+
 .refs a {
     color: white;
     text-decoration: none;
