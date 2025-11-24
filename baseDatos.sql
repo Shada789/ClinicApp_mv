@@ -22,10 +22,11 @@ insert into
         FOREIGN KEY (id_tipo) REFERENCES usuarioTipo (id_tipo)
     );
 /*Tratamientos     3*/
-create table tratamientos (
-    id_tratamiento int AUTO_INCREMENT PRIMARY KEY,
-    descripcion VARCHAR (50) NOT NULL,
-    precio int
+create table tratamientos(
+id_tratamiento int AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(50)NOT NULL,
+precio int,
+descripcion VARCHAR(50)NOT NULL
 );
 /*Citas      4*/
 create table citas (

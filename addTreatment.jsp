@@ -5,45 +5,34 @@
 
 <html>
 	<head>
-	<link rel="stylesheet" href="estiloia.css">
 	</head>
 	<%
-		int code;
-		String name;
-		String marc;
-		double price;
-	
+		String desc;
+		String nom;
+		int price;
 		
-		code=Integer.parseInt(request.getParameter("codigo"));
-		name=request.getParameter("nombre");
-		marc=request.getParameter("marca");
-		price=Double.parseDouble(request.getParameter("precio"));
+		nom=request.getParameter("nombre");
+		price=Integer.parseInt(request.getParameter("precio"));
+		desc=request.getParameter("descripcion");
 		
 		Connection conecta;
 		PreparedStatement st;
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/prueba","root","n0m3l0");
-		st=conecta.prepareStatement("Insert into productos values(?,?,?,?)");
-		st.setInt(1,code);
-		st.setString(2,name);
-		st.setString(3,marc);
-		st.setDouble(4,price);
+		conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
+		st=conecta.prepareStatement("Insert into tratamientos (nombre,precio,descripcion) values(?,?,?)");
+		
+		st.setString(1,nom);
+		st.setInt(2,price);
+		st.setString(3,desc);
 		st.executeUpdate();
 		
-		System.out.println(code);
-		System.out.println(name);
-		
-		System.out.println(price);
-	
-	
 	%>
 	
 	<body>
 	
-	<h1>Registro de Productos</h1>
+	<h1>Registro de Tratamientos</h1>
 	<p>Registro realizado con exito</p>
-	<form action="addTreatment.html" method="post">
-    <input type="submit" value="Vale!">
+	
 	</body>
 	
 </html>
