@@ -6,7 +6,10 @@ create table usuarioTipo (
     id_tipo int AUTO_INCREMENT PRIMARY KEY,
     tipo VARCHAR (50) NOT NULL
 );
-insert into
+INSERT INTO usuarioTipo (id_tipo, tipo) VALUES 
+(1, 'paciente'),
+(2, 'medico');
+
     /*Usuario    2*/
     create table usuario (
         id_usuario int AUTO_INCREMENT PRIMARY KEY,

@@ -220,7 +220,7 @@ textarea {
 }
 
 #hist form,
-#buscarTratamiento form {
+#buscarTratamiento form,#busc form {
     background-color: #ffffff;
     border-radius: 30px;
     border: 1px solid #333333;
@@ -233,7 +233,7 @@ textarea {
 }
 
 #hist form input,
-#buscarTratamiento form input {
+#buscarTratamiento form input, #busc form input{
     font-size: 15px;
     flex: 1;
     border: 0;
@@ -242,7 +242,7 @@ textarea {
 }
 
 #hist form button,
-#buscarTratamiento form button {
+#buscarTratamiento form button, #busc form button {
     background: linear-gradient(90deg, #A80139, rgb(16, 51, 121));
     border: 0;
     width: 40px;
@@ -253,7 +253,7 @@ textarea {
 }
 
 #hist button i,
-#buscarTratamiento button i {
+#buscarTratamiento button i, #busc button i {
     color: #ffffff;
     font-size: 15px;
 }
