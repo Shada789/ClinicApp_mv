@@ -37,7 +37,7 @@
         <section>
             <h2>Agendar Cita</h2>
 
-            <form id="formCita">
+            <form id="formCita" action="addAppt.jsp" method="post">
                 <label for="paciente">Paciente:</label>
                 <input type="text" id="paciente" name="paciente" placeholder="Nombre del paciente" required><br><br>
 
@@ -55,7 +55,7 @@
                     <option value="urgencia">Urgencia</option>
                 </select><br><br>
 
-                <button type="button" class="boton" onclick="location.href='addAppt.jsp'">Agregar Cita</button>
+                <button type="submit" class="boton" >Agregar Cita</button>
             </form>
 
             <table id="tablasDia">
