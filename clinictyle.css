@@ -611,7 +611,6 @@ form {
     margin-bottom: 60px;
 }
 
-<<<<<<< HEAD
 .image{
     width: 120%;
     height: 120%;
@@ -622,7 +621,8 @@ form {
 
     text-align: center;
     margin-top: 20px;
-=======
+
+}
 #ofrecemos {
     display: flex;
     align-items: flex-start;
@@ -805,5 +805,4 @@ h1 {
     width: 100%;
     height: auto;
     object-fit: contain;
->>>>>>> dcb1e95369a2c52db105c3ade8e88ce513f57506
 }
