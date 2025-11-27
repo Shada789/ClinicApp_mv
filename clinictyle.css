@@ -510,12 +510,17 @@ article::before {
     background: linear-gradient(90deg, #A80139, rgb(16, 51, 121));
 }
 
-footer *{
+footer {
     text-align: center;
     background-color: #333333;
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: 40px;
+}
+footer * {
+    margin: 0 auto;
+    display: block;
 }
 
 form {
