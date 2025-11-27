@@ -516,9 +516,10 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    
 }
 footer * {
-    margin: 0 auto;
+    margin: 1 auto;
     display: block;
 }
 
