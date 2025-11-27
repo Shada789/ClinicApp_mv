@@ -313,14 +313,13 @@ textarea {
 
 nav {
     width: 200px;
-    height: 100vh;
+bottom:0;
     background: rgb(16, 51, 121);
     position: fixed;
     top: 0;
     left: 0;
     text-align: center;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
-    border-radius: 0 15px 15px 0;
     padding-top: 20px;
 }
 
