@@ -2,40 +2,31 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
 
 <html>
 	<head>
 	<link rel="stylesheet" href="clinictyle.css" content="text/css">
 	</head>
+	<body>		
 	<%
-		String desc;
-		String nom;
-		int price;
-		
-		nom=request.getParameter("nombre");
-		price=Integer.parseInt(request.getParameter("precio"));
-		desc=request.getParameter("descripcion");
+		String code;
+		code=request.getParameter("id_tratamiento");
 		
 		Connection conecta;
 		PreparedStatement st;
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
-		st=conecta.prepareStatement("Insert into tratamientos (nombre,precio,descripcion) values(?,?,?)");
+		st = conecta.prepareStatement("DELETE FROM tratamientos WHERE id_tratamiento=?");
 		
-		st.setString(1,nom);
-		st.setInt(2,price);
-		st.setString(3,desc);
+		st.setString(1,code);
 		st.executeUpdate();
-		
+
 	%>
-	
-	<body>
-	
-		<h1>Registro de Tratamientos</h1>
-		<p>Registro realizado con exito</p>
+		<h1>Eliminación de Tratamientos</h1>
+		<p>Eliminación realizada con exito</p>
 		<button type="button" class="boton" onclick="location.href='visualizeTreatment.jsp'">Lista de Tratamientos
-		<button type="button" class="boton" onclick="location.href='addTreatment.html'">Seguir Registrando
-		
+		<button type="button" class="boton" onclick="location.href='deleteTreatments.jsp'">Seguir Eliminando
 	</body>
 	
 </html>
