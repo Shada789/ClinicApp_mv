@@ -151,7 +151,7 @@ function confirmarEliminacion(id, nombre) {
                             <%
                             }
                             %>
-                       
+                        </table>
                     <%
                 } catch (SQLException e) {
                     out.println("<p style='color:red; text-align:center;'>Error de base de datos: " + e.getMessage() + "</p>");
