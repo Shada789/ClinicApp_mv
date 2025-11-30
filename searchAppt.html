@@ -5,6 +5,23 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
     <title>Buscar Citas - Doctor</title>
+    <style>
+        #formCita label,
+#formCita input, #formCita select {
+
+    border: none;
+    color: black;
+    font-size: 16px;
+    background-color: transparent;
+
+}
+#formCita button{
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+    </style>
 </head>
 
 <body id="bodDoc">
@@ -27,38 +44,38 @@
                     <span>Perfil</span></a></li>
         </ul>
     </nav>
-
-    <main id="genDoc2">
-       <header class="nave">
+<header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
 
-        <h1>ClinicApp</h1>
+        <h1>Buscar Cita</h1>
     </header>
+    <main id="genDoc2">
+       
 
         <section id="buscarCitaSection">
-            <h1>Buscar Cita</h1>
 
-            <form id="formBuscarCita">
+            <form id="formCita">
                 <label for="inputPaciente">Paciente:</label>
                 <input type="text" id="inputPaciente" name="paciente" placeholder="Nombre del paciente"
-                    required><br><br>
+                    ><br><br>
 
                 <label for="inputFecha">Fecha de la cita:</label>
-                <input type="date" id="inputFecha" name="fecha" required><br><br>
+                <input type="date" id="fecha" name="fecha" ><br>
 
                 <label for="inputHora">Hora de la cita:</label>
-                <input type="time" id="inputHora" name="hora"><br><br>
+                <input type="time" id="hora" name="hora"><br><br>
 
                 <label for="selectTipo">Tipo de cita:</label>
-                <select id="selectTipo" name="tipo" required>
+                <select id="selectTipo" name="tipo" >
                     <option value="">Selecciona tipo</option>
                     <option value="consulta">Consulta</option>
                     <option value="control">Control</option>
                     <option value="urgencia">Urgencia</option>
                 </select><br><br>
 
-                <button type="button" class="boton" id="btnBuscarCita" onclick="location.href='docAppts.html'">Buscar Cita</button>
+                <button type="button" class="botonImportante" id="btnBuscarCita" onclick="location.href='docAppts.html'">Buscar Cita</button>
             </form>
+                <button type="button" onclick="location.href='docAppts.html'" class="boton">Regresar</button>
 
             <table id="tablasDia">
                 <thead>

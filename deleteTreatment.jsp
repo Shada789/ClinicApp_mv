@@ -27,6 +27,8 @@
 		<p>Eliminación realizada con exito</p>
 		<button type="button" class="boton" onclick="location.href='visualizeTreatment.jsp'">Lista de Tratamientos
 		<button type="button" class="boton" onclick="location.href='deleteTreatments.jsp'">Seguir Eliminando
+		                                    <button type="button" onclick="location.href='docTreatments.html'" class="boton">Regresar</button>
+
 	</body>
 	
 </html>

@@ -30,14 +30,15 @@
 					<span>Perfil</span></a></li>
 		</ul>
 	</nav>
-		
+		<header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
+
+        <h1>Lista Tratamientos</h1>
+    </header>
 	<main id="genDoc2">
-        <header id="headerTratamientos">
-            <h1>ClinicApp</h1>
-        </header>
+       
 
         <section id="tratamientosProceso">
-            <h2>Lista de Tratamientos</h2>
             <table id="tablasDia">
                 <thead>
                     <tr>
@@ -73,6 +74,8 @@
                 <tbody>
                 </tbody>
             </table>
+					                                    <button type="button" onclick="location.href='docTreatments.html'" class="boton">Regresar</button>
+
         </section>
         <footer id="footerTratamientos">
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>

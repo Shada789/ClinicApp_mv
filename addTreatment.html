@@ -5,22 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="clinictyle.css" content="text/css">
     <title>Inicio de Sesión</title>
-     <style>
-        #formCita label,
-#formCita input, #formCita select {
-
-    border: none;
-    color: black;
-    font-size: 16px;
-
-}
-#formCita button{
-    grid-column: 1 / -1;
-    justify-self: center;
-    padding: 10px 20px;
-    font-size: 18px;
-}
-    </style>
+   
 </head>
 
 <body id="bodDoc">
@@ -64,11 +49,21 @@
                 <input type="text" id="precio" name="precio" placeholder="Precio"><br>
 
                 <label for="descripcion">Descripción:</label><br>
-                <textarea id="descripcion" id="descripcion" name="descripcion" cols="50"></textarea><br>
+                <textarea id="descripcion" name="descripcion" cols="50" rows="1"
+                    placeholder="Escribe una breve descripción del tratamiento, su propósito y las indicaciones">
+Descripción general: 
+
+Propósito del tratamiento: 
+
+Indicaciones: 
+
+Composición o principios activos:
+
+                </textarea><br>
 
                 <button type="submit" class="botonImportante" id="code">Registrar
             </form>
-                <button type="button" onclick="location.href='docTreatments.html'" class="boton">Regresar</button>
+            <button type="button" onclick="location.href='docTreatments.html'" class="boton">Regresar</button>
 
 
         </section>

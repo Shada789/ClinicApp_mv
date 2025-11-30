@@ -80,6 +80,8 @@
         <input type="text" name="descripcion" value="<%= desc %>" required>
     </p>
 
-    <button type="submit" class="boton" id="code">Guardar Cambios
+    <button type="submit" class="botonImportante" id="code">Guardar Cambios
+	                                    <button type="button" onclick="location.href='docTreatments.html'" class="boton">Regresar</button>
+
 	</body>
 </html>
