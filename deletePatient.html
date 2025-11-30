@@ -8,9 +8,7 @@
 </head>
 
 <body id="bodDoc">
-    <header>
-        <h1>ClinicApp</h1>
-    </header>
+    
     <nav id="navDoc">
         <ul>
             <li><a href="doctorMain.html">
@@ -30,23 +28,29 @@
                     <span>Perfil</span></a></li>
         </ul>
     </nav>
+<header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
 
+        <h1>Eliminar Paciente</h1>
+    </header>
     <main id="genDoc2">
         <section>
-            <h2>Eliminar paciente</h2>
             <article id="login">
                 <form id="formRegistroDoctor">
                     <label for="user"><b> Usuario:</b></label>
                     <input type="text" id="user" name="usuario" placeholder="Username">
-                    <button type="button" onclick="location.href='patientManagement.html'">Eliminar</button>
+                    <button type="button" onclick="location.href='patientManagement.html'" class="botonImportante">Eliminar</button>
                 </form>
+                                <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar </button> 
+
             </article>
         </section>
-    </main>
-
-    <footer>
+         <footer>
         <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
     </footer>
+    </main>
+
+   
 </body>
 
 </html>

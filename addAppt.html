@@ -5,6 +5,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="clinictyle.css" content="text/css">
     <title>Inicio de Sesión</title>
+    <style>
+        #formCita label,
+#formCita input, #formCita select {
+
+    border: none;
+    color: black;
+    font-size: 16px;
+
+}
+#formCita button{
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+    </style>
 </head>
 
 <body id="bodDoc">
@@ -29,34 +45,42 @@
         </ul>
     </nav>
 
+    <header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
 
+        <h1>Agendar Cita</h1>
+    </header>
     <main id="genDoc2">
-        <header>
-            <h1>ClinicApp</h1>
-        </header>
+
         <section>
-            <h2>Agendar Cita</h2>
+            <article >
+                <form id="formCita" action="addAppt.jsp" method="post">
 
-            <form id="formCita" action="addAppt.jsp" method="post">
-                <label for="paciente">Paciente:</label>
-                <input type="text" id="paciente" name="paciente" placeholder="Nombre del paciente" required><br><br>
+                        <label for="paciente">Paciente:</label>
+                        <input type="text" id="paciente" name="paciente" placeholder="Nombre del paciente" required><br><br>
 
-                <label for="fecha">Fecha de la cita:</label>
-                <input type="date" id="fecha" name="fecha" required><br><br>
 
-                <label for="hora">Hora de la cita:</label>
-                <input type="time" id="hora1" name="hora" required><br><br>
+                        <label for="fecha">Fecha de la cita:</label>
+                        <input type="date" id="fecha" name="fecha" required><br>
 
-                <label for="tipo">Tipo de cita:</label>
-                <select id="tipo" name="tipo" required>
-                    <option value="">Selecciona tipo</option>
-                    <option value="consulta">Consulta</option>
-                    <option value="control">Control</option>
-                    <option value="urgencia">Urgencia</option>
-                </select><br><br>
 
-                <button type="submit" class="boton" >Agregar Cita</button>
-            </form>
+                        <label for="hora">Hora de la cita:</label>
+                        <input type="time" id="hora" name="hora" required><br><br>
+
+
+                        <label for="tipo">Tipo de cita:</label>
+                        <select id="tipo" name="tipo" required>
+                            <option value="">Selecciona tipo</option>
+                            <option value="consulta">Consulta</option>
+                            <option value="control">Control</option>
+                            <option value="urgencia">Urgencia</option>
+                        </select><br><br>
+                   
+                    <button type="submit" class="botonImportante">Agregar Cita</button>
+                </form>
+                <button type="button" onclick="location.href='docAppts.html'" class="boton">Regresar</button>
+
+            </article>
 
             <table id="tablasDia">
                 <thead>
@@ -72,8 +96,8 @@
                 </tbody>
             </table>
         </section>
-        <footer>
-            <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
+    <footer>
+            <p>&copy; 2025 ClinicApp | Todos los derechos </p>
         </footer>
     </main>
 

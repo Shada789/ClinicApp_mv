@@ -5,6 +5,22 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css">
     <title>Modificar Cita</title>
+    <style>
+        #formCita label,
+#formCita input, #formCita select {
+
+    border: none;
+    color: black;
+    font-size: 16px;
+
+}
+#formCita button{
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+    </style>
 </head>
 
 <body id="bodDoc">
@@ -30,12 +46,14 @@
                     <span>Perfil</span></a></li>
         </ul>
     </nav>
+     <header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
+
+        <h1>Modificar Cita</h1>
+    </header>
     <main id="genDoc2">
-        <header>
-            <h1>ClinicApp</h1>
-        </header>
+      
         <section>
-            <h1>Modificar Cita</h1>
 
             <form id="formCita">
                 <label for="paciente">Paciente:</label>
@@ -55,8 +73,9 @@
                     <option value="urgencia">Urgencia</option>
                 </select><br><br>
 
-                <button type="button" class="boton" onclick="location.href='docAppts.html'">Reagendar Cita</button>
+                <button type="button" class="botonImportante" onclick="location.href='docAppts.html'">Reagendar Cita</button>
             </form>
+                            <button type="button" onclick="location.href='docAppts.html'" class="boton">Regresar</button>
 
             <table id="tablasDia">
                 <thead>

@@ -28,41 +28,45 @@
         </ul>
     </nav>
 
+<header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
 
+        <h1>Editar Paciente</h1>
+    </header>
     <main id="genDoc2">
-        <header>
-            <h1>Editar Paciente</h1>
-        </header>
+       
         <section>
-            <h1>Editar Cuenta de Paciente</h1>
             <article id="registro">
                 <form id="formRegistroDoctor">
-                    <label for="name"><b>Nombres:</b></label>
-                    <input type="text" id="name" name="nombre">
+                   <label for="name"><b>Nombre(s):</b></label>
+                    <input type="text" id="name" name="nombre" placeholder="Nombre(s)" required>
 
                     <label for="paterno"><b>Apellido Paterno:</b></label>
-                    <input type="text" id="paterno" name="apellidoP">
+                    <input type="text" id="paterno" name="apellidoP" placeholder=" Paterno" required>
 
                     <label for="materno"><b>Apellido Materno:</b></label>
-                    <input type="text" id="materno" name="apellidoM">
+                    <input type="text" id="materno" name="apellidoM" placeholder=" Materno" required>
 
                     <label for="correo"><b>Correo Electrónico:</b></label>
-                    <input type="email" id="correo" name="Correo">
+                    <input type="email" id="correo" name="correo" placeholder="Correo " required>
 
                     <label for="fechanac"><b>Fecha de Nacimiento:</b></label>
-                    <input type="date" id="fechanac" name="Nacimiento">
+                    <input type="date" id="fechanac" name="nacimiento" required>
 
                     <label for="usuario"><b>Usuario:</b></label>
-                    <input type="text" id="usuario" name="Usuario">
+                    <input type="text" id="usuario" name="usuario" placeholder="Username" required>
 
                     <label for="contrasenia"><b>Contraseña:</b></label>
-                    <input type="password" id="contrasenia" name="Contraseña">
+                    <input type="password" id="contrasenia" name="contrasenia" placeholder="Password" required>
 
-                    <label for="confirm"><b>Confirmar Contraseña:</b></label>
-                    <input type="password" id="confirm" name="Confirmar">
+                    <label for="confirm"><b>Confirmar contraseña:</b></label>
+                    <input type="password" id="confirm" name="confirmar" placeholder="Confirm Password" required>
 
-                    <button type="button" onclick="location.href='patientManagement.html'">Guardar</button>
+
+                    <button type="button" onclick="location.href='patientManagement.html'" class="botonImportante">Guardar</button>
                 </form>
+                                <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar </button> 
+
             </article>
         </section>
         <footer>

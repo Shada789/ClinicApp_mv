@@ -42,15 +42,15 @@ function confirmarEliminacion(id, nombre) {
                     <span>Perfil</span></a></li>
         </ul>
     </nav>
-    
+    <header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
+
+        <h1>Buscar Paciente</h1>
+    </header>
     <main id="genDoc2">
-        <header id="headerMain">
-            <a href="logotipo.png" id="logo"></a>
-            <h1>ClinicApp</h1>
-        </header>
+       
         
         <section id="busc">
-            <h1>Buscar Paciente</h1>
             
             <div class="container">
                 <form class="form-busqueda" method="post">
@@ -148,10 +148,13 @@ function confirmarEliminacion(id, nombre) {
                                     No se encontraron pacientes con el criterio de búsqueda: "<%= busqueda %>"
                                 </td>
                             </tr>
+
                             <%
                             }
                             %>
                         </table>
+                      <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar </button> 
+
                     <%
                 } catch (SQLException e) {
                     out.println("<p style='color:red; text-align:center;'>Error de base de datos: " + e.getMessage() + "</p>");
@@ -170,18 +173,21 @@ function confirmarEliminacion(id, nombre) {
             <div class="mensaje-vacio">
                 Por favor, ingresa un término de búsqueda.
             </div>
+            <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar </button> 
             <%
             } else {
             %>
             <div class="mensaje-vacio">
                 Ingresa un nombre o apellido en la barra de búsqueda para encontrar pacientes.
             </div>
+                            <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar </button> 
+
             <%
             }
             %>
         </section>
         
-        <footer>
+       <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
         </footer>
     </main>
