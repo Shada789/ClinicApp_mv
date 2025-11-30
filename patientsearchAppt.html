@@ -5,12 +5,29 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
     <title>Buscar Cita</title>
+    <style>
+        #formRegistroDoctor label,
+#formRegistroDoctor input, #formRegistroDoctor select {
+
+    border: none;
+    color: black;
+    font-size: 16px;
+        background-color: transparent;
+
+}
+#formRegistroDoctor button{
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+    </style>
 </head>
 
 <body id="bodDoc">
     <nav id="navDoc">
         <ul>
-            <li><a href="patientMain.html">
+            <li><a href="patientMain.jsp">
                     <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
                     <span> Inicio</span></a></li>
             <li><a href="patientHistory.html">
@@ -29,13 +46,13 @@
                 </a></li>
         </ul>
     </nav>
-
-    <main id="genDoc2">
-       <header class="nave">
+<header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
 
         <h1>ClinicApp</h1>
     </header>
+    <main id="genDoc2">
+       
 
         <section id="buscarCita">
             <h1>Buscar Cita</h1>
@@ -54,8 +71,9 @@
                     <option value="control">Control</option>
                 </select>
 
-                <button type="button" class="boton" id="btnBuscarCita" onclick="location.href='docAppts.html'">Buscar Cita</button>
+                <button type="button" class="botonImportante" id="btnBuscarCita" onclick="location.href='docAppts.html'">Buscar Cita</button>
             </form>
+                <button type="button" onclick="location.href='patientAppts.html'" class="boton">Regresar</button>
 
             <table id="tablasDia">
                 <thead>
@@ -70,8 +88,11 @@
 
                 </tbody>
             </table>
-        </section>
+        </section><footer>
+            <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
+        </footer>
     </main>
+    
 </body>
 
 </html>
