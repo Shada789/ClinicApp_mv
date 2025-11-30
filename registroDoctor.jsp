@@ -124,7 +124,7 @@
                         <input type="password" id="confirmar" name="confirmar" placeholder="Confirme su contraseña" required>
                     </div>
 
-                <button type="button" onclick="location.href='index.html'" class="boton">Regresar</button>
+                <button type="button" onclick="location.href='inDoc.jsp'" class="boton">Regresar</button>
                 <button type="submit" class="botonImportante">Registrarse</button>
 
                 <p id="mensaje"><%= mensaje %></p>

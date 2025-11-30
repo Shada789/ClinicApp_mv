@@ -14,6 +14,32 @@
         response.sendRedirect("patientMain.jsp");
         return;
     }
+
+    String nombre = "";
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/chambs",
+            "root",
+            "n0m3l0"
+        );
+
+        PreparedStatement ps = con.prepareStatement(
+            "SELECT nombre FROM usuario WHERE id_usuario = ? LIMIT 1"
+        );
+        ps.setInt(1, usuario);
+
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            nombre = rs.getString("nombre");
+        }
+
+        con.close();
+    } catch (Exception e) {
+        nombre = "Usuario";
+    }
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,7 +54,7 @@
     
         <nav id="navDoc">
             <ul>
-                <li><a href="doctorMain.html">
+                <li><a href="doctorMain.jsp">
                     <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
                     <span>Inicio</span></a></li>
                 <li><a href="patientManagement.html">
@@ -54,7 +80,7 @@
     <main id="genDoc2">
         
         <section>
-            <p>Bienvenido(a), [Nombre]!</p>
+<p>Bienvenido(a), <%= nombre %>!</p>
         </section>
 
         <section id="tablasDia">

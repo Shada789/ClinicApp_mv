@@ -1,5 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%
+    Integer usuario = (Integer) session.getAttribute("usuario");
+    Integer tipo = (Integer) session.getAttribute("tipo");
+
+    if (usuario == null) {
+        response.sendRedirect("index.html");
+        return;
+    }
+
+    if (tipo != 1) { 
+        response.sendRedirect("doctorMain.jsp");
+        return;
+    }
+
+    String nombre = "";
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/chambs",
+            "root",
+            "n0m3l0"
+        );
+
+        PreparedStatement ps = con.prepareStatement(
+            "SELECT nombre FROM usuario WHERE id_usuario = ? LIMIT 1"
+        );
+        ps.setInt(1, usuario);
+
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            nombre = rs.getString("nombre");
+        }
+
+        con.close();
+    } catch (Exception e) {
+        nombre = "Usuario";
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -40,8 +80,7 @@
      
 
         <section>
-            <p>Bienvenido(a), [Nombre]!</p>
-        </section>
+<p>Bienvenido(a), <%= nombre %>!</p>        </section>
 
         <section id="tablasDia">
             <article>

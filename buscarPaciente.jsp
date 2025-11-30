@@ -25,7 +25,7 @@ function confirmarEliminacion(id, nombre) {
 <body id="bodDoc">
     <nav id="navDoc">
         <ul>
-            <li><a href="doctorMain.html">
+            <li><a href="doctorMain.jsp">
                     <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
                     <span>Inicio</span></a></li>
             <li><a href="patientManagement.html">
