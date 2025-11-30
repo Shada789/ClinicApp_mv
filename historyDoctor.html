@@ -6,6 +6,13 @@
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
     <script src="https://kit.fontawesome.com/f8d03bf483.js" crossorigin="anonymous"></script>
     <title>Historial Clínico</title>
+    <style>
+        textarea {
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+    </style>
 </head>
 
 <body id="bodDoc">
@@ -28,31 +35,34 @@
                     <span>Perfil</span></a></li>
         </ul>
     </nav>
-<header class="nave">
+    <header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
 
         <h1>ClinicApp</h1>
     </header>
     <main id="genDoc2">
-       
+
 
         <section id="hist">
             <article>
                 <h2>Buscar Paciente </h2>
                 <div class="container">
-                    <form>
-                        <input type="text" placeholder="Nombre(s) o Username">
-                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
+                    <form action="buscarPacientes.jsp" method="GET">
+    <input type="text" name="buscar" placeholder="Nombre(s) o Username">
+    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+</form>
                 </div>
                 <br>
-                <p>Nombre del paciente</p>
             </article>
 
             <article>
                 <h2>Historial</h2>
                 <br>
-                <p>Historial del paciente</p>
+                <form id="formRegistroDoctor">
+
+                    <textarea></textarea>
+
+                </form>
             </article>
         </section>
         <footer>
