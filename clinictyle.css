@@ -198,39 +198,7 @@ textarea {
     flex-direction: column;
     padding: 10px;
     margin-left: 200px;
-}
-
-#hist {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    grid-template-columns: 2fr 2fr 1fr;
-}
-
-#hist article {
-    flex: 2;
-    width: 100%;
-    padding: 75px;
-}
-
-#hist aside {
-    flex: 3;
-    width: 100%;
-    padding: 75px;
-}
-
-/*repetido pero por que esta el #hist del aside */
-#hist aside::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #A80139, #103379);
-}
-
-/*barra de busqueda*/
+}/*barra de busqueda*/
 .container {
     background-image: linear-gradient(rgba(0, 0, 0, 5), rgba(0, 0, 0, 5), url(img_fondo.jpg));
     background-position: center;
@@ -240,43 +208,67 @@ textarea {
     justify-content: center;
 }
 
+#hist {
+    display: flex;
+    flex-direction: column; 
+    gap: 40px;            
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Cada artículo */
+#hist article {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+
+/* Formulario de búsqueda */
 #hist form,
-#buscarTratamiento form,#busc form {
+#buscarTratamiento form,
+#busc form {
     background-color: #ffffff;
     border-radius: 30px;
     border: 1px solid #333333;
     display: flex;
     align-items: center;
-    padding-left: 22px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 10px;
+    gap: 10px;
 }
 
+/* Input */
 #hist form input,
-#buscarTratamiento form input, #busc form input{
-    font-size: 15px;
+#buscarTratamiento form input,
+#busc form input {
+    font-size: 16px;
     flex: 1;
     border: 0;
     outline: 0;
     background-color: transparent;
 }
 
+/* Botón */
 #hist form button,
-#buscarTratamiento form button, #busc form button {
+#buscarTratamiento form button,
+#busc form button {
     background: linear-gradient(90deg, #A80139, rgb(16, 51, 121));
     border: 0;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
-
 }
 
+/* Ícono */
 #hist button i,
-#buscarTratamiento button i, #busc button i {
+#buscarTratamiento button i,
+#busc button i {
     color: #ffffff;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 #apt1 {
