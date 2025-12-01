@@ -40,6 +40,7 @@
         nombre = "Usuario";
     }
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -80,7 +81,7 @@
      
 
         <section>
-<p>Bienvenido(a), <%= nombre %>!</p>        </section>
+<p>Bienvenido(a), <%= nombre %> !</p>        </section>
 
         <section id="tablasDia">
             <article>

@@ -20,6 +20,7 @@ function confirmarEliminacion(id, nombre) {
     }
 }
 </script>
+
 </head>
 
 <body id="bodDoc">
@@ -65,131 +66,125 @@ function confirmarEliminacion(id, nombre) {
         </section>
 
         <section id="tablaPacientesSection">
-            <%
-            String busqueda = request.getParameter("busqueda");
+<%
+    String busqueda = request.getParameter("busqueda");
+    
+    if (busqueda != null && !busqueda.trim().isEmpty()) {
+        Connection conecta = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs", "root", "n0m3l0");
             
-            if (busqueda != null && !busqueda.trim().isEmpty()) {
-                Connection conecta = null;
-                PreparedStatement st = null;
-                ResultSet rs = null;
+            // Consulta para buscar pacientes por nombre o apellido
+            String sql = "SELECT u.nombre, u.paterno, u.materno, u.gmail, u.fechaNac, " +
+                         "c.id_cliente, u.id_usuario " +
+                         "FROM usuario u " +
+                         "INNER JOIN cliente c ON u.id_usuario = c.id_usuario " +
+                         "WHERE u.id_tipo = 1 " +
+                         "AND (u.nombre LIKE ? OR u.paterno LIKE ? OR u.materno LIKE ? OR u.gmail LIKE ?) " +
+                         "ORDER BY u.paterno, u.materno, u.nombre";
+            
+            st = conecta.prepareStatement(sql);
+            String parametroBusqueda = "%" + busqueda + "%";
+            st.setString(1, parametroBusqueda);
+            st.setString(2, parametroBusqueda);
+            st.setString(3, parametroBusqueda);
+            st.setString(4, parametroBusqueda);
+            
+            rs = st.executeQuery();
+            %>
+            
+            <table id="tablasDia">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Email</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Acciones</th>
+                    </tr>
                 
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs", "root", "n0m3l0");
-                    
-                    // Consulta para buscar pacientes por nombre o apellido
-                    String sql = "SELECT u.id_usuario, u.nombre, u.paterno, u.materno, u.gmail, u.fechaNac, " +
-                                 "c.id_cliente " +
-                                 "FROM usuario u " +
-                                 "INNER JOIN cliente c ON u.id_usuario = c.id_usuario " +
-                                 "WHERE u.id_tipo = 1 " +
-                                 "AND (u.nombre LIKE ? OR u.paterno LIKE ? OR u.materno LIKE ? OR u.gmail LIKE ?) " +
-                                 "ORDER BY u.paterno, u.materno, u.nombre";
-                    
-                    st = conecta.prepareStatement(sql);
-                    String parametroBusqueda = "%" + busqueda + "%";
-                    st.setString(1, parametroBusqueda);
-                    st.setString(2, parametroBusqueda);
-                    st.setString(3, parametroBusqueda);
-                    st.setString(4, parametroBusqueda);
-                    
-                    rs = st.executeQuery();
-                    %>
-                    
-                    <table id="tablasDia">
-                    
-                    <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Apellido Paterno</th>
-                                <th>Apellido Materno</th>
-                                <th>Email</th>
-                                <th>Fecha Nacimiento</th>
-                                <th>Acciones</th>
-                            </tr>
-                    </thead>
-                            <%
-                            boolean hayResultados = false;
-                            while (rs.next()) {
-                                hayResultados = true;
-                                int idUsuario = rs.getInt("id_usuario");
-                                String nombre = rs.getString("nombre");
-                                String paterno = rs.getString("paterno");
-                                String materno = rs.getString("materno");
-                                String email = rs.getString("gmail");
-                                String fechaNac = rs.getString("fechaNac");
-                                int idCliente = rs.getInt("id_cliente");
-                            %>
-                            <tr>
-                                <td><%= idUsuario %></td>
-                                <td><%= nombre %></td>
-                                <td><%= paterno %></td>
-                                <td><%= materno %></td>
-                                <td><%= email %></td>
-                                <td><%= fechaNac %></td>
-                                <td>
-                                    <a href="editarPaciente.jsp?id=<%= idUsuario %>" class="btn-editar">
-                                    <i class="fa-solid fa-pen-to-square"></i> Editar
-                                    </a><br><br>
-                                    <a href="eliminarPaciente.jsp?id=<%= idUsuario %>" class="btn-editar" 
-                                    onclick="return confirm('¿Estás seguro de que quieres eliminar este paciente?')">
-                                    <i class="fa-solid fa-trash"></i> Eliminar
-                                    </a>
-                                </td>
-                            </tr>
-                            <%
-                            }
-                            
-                            if (!hayResultados) {
-                            %>
-                            <tr>
-                                <td colspan="7" class="mensaje-vacio">
-                                    No se encontraron pacientes con el criterio de búsqueda: "<%= busqueda %>"
-                                </td>
-                            </tr>
-
-                            <%
-                            }
-                            %>
-                        </table>
-                      <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar </button> 
-
                     <%
-                } catch (SQLException e) {
-                    out.println("<p style='color:red; text-align:center;'>Error de base de datos: " + e.getMessage() + "</p>");
-                } finally {
-                    // Cerrar recursos
-                    try {
-                        if (rs != null) rs.close();
-                        if (st != null) st.close();
-                        if (conecta != null) conecta.close();
-                    } catch (SQLException e) {
-                        out.println("<p style='color:red; text-align:center;'>Error al cerrar conexión: " + e.getMessage() + "</p>");
+                    boolean hayResultados = false;
+                    while (rs.next()) {
+                        hayResultados = true;
+                        int idUsuario = rs.getInt("id_usuario");
+                        String nombre = rs.getString("nombre");
+                        String paterno = rs.getString("paterno");
+                        String materno = rs.getString("materno");
+                        String email = rs.getString("gmail");
+                        String fechaNac = rs.getString("fechaNac");
+                        int idCliente = rs.getInt("id_cliente");
+                    %>
+                    <tr>
+                        <td><%= nombre %></td>
+                        <td><%= paterno %></td>
+                        <td><%= materno %></td>
+                        <td><%= email %></td>
+                        <td><%= fechaNac %></td>
+                        <td>
+                            <a href="editarPaciente.jsp?id=<%= idUsuario %>" class="btn-editar">
+                                <i class="fa-solid fa-pen-to-square"></i> Editar
+                            </a><br><br>
+                            <a href="eliminarPaciente.jsp?id=<%= idUsuario %>" class="btn-editar" 
+                            onclick="return confirm('¿Estás seguro de que quieres eliminar este paciente?')">
+                                <i class="fa-solid fa-trash"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    <%
                     }
-                }
-            } else if (busqueda != null && busqueda.trim().isEmpty()) {
-            %>
-            <div class="mensaje-vacio">
-                Por favor, ingresa un término de búsqueda.
-            </div>
-            <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar </button> 
-            <%
-            } else {
-            %>
-            <div class="mensaje-vacio">
-                Ingresa un nombre o apellido en la barra de búsqueda para encontrar pacientes.
-            </div>
-                            <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar </button> 
+                    
+                    if (!hayResultados) {
+                    %>
+                    <tr>
+                        <td colspan="6" class="mensaje-vacio">
+                            No se encontraron pacientes con el criterio de búsqueda: "<%= busqueda %>"
+                        </td>
+                    </tr>
+                    <%
+                    }
+                    %>
+                </thead>
+            </table>
+            <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar</button>
 
             <%
+        } catch (SQLException e) {
+            out.println("<p style='color:red; text-align:center;'>Error de base de datos: " + e.getMessage() + "</p>");
+        } finally {
+            // Cerrar recursos
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+                if (conecta != null) conecta.close();
+            } catch (SQLException e) {
+                out.println("<p style='color:red; text-align:center;'>Error al cerrar conexión: " + e.getMessage() + "</p>");
             }
-            %>
+        }
+    } else if (busqueda != null && busqueda.trim().isEmpty()) {
+    %>
+    <div class="mensaje-vacio">
+        Por favor, ingresa un término de búsqueda.
+    </div>
+    <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar</button>
+    <%
+    } else {
+    %>
+    <div class="mensaje-vacio">
+        Ingresa un nombre o apellido en la barra de búsqueda para encontrar pacientes.
+    </div>
+    <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar</button>
+    <%
+    }
+%>
         </section>
         
-       <footer>
-            <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
-        </footer>
+       
     </main>
 </body>
 </html>
