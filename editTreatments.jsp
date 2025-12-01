@@ -69,7 +69,7 @@
 						<td><%=rs.getString("nombre")%></td>
 						<td><%=rs.getString("precio")%></td>
 						<td><%=rs.getString("descripcion")%></td>
-						<td><a href="editTreatment.jsp"id_tratamiento")%>"><button type="submit" class="boton" id="code">Modificar</td>
+						<td><a href="editTreatment.jsp?id_tratamiento=<%=rs.getString("id_tratamiento")%>"><button type="submit" class="boton" id="code">Modificar</td>
 					</tr>
 					<%
 					}
