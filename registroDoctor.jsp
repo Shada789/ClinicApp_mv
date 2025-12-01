@@ -73,9 +73,11 @@
 
 <body id="bodDoc">
 
-<header>
-    <h1>Registro</h1>
-</header>
+<header >
+        <img class="logo" src="imgs/image.png" alt="Logo">
+
+        <h1>Agendar Cita</h1>
+    </header>
 
 <main id="indMain">
     <section>
