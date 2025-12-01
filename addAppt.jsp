@@ -20,7 +20,7 @@ try {
     conecta = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC",
         "root",
-        "TheNPC193913"
+        "n0m3l0"
     );
 
     st = conecta.prepareStatement(
