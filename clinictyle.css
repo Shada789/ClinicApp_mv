@@ -867,3 +867,17 @@ h1 {
     background: linear-gradient(90deg, #8b0b44, #1c3a7e) !important;
     color: white !important;
 }
+#tablasDia th:nth-child(1),
+#tablasDia td:nth-child(1) {
+    width: 40%;   /* Paciente */
+}
+
+#tablasDia th:nth-child(2),
+#tablasDia td:nth-child(2) {
+    width: 35%;   /* Fecha */
+}
+
+#tablasDia th:nth-child(3),
+#tablasDia td:nth-child(3) {
+    width: 25%;   /* Tipo */
+}
