@@ -2,33 +2,32 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
-
 <html lang="es">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="clinictyle.css" content="text/css">
     <title>Inicio de Sesión</title>
+
     <style>
         #formCita label,
-#formCita input, #formCita select {
-
-    border: none;
-    color: black;
-    font-size: 16px;
-        background-color: transparent;
-
-}
-#formCita button{
-    grid-column: 1 / -1;
-    justify-self: center;
-    padding: 10px 20px;
-    font-size: 18px;
-}
+        #formCita input,
+        #formCita select {
+            border: none;
+            color: black;
+            font-size: 16px;
+            background-color: transparent;
+        }
+        #formCita button {
+            grid-column: 1 / -1;
+            justify-self: center;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
     </style>
 </head>
 
 <body id="bodDoc">
+
 <%
 String pac = request.getParameter("paciente");
 String fecha = request.getParameter("fecha");
@@ -38,7 +37,9 @@ String tipo = request.getParameter("tipo");
 String fecha_hora = fecha + " " + hora;
 
 Connection conecta = null;
-PreparedStatement st = null;
+PreparedStatement stInsert = null;
+PreparedStatement stSelect = null;
+ResultSet rs = null;
 
 try {
     Class.forName("com.mysql.cj.jdbc.Driver");
@@ -49,86 +50,84 @@ try {
         "n0m3l0"
     );
 
-    st = conecta.prepareStatement(
+    // INSERTAR CITA
+    stInsert = conecta.prepareStatement(
         "INSERT INTO citas (fecha_hora, nombre, tipo) VALUES (?,?,?)"
     );
 
-    st.setString(1, fecha_hora);
-    st.setString(2, pac);  
-    st.setString(3, tipo);
+    stInsert.setString(1, fecha_hora);
+    stInsert.setString(2, pac);
+    stInsert.setString(3, tipo);
 
-    st.executeUpdate();
-
+    stInsert.executeUpdate();
     out.println("<p>Todo joya ✔</p>");
+
+    // CONSULTAR CITA
+    stSelect = conecta.prepareStatement("SELECT * FROM citas");
+    rs = stSelect.executeQuery();
 
 } catch (Exception e) {
     out.println("<p>Error: " + e.getMessage() + "</p>");
-} 
+}
 %>
 
 <nav id="navDoc">
-        <ul>
-            <li><a href="doctorMain.jsp">
-                    <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
-                    <span>Inicio</span></a></li>
-            <li><a href="patientManagement.html">
-                    <img src="imgs/patient-svgrepo-com.svg">
-                    <span>Pacientes</span></a></li>
-            <li><a href="historyDoctor.html"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
-                    <span>Historial</span></a></li></a></li>
-            <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
-                    <span>Citas</span></a></li></a></li>
-            <li><a href="docTreatments.html">
-                    <img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
-                    <span>Tratamientos</span></a></li>
-            <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
-                    <span>Perfil</span></a></li>
-        </ul>
-    </nav>
+    <ul>
+        <li><a href="doctorMain.jsp"><img src="imgs/Codementor--Streamline-Simple-Icons.svg"><span>Inicio</span></a></li>
+        <li><a href="patientManagement.html"><img src="imgs/patient-svgrepo-com.svg"><span>Pacientes</span></a></li>
+        <li><a href="historyDoctor.html"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg"><span>Historial</span></a></li>
+        <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg"><span>Citas</span></a></li>
+        <li><a href="docTreatments.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg"><span>Tratamientos</span></a></li>
+        <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg"><span>Perfil</span></a></li>
+    </ul>
+</nav>
 
-    <header class="nave">
-        <img class="logo" src="imgs/image.png" alt="Logo">
+<header class="nave">
+    <img class="logo" src="imgs/image.png" alt="Logo">
+    <h1>Agendar Cita</h1>
+</header>
 
-        <h1>Agendar Cita</h1>
-    </header>
-    <main id="genDoc2">
-
-        <section>
-
-            <table id="tablasDia">
-                <thead>
-                    <tr>
-                        <th>Paciente</th>
-                        <th>Fecha</th>
-                        <th>Tipo</th>
-                    </tr>
-                </thead>
-                <%
-                    st = conecta.prepareStatement("Select * from citas");
-                    ResultSet rs = st.executeQuery();
-		            while(rs.next()){
-                %>
-                <tbody>
+<main id="genDoc2">
+    <section>
+        <table id="tablasDia">
+            <thead>
                 <tr>
-			<td><%=rs.getString("nombre")%></td>
-			<td><%=rs.getString("fecha_hora")%></td>
-			<td><%=rs.getString("tipo")%></td>
-		</tr>
-	<%
-		} finally {
-    if (st != null) st.close();
+                    <th>Paciente</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+            <%
+                if (rs != null) {
+                    while (rs.next()) {
+            %>
+                <tr>
+                    <td><%= rs.getString("nombre") %></td>
+                    <td><%= rs.getString("fecha_hora") %></td>
+                    <td><%= rs.getString("tipo") %></td>
+                </tr>
+            <%
+                    }
+                }
+            %>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 ClinicApp | Todos los derechos</p>
+    </footer>
+</main>
+
+<%
+finally {
+    if (rs != null) rs.close();
+    if (stInsert != null) stInsert.close();
+    if (stSelect != null) stSelect.close();
     if (conecta != null) conecta.close();
 }
-	%>
-                </tbody>
-            </table>
-        </section>
-    <footer>
-            <p>&copy; 2025 ClinicApp | Todos los derechos </p>
-        </footer>
-    </main>
-
+%>
 
 </body>
-
 </html>
