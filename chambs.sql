@@ -6,29 +6,28 @@ create table usuarioTipo (
     id_tipo int AUTO_INCREMENT PRIMARY KEY,
     tipo VARCHAR (50) NOT NULL
 );
-INSERT INTO usuarioTipo (id_tipo, tipo) VALUES 
-(1, 'paciente'),
-(2, 'medico');
-
-    /*Usuario    2*/
-    create table usuario (
-        id_usuario int AUTO_INCREMENT PRIMARY KEY,
-        nombre VARCHAR (50) NOT NULL,
-        paterno varchar (50) NOT NULL,
-        materno varchar (50) NOT NULL,
-        gmail varchar (50) NOT NULL,
-        usuario varchar (50) not null,
-        contrasena varchar (50) not null,
-        cedula varchar (50),
-        fechaNac date,
-        id_tipo int,
-        FOREIGN KEY (id_tipo) REFERENCES usuarioTipo (id_tipo)
-    );
+INSERT INTO usuarioTipo (id_tipo, tipo)
+VALUES (1, 'paciente'),
+    (2, 'medico');
+/*Usuario    2*/
+create table usuario (
+    id_usuario int AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR (50) NOT NULL,
+    paterno varchar (50) NOT NULL,
+    materno varchar (50) NOT NULL,
+    gmail varchar (50) NOT NULL,
+    usuario varchar (50) not null,
+    contrasena varchar (50) not null,
+    cedula varchar (50),
+    fechaNac date,
+    id_tipo int,
+    FOREIGN KEY (id_tipo) REFERENCES usuarioTipo (id_tipo)
+);
 /*Tratamientos     3*/
 create table tratamientos (
     id_tratamiento int AUTO_INCREMENT PRIMARY KEY,
-	nombre VARCHAR (50) NOT NULL,
-	precio int,
+    nombre VARCHAR (50) NOT NULL,
+    precio int,
     descripcion text NOT NULL
 );
 /*Citas      4*/
@@ -37,14 +36,14 @@ create table citas (
     fecha_hora datetime (6) NOT NULL,
     nombre varchar(100) not null,
     tipo ENUM('consulta', 'control', 'urgencia') NOT NULL
-
 );
 /*Historial      5*/
 create table historial (
     id_historial int AUTO_INCREMENT PRIMARY KEY,
     id_tratamiento int,
-    FOREIGN KEY (id_tratamiento) REFERENCES tratamientos (id_tratamiento),
     id_cita int,
+    descripcion TEXT NOT NULL,
+    FOREIGN KEY (id_tratamiento) REFERENCES tratamientos (id_tratamiento),
     FOREIGN KEY (id_cita) REFERENCES citas (id_cita)
 );
 /*Medico     6*/

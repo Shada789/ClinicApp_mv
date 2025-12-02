@@ -1,3 +1,7 @@
+<%@ page import="java.sql.*" %>
+<%@ page contentType="application/json" %>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,6 +16,25 @@
             border: none;
             outline: none;
         }
+        .result-box {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 250px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 100;
+}
+
+.result-box .item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.result-box .item:hover {
+    background: #eee;
+}
     </style>
 </head>
 
@@ -48,7 +71,8 @@
                 <h2>Buscar Paciente </h2>
                 <div class="container">
                     <form action="buscarPacientes.jsp" method="GET">
-    <input type="text" name="buscar" placeholder="Nombre(s) o Username">
+    <input type="text" id="buscarPaciente" placeholder="Nombre(s) o Username" autocomplete="off">
+<div id="resultados" class="result-box"></div>
     <button><i class="fa-solid fa-magnifying-glass"></i></button>
 </form>
                 </div>
@@ -70,7 +94,45 @@
         </footer>
     </main>
 
+<script>
+const input = document.getElementById("buscarPaciente");
+const box = document.getElementById("resultados");
 
+input.addEventListener("keyup", () => {
+    let term = input.value.trim();
+
+    if (term.length === 0) {
+        box.innerHTML = "";
+        box.style.display = "none";
+        return;
+    }
+
+    fetch("searchPatient.jsp?term=" + term)
+        .then(res => res.json())
+        .then(data => {
+            box.innerHTML = "";
+            if (data.length === 0) {
+                box.style.display = "none";
+                return;
+            }
+
+            data.forEach(p => {
+                let div = document.createElement("div");
+                div.classList.add("item");
+                div.innerText = p.nombre + " (" + p.username + ")";                
+                div.onclick = () => {
+                    input.value = p.nombre;
+                    box.innerHTML = "";
+                    box.style.display = "none";
+                };
+
+                box.appendChild(div);
+            });
+
+            box.style.display = "block";
+        });
+});
+</script>
 </body>
 
 </html>
