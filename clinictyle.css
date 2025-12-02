@@ -849,3 +849,21 @@ h1 {
     height: auto;
     object-fit: contain;
 }
+#tablasDia {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    display: table !important;
+    float: none !important;
+}
+
+#tablasDia th, 
+#tablasDia td {
+    border: 1px solid #ccc !important;
+    padding: 10px !important;
+    text-align: left !important;
+}
+
+#tablasDia th {
+    background: linear-gradient(90deg, #8b0b44, #1c3a7e) !important;
+    color: white !important;
+}
