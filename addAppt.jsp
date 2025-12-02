@@ -50,7 +50,6 @@ try {
         "n0m3l0"
     );
 
-    // INSERTAR CITA
     stInsert = conecta.prepareStatement(
         "INSERT INTO citas (fecha_hora, nombre, tipo) VALUES (?,?,?)"
     );
@@ -62,12 +61,13 @@ try {
     stInsert.executeUpdate();
     out.println("<p>Todo joya ✔</p>");
 
-    // CONSULTAR CITA
     stSelect = conecta.prepareStatement("SELECT * FROM citas");
     rs = stSelect.executeQuery();
 
 } catch (Exception e) {
     out.println("<p>Error: " + e.getMessage() + "</p>");
+} finally {
+
 }
 %>
 
@@ -121,12 +121,10 @@ try {
 </main>
 
 <%
-finally {
     if (rs != null) rs.close();
     if (stInsert != null) stInsert.close();
     if (stSelect != null) stSelect.close();
     if (conecta != null) conecta.close();
-}
 %>
 
 </body>
