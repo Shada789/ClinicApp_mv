@@ -90,29 +90,23 @@ try {
 <main id="genDoc2">
     <section>
         <table id="tablasDia">
-            <thead>
-                <tr>
-                    <th>Paciente</th>
-                    <th>Fecha</th>
-                    <th>Tipo</th>
-                </tr>
-            </thead>
-            <tbody>
-            <%
-                if (rs != null) {
-                    while (rs.next()) {
-            %>
-                <tr>
-                    <td><%= rs.getString("nombre") %></td>
-                    <td><%= rs.getString("fecha_hora") %></td>
-                    <td><%= rs.getString("tipo") %></td>
-                </tr>
-            <%
-                    }
-                }
-            %>
-            </tbody>
-        </table>
+    <thead>
+        <tr>
+            <th>Paciente</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (rs != null) { while (rs.next()) { %>
+        <tr>
+            <td><%= rs.getString("nombre") %></td>
+            <td><%= rs.getString("fecha_hora") %></td>
+            <td><%= rs.getString("tipo") %></td>
+        </tr>
+        <% }} %>
+    </tbody>
+</table>
     </section>
 
     <footer>
