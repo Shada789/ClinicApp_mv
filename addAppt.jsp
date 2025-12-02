@@ -1,8 +1,34 @@
+<!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
-<html>
-<body>
+
+<html lang="es">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="clinictyle.css" content="text/css">
+    <title>Inicio de Sesión</title>
+    <style>
+        #formCita label,
+#formCita input, #formCita select {
+
+    border: none;
+    color: black;
+    font-size: 16px;
+        background-color: transparent;
+
+}
+#formCita button{
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+    </style>
+</head>
+
+<body id="bodDoc">
 <%
 String pac = request.getParameter("paciente");
 String fecha = request.getParameter("fecha");
@@ -43,6 +69,55 @@ try {
 }
 %>
 
-Registro exitoso
+<nav id="navDoc">
+        <ul>
+            <li><a href="doctorMain.jsp">
+                    <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
+                    <span>Inicio</span></a></li>
+            <li><a href="patientManagement.html">
+                    <img src="imgs/patient-svgrepo-com.svg">
+                    <span>Pacientes</span></a></li>
+            <li><a href="historyDoctor.html"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
+                    <span>Historial</span></a></li></a></li>
+            <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
+                    <span>Citas</span></a></li></a></li>
+            <li><a href="docTreatments.html">
+                    <img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
+                    <span>Tratamientos</span></a></li>
+            <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
+                    <span>Perfil</span></a></li>
+        </ul>
+    </nav>
+
+    <header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
+
+        <h1>Agendar Cita</h1>
+    </header>
+    <main id="genDoc2">
+
+        <section>
+
+            <table id="tablasDia">
+                <thead>
+                    <tr>
+                        <th>Doctor</th>
+                        <th>Paciente</th>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    <footer>
+            <p>&copy; 2025 ClinicApp | Todos los derechos </p>
+        </footer>
+    </main>
+
+
 </body>
+
 </html>
