@@ -63,10 +63,7 @@ try {
 
 } catch (Exception e) {
     out.println("<p>Error: " + e.getMessage() + "</p>");
-} finally {
-    if (st != null) st.close();
-    if (conecta != null) conecta.close();
-}
+} 
 %>
 
 <nav id="navDoc">
@@ -118,7 +115,10 @@ try {
 			<td><%=rs.getString("tipo")%></td>
 		</tr>
 	<%
-		}
+		} finally {
+    if (st != null) st.close();
+    if (conecta != null) conecta.close();
+}
 	%>
                 </tbody>
             </table>
