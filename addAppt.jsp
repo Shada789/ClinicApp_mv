@@ -101,14 +101,25 @@ try {
             <table id="tablasDia">
                 <thead>
                     <tr>
-                        <th>Doctor</th>
                         <th>Paciente</th>
                         <th>Fecha</th>
                         <th>Tipo</th>
-                        <th>Acciones</th>
                     </tr>
                 </thead>
+                <%
+                    st = conecta.prepareStatement("Select * from citas");
+                    ResultSet rs = st.executeQuery();
+		            while(rs.next()){
+                %>
                 <tbody>
+                <tr>
+			<td><%=rs.getString("nombre")%></td>
+			<td><%=rs.getString("fecha_hora")%></td>
+			<td><%=rs.getString("tipo")%></td>
+		</tr>
+	<%
+		}
+	%>
                 </tbody>
             </table>
         </section>
