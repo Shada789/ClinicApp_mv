@@ -22,7 +22,39 @@
             justify-self: center;
             padding: 10px 20px;
             font-size: 18px;
-        }
+        } 
+        #tablasDia {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    display: table !important;
+    float: none !important;
+}
+
+#tablasDia th, 
+#tablasDia td {
+    border: 1px solid #ccc !important;
+    padding: 10px !important;
+    text-align: left !important;
+}
+
+#tablasDia th {
+    background: linear-gradient(90deg, #8b0b44, #1c3a7e) !important;
+    color: white !important;
+}
+#tablasDia th:nth-child(1),
+#tablasDia td:nth-child(1) {
+    width: 40%;  
+}
+
+#tablasDia th:nth-child(2),
+#tablasDia td:nth-child(2) {
+    width: 35%;  
+}
+
+#tablasDia th:nth-child(3),
+#tablasDia td:nth-child(3) {
+    width: 25%;   
+}
     </style>
 </head>
 
@@ -120,6 +152,8 @@ try {
     if (stSelect != null) stSelect.close();
     if (conecta != null) conecta.close();
 %>
+
+<button type="button" onclick="location.href='addAppt.html'" class="boton">Regresar</button>
 
 </body>
 </html>
