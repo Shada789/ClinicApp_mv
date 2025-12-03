@@ -11,12 +11,12 @@
 
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost/chambs", "root", "");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost/chambs", "root", "n0m3l0");
         st = conn.createStatement();
     } catch (Exception e) {
         out.println("Error de conexión: " + e);
     }
-%>
+%> 
 <!DOCTYPE html>
 <html lang="es">
 
