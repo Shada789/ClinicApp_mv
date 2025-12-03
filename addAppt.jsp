@@ -55,6 +55,10 @@
 #tablasDia td:nth-child(3) {
     width: 25%;   
 }
+#Regreso{
+    text-align:right !important;
+    width:10% !important;
+}
     </style>
 </head>
 
@@ -153,7 +157,7 @@ try {
     if (conecta != null) conecta.close();
 %>
 
-<button type="button" onclick="location.href='addAppt.html'" class="boton">Regresar</button>
+<button type="button" onclick="location.href='addAppt.html'" class="boton" id="Regreso">Regresar</button>
 
 </body>
 </html>
