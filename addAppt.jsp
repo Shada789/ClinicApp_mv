@@ -43,22 +43,23 @@
 }
 #tablasDia th:nth-child(1),
 #tablasDia td:nth-child(1) {
-    width: 40%;  
+    width: 20%;  
 }
 
 #tablasDia th:nth-child(2),
 #tablasDia td:nth-child(2) {
-    width: 35%;  
+    width: 30%;  
 }
 
 #tablasDia th:nth-child(3),
 #tablasDia td:nth-child(3) {
     width: 25%;   
 }
-#Regreso{
-    text-align:right !important;
-    width:10% !important;
+#tablasDia th:nth-child(4),
+#tablasDia td:nth-child(4) {
+    width: 25%;   
 }
+
     </style>
 </head>
 
@@ -128,6 +129,7 @@ try {
         <table id="tablasDia">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Paciente</th>
             <th>Fecha</th>
             <th>Tipo</th>
@@ -136,6 +138,7 @@ try {
     <tbody>
         <% if (rs != null) { while (rs.next()) { %>
         <tr>
+            <td><%= rs.getString("id_cita") %></td>
             <td><%= rs.getString("nombre") %></td>
             <td><%= rs.getString("fecha_hora") %></td>
             <td><%= rs.getString("tipo") %></td>
@@ -143,6 +146,7 @@ try {
         <% }} %>
     </tbody>
 </table>
+<button type="button" onclick="location.href='addAppt.html'" class="boton" id="Regreso">Regresar</button>
     </section>
 
     <footer>
@@ -157,7 +161,7 @@ try {
     if (conecta != null) conecta.close();
 %>
 
-<button type="button" onclick="location.href='addAppt.html'" class="boton" id="Regreso">Regresar</button>
+
 
 </body>
 </html>
