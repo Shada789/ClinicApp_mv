@@ -76,7 +76,7 @@
 <header >
         <img class="logo" src="imgs/image.png" alt="Logo">
 
-        <h1>Agendar Cita</h1>
+        <h1>Registro de Doctor</h1>
     </header>
 
 <main id="indMain">

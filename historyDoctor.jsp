@@ -1,41 +1,36 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.SQLException"%>
 <%@ page import="java.sql.*" %>
-<%@ page contentType="application/json" %>
+<%
+    Connection conn = null;
+    Statement stGlobal = null;
 
-
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost/chambs", "root", "n0m3l0");
+        stGlobal = conn.createStatement();
+    } catch (Exception e) {
+        out.println("Error de conexión: " + e);
+    }
+%> 
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
-    <script src="https://kit.fontawesome.com/f8d03bf483.js" crossorigin="anonymous"></script>
-    <title>Historial Clínico</title>
     <style>
-        textarea {
-            background-color: transparent;
-            border: none;
-            outline: none;
-        }
-        .result-box {
-    position: absolute;
-    background: white;
-    border: 1px solid #ccc;
-    width: 250px;
-    max-height: 200px;
-    overflow-y: auto;
-    display: none;
-    z-index: 100;
-}
-
-.result-box .item {
-    padding: 8px;
-    cursor: pointer;
-}
-
-.result-box .item:hover {
-    background: #eee;
-}
+    tr{
+        background:white;
+    }
     </style>
+    <script src="https://kit.fontawesome.com/f8d03bf483.js" crossorigin="anonymous"></script>
+    <title>Buscar Paciente</title>
+
 </head>
 
 <body id="bodDoc">
@@ -47,7 +42,7 @@
             <li><a href="patientManagement.html">
                     <img src="imgs/patient-svgrepo-com.svg">
                     <span>Pacientes</span></a></li>
-            <li><a href="historyDoctor.html"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
+            <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
                     <span>Historial</span></a></li></a></li>
             <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
                     <span>Citas</span></a></li></a></li>
@@ -61,78 +56,145 @@
     <header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
 
-        <h1>ClinicApp</h1>
+        <h1>Historial Pacientes</h1>
     </header>
     <main id="genDoc2">
-
-
-        <section id="hist">
-            <article>
-                <h2>Buscar Paciente </h2>
-                <div class="container">
-                    <form action="buscarPacientes.jsp" method="GET">
-    <input type="text" id="buscarPaciente" placeholder="Nombre(s) o Username" autocomplete="off">
-<div id="resultados" class="result-box"></div>
-    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-</form>
-                </div>
-                <br>
-            </article>
-
-            <article>
-                <h2>Historial</h2>
-                <br>
-                <form id="formRegistroDoctor">
-
-                    <textarea></textarea>
-
+       
+        
+        <section id="busc">
+            
+            <div class="container">
+                <form class="form-busqueda" method="post">
+                    <input type="text" name="busqueda" placeholder="Buscar" 
+                           value="<%= request.getParameter("busqueda") != null ? request.getParameter("busqueda") : "" %>" 
+                           class="input-busqueda">
+                    <button type="submit" class="btn-busqueda">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
                 </form>
-            </article>
+            </div>
         </section>
-        <footer>
-            <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
-        </footer>
-    </main>
 
-<script>
-const input = document.getElementById("buscarPaciente");
-const box = document.getElementById("resultados");
+        <section id="tablaPacientesSection">
+<%
+    String busqueda = request.getParameter("busqueda");
+    
+    if (busqueda != null && !busqueda.trim().isEmpty()) {
+        Connection conecta = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs", "root", "n0m3l0");
+            
+            // Consulta para buscar pacientes por nombre o apellido
+            String sql = "SELECT u.nombre, u.paterno, u.materno, u.gmail, u.fechaNac, " +
+                         "c.id_cliente, u.id_usuario " +
+                         "FROM usuario u " +
+                         "INNER JOIN cliente c ON u.id_usuario = c.id_usuario " +
+                         "WHERE u.id_tipo = 1 " +
+                         "AND (u.nombre LIKE ? OR u.paterno LIKE ? OR u.materno LIKE ? OR u.gmail LIKE ?) " +
+                         "ORDER BY u.paterno, u.materno, u.nombre";
+            
+            st = conecta.prepareStatement(sql);
+            String parametroBusqueda = "%" + busqueda + "%";
+            st.setString(1, parametroBusqueda);
+            st.setString(2, parametroBusqueda);
+            st.setString(3, parametroBusqueda);
+            st.setString(4, parametroBusqueda);
+            
+            rs = st.executeQuery();
+            %>
+            
+            <table id="tablasDia">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Email</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Acciones</th>
+                    </tr>
+                
+                    <%
+                    boolean hayResultados = false;
+                    while (rs.next()) {
+                        hayResultados = true;
+                        int idUsuario = rs.getInt("id_usuario");
+                        String nombre = rs.getString("nombre");
+                        String paterno = rs.getString("paterno");
+                        String materno = rs.getString("materno");
+                        String email = rs.getString("gmail");
+                        String fechaNac = rs.getString("fechaNac");
+                        int idCliente = rs.getInt("id_cliente");
+                    %>
+                    <tr>
+                        <td><%= nombre %></td>
+                        <td><%= paterno %></td>
+                        <td><%= materno %></td>
+                        <td><%= email %></td>
+                        <td><%= fechaNac %></td>
+                        <td>
+                            <a href="editarPaciente.jsp?id=<%= idUsuario %>" class="btn-editar">
+                                <i class="fa-solid fa-pen-to-square"></i> Editar
+                            </a><br><br>
+                            <a href="eliminarPaciente.jsp?id=<%= idUsuario %>" class="btn-editar" 
+                            onclick="return confirm('¿Estás seguro de que quieres eliminar este paciente?')">
+                                <i class="fa-solid fa-trash"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    <%
+                    }
+                    
+                    if (!hayResultados) {
+                    %>
+                    <tr>
+                        <td colspan="6" class="mensaje-vacio">
+                            No se encontraron pacientes con el criterio de búsqueda: "<%= busqueda %>"
+                        </td>
+                    </tr>
+                    <%
+                    }
+                    %>
+                </thead>
+            </table>
+            <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar</button>
 
-input.addEventListener("keyup", () => {
-    let term = input.value.trim();
-
-    if (term.length === 0) {
-        box.innerHTML = "";
-        box.style.display = "none";
-        return;
-    }
-
-    fetch("searchPatient.jsp?term=" + term)
-        .then(res => res.json())
-        .then(data => {
-            box.innerHTML = "";
-            if (data.length === 0) {
-                box.style.display = "none";
-                return;
+            <%
+        } catch (SQLException e) {
+            out.println("<p style='color:red; text-align:center;'>Error de base de datos: " + e.getMessage() + "</p>");
+        } finally {
+            // Cerrar recursos
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+                if (conecta != null) conecta.close();
+            } catch (SQLException e) {
+                out.println("<p style='color:red; text-align:center;'>Error al cerrar conexión: " + e.getMessage() + "</p>");
             }
-
-            data.forEach(p => {
-                let div = document.createElement("div");
-                div.classList.add("item");
-                div.innerText = p.nombre + " (" + p.username + ")";                
-                div.onclick = () => {
-                    input.value = p.nombre;
-                    box.innerHTML = "";
-                    box.style.display = "none";
-                };
-
-                box.appendChild(div);
-            });
-
-            box.style.display = "block";
-        });
-});
-</script>
+        }
+    } else if (busqueda != null && busqueda.trim().isEmpty()) {
+    %>
+    <div class="mensaje-vacio">
+        Por favor, ingresa un término de búsqueda.
+    </div>
+    <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar</button>
+    <%
+    } else {
+    %>
+    <div class="mensaje-vacio">
+        Ingresa un nombre o apellido en la barra de búsqueda para encontrar pacientes.
+    </div>
+    <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar</button>
+    <%
+    }
+%>
+        </section>
+        
+       
+    </main>
 </body>
-
 </html>

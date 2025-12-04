@@ -7,12 +7,12 @@
 <%@ page import="java.sql.*" %>
 <%
     Connection conn = null;
-    Statement st = null;
+    Statement stGlobal = null;
 
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         conn = DriverManager.getConnection("jdbc:mysql://localhost/chambs", "root", "n0m3l0");
-        st = conn.createStatement();
+        stGlobal = conn.createStatement();
     } catch (Exception e) {
         out.println("Error de conexión: " + e);
     }
@@ -32,7 +32,11 @@ function confirmarEliminacion(id, nombre) {
     }
 }
 </script>
-
+<style>
+    tr{
+        background:white;
+    }
+    </style>
 </head>
 
 <body id="bodDoc">
@@ -44,7 +48,7 @@ function confirmarEliminacion(id, nombre) {
             <li><a href="patientManagement.html">
                     <img src="imgs/patient-svgrepo-com.svg">
                     <span>Pacientes</span></a></li>
-            <li><a href="historyDoctor.html"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
+            <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
                     <span>Historial</span></a></li></a></li>
             <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
                     <span>Citas</span></a></li></a></li>
