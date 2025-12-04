@@ -27,6 +27,48 @@
     tr{
         background:white;
     }
+ 
+        .result-box {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 250px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 100;
+}
+#historialBox {
+    display: none;
+}
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: -300px;
+    background: linear-gradient(135deg, #A80139, rgb(16, 51, 121));
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.25);
+    opacity: 0;
+    transition: all 0.6s ease;
+    z-index: 2000;
+}
+.toast.show {
+    right: 30px;
+    opacity: 1;
+}
+.result-box .item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.result-box .item:hover {
+    background: #eee;
+}
+
     </style>
     <script src="https://kit.fontawesome.com/f8d03bf483.js" crossorigin="anonymous"></script>
     <title>Buscar Paciente</title>
@@ -137,13 +179,10 @@
                         <td><%= email %></td>
                         <td><%= fechaNac %></td>
                         <td>
-                            <a href="editarPaciente.jsp?id=<%= idUsuario %>" class="btn-editar">
-                                <i class="fa-solid fa-pen-to-square"></i> Editar
-                            </a><br><br>
-                            <a href="eliminarPaciente.jsp?id=<%= idUsuario %>" class="btn-editar" 
-                            onclick="return confirm('¿Estás seguro de que quieres eliminar este paciente?')">
-                                <i class="fa-solid fa-trash"></i> Eliminar
-                            </a>
+                            <button type="button" onclick="cargarHistorial(<%= idCliente %>)" class="btn-editar">
+                                <i class="fa-solid fa-pen-to-square"></i> Historial
+                            </button>
+                            
                         </td>
                     </tr>
                     <%
@@ -161,7 +200,6 @@
                     %>
                 </thead>
             </table>
-            <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar</button>
 
             <%
         } catch (SQLException e) {
@@ -181,20 +219,66 @@
     <div class="mensaje-vacio">
         Por favor, ingresa un término de búsqueda.
     </div>
-    <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar</button>
     <%
     } else {
     %>
     <div class="mensaje-vacio">
         Ingresa un nombre o apellido en la barra de búsqueda para encontrar pacientes.
     </div>
-    <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar</button>
     <%
     }
 %>
         </section>
-        
-       
+       <section id="historialBox">
+            <h2>Historial del Paciente</h2>
+            <textarea id="areaHistorial"></textarea>
+            <button class="botonImportante" id="btnGuardar" onclick="guardarHistorial()">Guardar</button>
+        </section>
+
     </main>
+
+<script>
+let clienteActual = null;
+
+function cargarHistorial(idCliente) {
+    clienteActual = idCliente;
+
+    fetch("getHistorial.jsp?idCliente=" + idCliente)
+        .then(r => r.text())
+        .then(t => {
+            document.getElementById("areaHistorial").value = t;
+            document.getElementById("historialBox").style.display = "block";
+        });
+}
+
+function guardarHistorial() {
+    let texto = document.getElementById("areaHistorial").value;
+
+    fetch("saveHistorial.jsp", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "idCliente=" + clienteActual + "&texto=" + encodeURIComponent(texto)
+    })
+    .then(r => r.text())
+    .then(t => {
+        if (t.trim() === "OK") {
+            mostrarToast("Historial guardado correctamente");
+        } else {
+            mostrarToast("Error: " + t);
+        }
+    });
+}
+function mostrarToast(msg) {
+    const toast = document.getElementById("toast");
+    toast.innerText = msg;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+</script>
+<div id="toast" class="toast">Historial guardado correctamente</div>
 </body>
-</html>
+</html> 

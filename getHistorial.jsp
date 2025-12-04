@@ -1,32 +1,41 @@
 <%@ page import="java.sql.*" %>
 <%
-response.setContentType("text/plain");
-
-String id = request.getParameter("id");
-
-String url = "jdbc:mysql://localhost/clinicapp";
-String user = "root";
-String pass = "tuPassword";
-
-StringBuilder historial = new StringBuilder();
+String idCliente = request.getParameter("idCliente");
+String resultado = "";
 
 try {
     Class.forName("com.mysql.cj.jdbc.Driver");
-    Connection con = DriverManager.getConnection(url, user, pass);
-
-    PreparedStatement ps = con.prepareStatement(
-        "SELECT descripcion FROM historial WHERE idPaciente = ? ORDER BY fecha ASC"
+    Connection c = DriverManager.getConnection(
+        "jdbc:mysql://localhost/chambs",
+        "root",
+        "n0m3l0"
     );
-    ps.setString(1, id);
+
+    // Si solo hay UN historial por paciente, solo necesitamos uno
+    String sql = "SELECT h.descripcion " +
+                 "FROM historial h " +
+                 "INNER JOIN infoCliente ic ON h.id_historial = ic.id_historial " +
+                 "WHERE ic.id_cliente = ? " +
+                 "LIMIT 1";
+
+    PreparedStatement ps = c.prepareStatement(sql);
+    ps.setInt(1, Integer.parseInt(idCliente));
+
     ResultSet rs = ps.executeQuery();
 
-    while (rs.next()) {
-        historial.append(rs.getString(1)).append("\n\n");
+    if (rs.next()) {
+        resultado = rs.getString("descripcion");
+    } else {
+        resultado = "";   // Sin historial aún → área en blanco
     }
 
-    out.print(historial.toString());
+    rs.close();
+    ps.close();
+    c.close();
 
-} catch (Exception e) {
-    out.print("");
+} catch(Exception e) {
+    resultado = "Error: " + e.getMessage();
 }
+
+out.print(resultado);
 %>
