@@ -92,6 +92,7 @@ String pac = "";
         <section>
 
             <form id="formCita" action="editAppt3.jsp" method="post">
+            
                 <label for="id">ID:</label>
                 <input type="text" id="id" name="id" value="<%= id %>" readonly><br><br>
 
@@ -117,20 +118,6 @@ String pac = "";
             </form>
             <button type="button" class="botonImportante" onclick="location.href='editAppt.jsp'">Regresar a selección </button>
                             
-
-            <table id="tablasDia">
-                <thead>
-                    <tr>
-                        <th>Doctor</th>
-                        <th>Paciente</th>
-                        <th>Fecha</th>
-                        <th>Tipo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
         </section>
         <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
