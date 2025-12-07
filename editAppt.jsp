@@ -121,7 +121,7 @@ try {
     <header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
 
-        <h1>Agendar Cita</h1>
+        <h1>Modificar Cita</h1>
     </header>
     <main id="genDoc2">
 

@@ -80,7 +80,7 @@
     <main id="genDoc2">
       
         <section>
-		<h1>Reagendeo de citas</h1>
+		<h1>Modificación de citas</h1>
 		<p>Modificación realizada con exito</p>
 		<button type="button" class="boton" onclick="location.href='editAppt.jsp'">Lista de Citas </button>
 		<button type="button" class="boton" onclick="location.href='editAppt.jsp'">Seguir Modificando </button>
