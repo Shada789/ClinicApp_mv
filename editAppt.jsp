@@ -144,7 +144,7 @@ try {
             <td><%= rs.getString("nombre") %></td>
             <td><%= rs.getString("fecha_hora") %></td>
             <td><%= rs.getString("tipo") %></td>
-            <td><a href="editAppt.html?id=<%= rs.getInt("id_cita")%>">Modificar</a></td>
+            <td><a href="editAppt2.jsp?id_cita=<%= rs.getInt("id_cita") %>">Modificar</a></td>
         </tr>
         <% }} %>
     </tbody>
