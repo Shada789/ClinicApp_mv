@@ -121,8 +121,7 @@ String pac = "";
                 <button type="submit" class="botonImportante" id ="code">Reagendar Cita</button>
                 
             </form>
-            <button type="button" class="botonImportante" onclick="location.href='editAppt.jsp'">Regresar a selección </button>
-                     <button type="button" onclick="location.href='docAppts.html'" class="boton">Regresar</button>       
+            <button type="button" class="botonImportante" onclick="location.href='editAppt.jsp'">Regresar a selección </button>     
         </section>
         <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
