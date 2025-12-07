@@ -44,7 +44,7 @@ String pac = "";
         );
 
         PreparedStatement st = conecta.prepareStatement(
-            "SELECT * FROM productos WHERE id_cita=?"
+            "SELECT * FROM citas WHERE id_cita=?"
         );
         st.setInt(1, Integer.parseInt(id));
 
@@ -53,6 +53,11 @@ String pac = "";
         if (rs.next()) {
             pac = rs.getString("nombre");
             tipo = rs.getString("tipo");
+
+            String fecha_hora = rs.getString("fecha_hora");
+
+            fecha = fecha_hora.substring(0, 10);
+            hora = fecha_hora.substring(11, 16);
         }
 
     } catch (Exception e) {
@@ -92,7 +97,7 @@ String pac = "";
         <section>
 
             <form id="formCita" action="editAppt3.jsp" method="post">
-            
+
                 <label for="id">ID:</label>
                 <input type="text" id="id" name="id" value="<%= id %>" readonly><br><br>
 
@@ -100,31 +105,31 @@ String pac = "";
                 <input type="text" id="paciente" name="paciente" value="<%= pac %>"><br><br>
 
                 <label for="fecha">Fecha de la cita:</label>
-                <input type="date" id="fecha" name="fecha" required><br><br>
+                <input type="date" id="fecha" name="fecha" value="<%= fecha %>" required><br><br>
 
                 <label for="hora">Hora de la cita:</label>
-                <input type="time" id="hora" name="hora" required><br><br>
+                <input type="time" id="hora" name="hora" value="<%= hora %>" required><br><br>
 
                 <label for="tipo">Tipo de cita:</label>
-                <select id="tipo" name="tipo" value="<%= tipo %>"required>
+                <select id="tipo" name="tipo" required>
                     <option value="">Selecciona tipo</option>
-                    <option value="consulta">Consulta</option>
-                    <option value="control">Control</option>
-                    <option value="urgencia">Urgencia</option>
+                    <option value="consulta" <%= tipo.equals("consulta") ? "selected" : "" %>>Consulta</option>
+                    <option value="control"   <%= tipo.equals("control") ? "selected" : "" %>>Control</option>
+                    <option value="urgencia"  <%= tipo.equals("urgencia") ? "selected" : "" %>>Urgencia</option>
                 </select><br><br>
 
                 <button type="submit" class="botonImportante" id ="code">Reagendar Cita</button>
                 
             </form>
             <button type="button" class="botonImportante" onclick="location.href='editAppt.jsp'">Regresar a selección </button>
-                            
+                     <button type="button" onclick="location.href='docAppts.html'" class="boton">Regresar</button>       
         </section>
         <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
         </footer>
     </main>
 
-<button type="button" onclick="location.href='docAppts.html'" class="boton">Regresar</button>
+
 </body>
 
 </html>
