@@ -37,7 +37,7 @@
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				
 				conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
-				st = conecta.prepareStatement("Delete from citas where codigo = ?");
+				st = conecta.prepareStatement("Delete from citas where id_cita = ?");
 				st.setString(1, id);
 				st.executeUpdate();
 			} catch (Exception e){
