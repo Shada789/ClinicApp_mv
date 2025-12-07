@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
+<%@page import="java.sql.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
     <meta charset="UTF-8">
