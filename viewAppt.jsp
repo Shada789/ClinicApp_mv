@@ -135,7 +135,7 @@ try {
         <% }} %>
     </tbody>
 </table>
-<button type="button" onclick="location.href='addAppt.html'" class="boton" id="Regreso">Regresar</button>
+<button type="button" onclick="location.href='docAppts.html'" class="boton" id="Regreso">Regresar</button>
     </section>
 
     <footer>
