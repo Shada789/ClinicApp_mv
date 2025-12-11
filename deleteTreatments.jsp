@@ -7,8 +7,9 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="clinictyle.css" type="text/css">
-	<title>Tratamientos en Proceso</title>
+	<link rel="stylesheet" href="clinic.css" type="text/css">
+	<title>Eliminación de Tratamiento</title>
+	<script src="https://kit.fontawesome.com/f8d03bf483.js" crossorigin="anonymous"></script>
 	</head>
 	<body id="bodDoc">
 	<nav id="navDoc">
@@ -31,21 +32,22 @@
         </ul>
     </nav>
 	
+	<header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
+        <h1>Eliminar Tratamiento</h1>
+    </header>
 	
 	<main id="genDoc2">
-        <header id="headerTratamientos">
-            <h1>ClinicApp</h1>
-        </header>
-
         <section id="tratamientosProceso">
+		
             <h2>Tratamientos Listados</h2>
-			
-            <table id="tablasDia">
+            <table style="width:100%;" id="tablasNoche">
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Precio</th>
                         <th>Descripción</th>
+						<th></th>
                     </tr>
 					
 					<%
@@ -64,10 +66,12 @@
 					%>	
 					
 					<tr>
-						<td><%=rs.getString("nombre")%></td>
-						<td><%=rs.getString("precio")%></td>
-						<td><%=rs.getString("descripcion")%></td>
-						<td><a href="deleteTreatment.jsp?id_tratamiento=<%=rs.getString("id_tratamiento")%>"><button type="submit" class="boton" id="code">Eliminar</td>
+						<td style="width: 25%;"><%=rs.getString("nombre")%></td>
+						<td style="width: 10%;"><%=rs.getString("precio")%></td>
+						<td style="width: 65%;"><%=rs.getString("descripcion")%></td>
+						<td><a href="deleteTreatment.jsp?id_tratamiento=<%=rs.getString("id_tratamiento")%>" onclick="return confirm('¿Esta seguro de querer eliminar este tratamiento?')">
+						<button type="submit" class="boton" id="code" >
+						<i class="fa-solid fa-trash"></i>Eliminar</td>
 					</tr>
 					<%
 					}
@@ -78,10 +82,10 @@
 					
                 </tbody>
             </table>
+			<br>
+			<button type="button" onclick="location.href='docTreatments.html'" class="boton">Regresar</button>
         </section>
-        <footer id="footerTratamientos">
-            <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
-        </footer>
+        
     </main>
 
 	</body>
