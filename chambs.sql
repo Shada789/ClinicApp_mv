@@ -44,7 +44,7 @@ create table historial (
     id_cita int,
     descripcion TEXT NOT NULL,
     id_cliente int,
-    id_medico,
+    id_medico int,
     FOREIGN key (id_cliente) REFERENCES cliente(id_cliente),
     FOREIGN key (id_medico) REFERENCES medico (id_medico),
     FOREIGN KEY (id_tratamiento) REFERENCES tratamientos (id_tratamiento),
