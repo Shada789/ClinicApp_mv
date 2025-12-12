@@ -1,53 +1,104 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.SQLException"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*"%>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="clinictyle.css">
+    <title>Eliminar Paciente</title>
+    <style>
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: -300px;
+            background: linear-gradient(135deg, #A80139, rgb(16, 51, 121));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 0 18px rgba(0,0,0,0.25);
+            opacity: 0;
+            transition: all 0.6s ease;
+            z-index: 2000;
+        }
+        .toast.show {
+            right: 30px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
 
 <%
     String id = request.getParameter("id");
-    
+
     if(id != null){
+        Connection conecta = null;
+        PreparedStatement st = null;
+        String mensaje = "";
+
         try {
-            Connection conecta;
-            PreparedStatement st;
             Class.forName("com.mysql.cj.jdbc.Driver");
             conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs", "root", "n0m3l0");
-            
-            // Primero eliminar de la tabla cliente (por la clave foránea)
+
+            // 1. Eliminar registros de infocliente
+            st = conecta.prepareStatement(
+                "DELETE FROM infocliente WHERE id_cliente = (SELECT id_cliente FROM cliente WHERE id_usuario=?)"
+            );
+            st.setString(1, id);
+            st.executeUpdate();
+            st.close();
+
+            // 2. Eliminar cliente
             st = conecta.prepareStatement("DELETE FROM cliente WHERE id_usuario = ?");
             st.setString(1, id);
             st.executeUpdate();
             st.close();
-            
-            // Luego eliminar de la tabla usuario
+
+            // 3. Eliminar usuario
             st = conecta.prepareStatement("DELETE FROM usuario WHERE id_usuario = ?");
             st.setString(1, id);
             int filasAfectadas = st.executeUpdate();
-            
-            if(filasAfectadas > 0) {
-                out.println("<html><head><title>Eliminación Exitosa</title>");
-                out.println("<script>");
-                out.println("alert('Paciente eliminado correctamente');");
-                out.println("window.location.href = 'buscarPaciente.jsp';");
-                out.println("</script>");
-                out.println("</head><body></body></html>");
-            } else {
-                out.println("<script>alert('Error: No se pudo eliminar el paciente'); window.history.back();</script>");
-            }
-            
             st.close();
+
+            if(filasAfectadas > 0) {
+                mensaje = "Paciente eliminado correctamente";
+            } else {
+                mensaje = "Error: No se pudo eliminar el paciente";
+            }
+
             conecta.close();
-            
+
         } catch(Exception e) {
-            out.println("<html><head><title>Error</title>");
-            out.println("<script>");
-            out.println("alert('ERROR: " + e.getMessage() + "');");
-            out.println("window.history.back();");
-            out.println("</script>");
-            out.println("</head><body></body></html>");
+            mensaje = "ERROR: " + e.getMessage();
         }
+%>
+
+<script>
+    function mostrarToast(msg, redirect = null) {
+        const toast = document.getElementById("toast");
+        toast.innerText = msg;
+        toast.classList.add("show");
+        setTimeout(() => {
+            toast.classList.remove("show");
+            if(redirect) window.location.href = redirect;
+        }, 3000);
+    }
+
+    mostrarToast("<%= mensaje %>", "buscarPaciente.jsp");
+</script>
+
+<%
     } else {
-        out.println("<script>alert('ID de paciente no proporcionado'); window.history.back();</script>");
+%>
+<script>
+    mostrarToast("ID de paciente no proporcionado", "buscarPaciente.jsp");
+</script>
+<%
     }
 %>
+</body>
+</html>

@@ -7,12 +7,10 @@
     Integer tipo = (Integer) session.getAttribute("tipo");
 
     if(id == null) {
-        // No hay usuario logueado, redirigir a inicio
         response.sendRedirect("index.html");
         return;
     }
 
-    // Solo los doctores (tipo = 2) pueden entrar
     if(tipo != 2) {
         response.sendRedirect("patientMain.jsp");
         return;
@@ -57,7 +55,6 @@
                 st.executeUpdate();
                 mensaje = "Datos actualizados correctamente.";
 
-                // Actualizar las variables para mostrar en los inputs
                 nombres = nombresNew;
                 apP = apPNew;
                 apM = apMNew;
@@ -68,7 +65,6 @@
             }
         }
 
-        // Cargar datos actuales desde DB
         st = conecta.prepareStatement("SELECT * FROM usuario WHERE id_usuario=?");
         st.setInt(1, id);
         rz = st.executeQuery();
@@ -96,6 +92,27 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css">
     <title>Editar Cuenta</title>
+    <style>
+    .toast {
+        position: fixed;
+        bottom: 30px;
+        right: -300px;
+        background: linear-gradient(135deg, #A80139, rgb(16, 51, 121));
+        color: white;
+        padding: 15px 25px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: 0 0 18px rgba(0,0,0,0.25);
+        opacity: 0;
+        transition: all 0.6s ease;
+        z-index: 2000;
+    }
+    .toast.show {
+        right: 30px;
+        opacity: 1;
+    }
+    </style>
 </head>
 <body id="bodDoc">
     <nav id="navDoc">
@@ -118,7 +135,7 @@
         <section>
             <h1>Edite su cuenta</h1>
             <article id="registro">
-                <form id="formRegistroDoctor" method="post" action="editarCuenta.jsp">
+                <form id="formRegistroDoctor" method="post" action="editAccount.jsp">
                     <label for="name"><b>Nombres:</b></label>
                     <input type="text" id="name" name="nombre" value="<%=nombres%>" required>
 
@@ -143,13 +160,25 @@
                     <label for="confirm"><b>Confirmar contraseña:</b></label>
                     <input type="password" id="confirm" name="confirmar" value="<%=password%>" required>
 
-                    <p style="color:red;"><%=mensaje%></p>
-
                     <button type="submit" class="botonImportante">Guardar</button>
-                    <button type="button" class="boton" onclick="location.href='myProfile.jsp'">Cancelar</button>
+                    <button type="button" class="boton" onclick="location.href='myProfile.html'">Cancelar</button>
                 </form>
             </article>
         </section>
     </main>
+
+    <div id="toast" class="toast"></div>
+    <script>
+    function mostrarToast(msg) {
+        const toast = document.getElementById("toast");
+        toast.innerText = msg;
+        toast.classList.add("show");
+        setTimeout(() => { toast.classList.remove("show"); }, 3000);
+    }
+
+    <% if(!mensaje.isEmpty()) { %>
+        mostrarToast("<%=mensaje.replace("\"","\\\"")%>");
+    <% } %>
+    </script>
 </body>
 </html>
