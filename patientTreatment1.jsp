@@ -67,19 +67,16 @@
 		ResultSet rs = st.executeQuery();
 		while(rs.next()){
 	%>
-		</thead>	
-        <tbody>
 		<tr>
 			<td style="width: 27%;"><%=rs.getString("nombre")%></td>
 			<td style="width: 27%;"><%=rs.getString("paterno")%></td>
 			<td style="width: 27%;"><%=rs.getString("materno")%></td>
-			<td style="width: 19%; text-align: center;"><a href="searchTreatmentP1.jsp?id_tratamiento=<%=rs.getString("id_usuario")%>">
-			<button type="submit" class="boton" id="code" >
-			Ver Tratamientos</td>
+			<td style="width: 19%;"><a href="searchTreatmentP1.jsp?id_tratamiento=<%=rs.getString("id_usuario")%>">
+			<button type="submit" class="boton" id="code" >	Ver Tratamientos</td>
 		</tr>
 	<%}
 	%>
-				</tbody>
+			</thead>
             </table>
 			<br>
 			

@@ -53,42 +53,39 @@
 			<br>
             
 			
-            <table style="width:100%;"  id="tablasNoche">
+            <table style="width: 100%;" id="tablasNoche">
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Precio</th>
                         <th>Descripción</th>
                     </tr>
-            <%
-		int code;
-		String name;
-		String marc;
-		double price;
-		
-		Connection conecta;
-		PreparedStatement st;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
-		st = conecta.prepareStatement("SELECT * FROM tratamientos");
-		
-		
-		ResultSet rs = st.executeQuery();
-		while(rs.next()){
-		%>
-		</thead>	
-        <tbody>
-		<tr>
-			<td style="width: 25%;"><%=rs.getString("nombre")%></td>
-			<td style="width: 10%;">$<%=rs.getString("precio")%>.0</td>
-			<td style="width: 65%;"><%=rs.getString("descripcion")%></td>
-		</tr>
-		<%}
-		%>
-		</tbody>
-        </table>
+					
+					<%
+					
+					Connection conecta;
+					PreparedStatement st;
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
+					st = conecta.prepareStatement("SELECT * FROM tratamientos");
+					
+					ResultSet rs = st.executeQuery();
+					while(rs.next()){
+					int code = rs.getInt("id_tratamiento");
+					%>	
+					
+					<tr>
+						<td style="width: 25%;"><%=rs.getString("nombre")%></td>
+						<td style="width: 10%;">$<%=rs.getString("precio")%>.0</td>
+						<td style="width: 70%;"><%=rs.getString("descripcion")%></td>
+						<td style="border:none;"></td>
+					</tr>
+					<%
+					}
+					%>
+                </thead>
+            </table>
 		<br>
-		
 		<button type="button" onclick="location.href='docTreatments.html'" class="boton">Regresar</button>
         </section>
     </main>

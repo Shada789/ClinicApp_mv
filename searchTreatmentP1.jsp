@@ -78,16 +78,15 @@
 		ResultSet rs = st.executeQuery();
 		while(rs.next()){
 		%>
-		</thead>	
-        <tbody>
 		<tr>
 			<td style="width: 25%;"><%=rs.getString("nombre")%></td>
 			<td style="width: 10%;">$<%=rs.getString("precio")%>.0</td>
 			<td style="width: 65%;"><%=rs.getString("descripcion")%></td>
+			<td style="border: none;"></td>
 		</tr>
 		<%}
 		%>
-		</tbody>
+		</thead>
         </table>
 		<br>
 		
