@@ -60,6 +60,7 @@
                         if (rs.next()) {
                             int tipo = rs.getInt("id_tipo");
 
+                            session.setAttribute("nombrePaciente", user);
                             session.setAttribute("usuario", rs.getInt("id_usuario"));
                             session.setAttribute("tipo", tipo);
 
