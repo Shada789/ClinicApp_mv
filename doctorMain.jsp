@@ -80,49 +80,10 @@
     <main id="genDoc2">
         
         <section>
-<p>Bienvenido(a), <%= nombre %>!</p>
+<h1>Bienvenido(a), <%= nombre %>!</h1>
         </section>
 
-        <section id="tablasDia">
-            <article>
-                <h2>Citas del Día</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Paciente</th>
-                            <th>Hora</th>
-                            <th>Motivo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </article>
-
-            <article>
-                <h2>Tratamientos del Día</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Paciente</th>
-                            <th>Tratamiento</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </article>
+      
 
             <aside id="reloj">
                 <h3>Fecha y Hora</h3>

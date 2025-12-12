@@ -81,46 +81,10 @@
      
 
         <section>
-<p>Bienvenido(a), <%= nombre %> !</p>        </section>
+<h1>Bienvenido(a), <%= nombre %> !</h1>        </section>
 
-        <section id="tablasDia">
-            <article>
-                <h2>Mis Citas</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Hora</th>
-                            <th>Motivo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </article>
-
-            <article>
-                <h2>Mis Tratamientos</h2>
-                <table id="tablaTratamientos">
-                    <thead>
-                        <tr>
-                            <th>Tratamiento</th>
-                            <th>Estado</th>
-                            <th>Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </article>
+        <section >
+           
 
             <aside id="reloj">
                 <h3>Fecha y Hora</h3>
