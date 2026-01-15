@@ -120,9 +120,10 @@ try {
 </nav>
 
 <header class="nave">
-    <img class="logo" src="imgs/image.png" alt="Logo">
-    <h1>Agendar Cita</h1>
-</header>
+        <img class="logo" src="imgs/image.png" alt="Logo">
+
+        <h1>ClinicApp</h1>
+    </header>
 
 <main id="genDoc2">
     <section>
