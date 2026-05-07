@@ -113,7 +113,7 @@ try {
         "n0m3l0"
     );
 
-    // VALIDAR SI YA EXISTE UNA CITA
+    // Validación
     stCheck = conecta.prepareStatement(
         "SELECT COUNT(*) FROM citas WHERE fecha_hora = ?"
     );
@@ -128,15 +128,15 @@ try {
         existe = rsCheck.getInt(1) > 0;
     }
 
-    // SI YA EXISTE
+    // If en caso de que ya exista
     if (existe) {
 
-        mensaje = "❌ Ya existe una cita en esa fecha y hora.";
+        mensaje = "Ya existe una cita en esa fecha y hora.";
         claseMensaje = "mensajeError";
 
     } else {
 
-        // INSERTAR NUEVA CITA
+        // Si no existe otra cita
         stInsert = conecta.prepareStatement(
             "INSERT INTO citas (fecha_hora, nombre, tipo) VALUES (?,?,?)"
         );
@@ -147,7 +147,7 @@ try {
 
         stInsert.executeUpdate();
 
-        mensaje = "✔ Cita agregada correctamente.";
+        mensaje = "Cita agregada correctamente.";
         claseMensaje = "mensajeExito";
     }
 
@@ -160,7 +160,7 @@ try {
 
 } catch (Exception e) {
 
-    mensaje = "❌ Error: " + e.getMessage();
+    mensaje = "Error: " + e.getMessage();
     claseMensaje = "mensajeError";
 
 }
@@ -271,7 +271,7 @@ try {
 </main>
 
 <%
-    // CERRAR RECURSOS
+
 
     if (rs != null) rs.close();
     if (rsCheck != null) rsCheck.close();
