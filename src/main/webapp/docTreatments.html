@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="clinictyle.css" type="text/css">
+    <title>Página Principal</title>
+</head>
+
+<body id="bodDoc">
+
+    <nav id="navDoc">
+        <ul>
+            <li><a href="doctorMain.jsp">
+                    <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
+                    <span>Inicio</span></a></li>
+            <li><a href="patientManagement.html">
+                    <img src="imgs/patient-svgrepo-com.svg">
+                    <span>Pacientes</span></a></li>
+            <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
+                    <span>Historial</span></a></li></a></li>
+            <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
+                    <span>Citas</span></a></li></a></li>
+            <li><a href="docTreatments.html">
+                    <img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
+                    <span>Tratamientos</span></a></li>
+            <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
+                    <span>Perfil</span></a></li>
+        </ul>
+    </nav>
+	
+	<header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
+        <h1>ClinicApp</h1>
+    </header>
+
+    <main id="genDoc2">
+        <section id="trat">
+		
+            <article>
+                <h2>Registrar tratamiento</h2>
+                <p>Aquí podrá agregar tratamientos nuevos.</p>
+                <button type="button" class="boton" id="RegisTrat" onclick="location.href='addTreatment.html'">Registrar</button>
+            </article>
+
+			<article>
+                <h2>Lista de Tratamientos</h2>
+                <p>Aquí podrá visualizar y buscar todos los tratamientos previamente registrados.</p>
+                <button type="button" class="boton" id="BVtr" onclick="location.href='searchTreatment1.jsp'">Buscar</button>
+            </article>
+
+            <article>
+                <h2>Modificar tratamiento</h2>
+                <p>Aquí podrá seleccionar algún tratamiento y modificarlo.</p>
+                <button type="button" class="boton" id="modTrat" onclick="location.href='editTreatments.jsp'">Modificar</button>
+            </article>
+
+            <article>
+                <h2>Eliminar tratamiento</h2>
+                <p>Aquí podrá seleccionar algún tratamiento y eliminarlo.</p>
+                <button type="button" class="boton" id="EliTrat" onclick="location.href='deleteTreatments.jsp'">Eliminar</button>
+            </article>
+			
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" 
+	content="width=device-width, initial-scale=1.0" />
+	<title>Índice</title>
+	<link rel="stylesheet" href="estilosFlex.css" type="text/css">
+	<style>
+	body{
+		font-family:Arial,Helvetica,sans-serif;
+		margin: 0;
+		line-height: 1.6;
+		background-color: #8DD5E3;
+		color: #000000;
+	
+	}
+	
+	header, nav, main, section, article, aside, footer{
+		border: 1px solid #ccc;
+		margin: 10px;
+		padding: 15px;
+		border-radius: 5px;
+		background-color: #565a75;
+	}
+	header {
+    position: relative;     
+    background-color: #F2a0a7;
+    color: white;
+    padding: 15px;
+    text-align: center;     
+}
+
+header .regresar {
+    position: absolute;
+    left: 20px;          
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+	
+	nav{
+		background-color: #a2d0a7;
+		text-align: center;
+		
+	}
+	
+	nav a{
+		margin: 10px;
+		text-decoration: none;
+		color: #f2a6ff;
+		font-weight: bold;
+		color: white;
+	}
+	
+	main{
+		display: flex;
+		flew-wrap: wrap;
+		background-color: #fcd99d;
+		gap: 10px;
+	}
+	
+	section{
+		flex:2;	
+		background-color: #d1d1e3;
+		color: white;
+	}
+	
+	article{
+		background-color: #9acbf5;
+	}
+	
+	aside{
+		flex:1;
+		background-color: #d1d1e3;
+		color: white;
+	}
+	
+	footer{
+	text-align: center;
+	background-color: #a76dbf;
+	color: white;
+	}
+	</style>
+ </head>
+ <body>
+	<header>
+	<a class="regresar" href="../index.html">REGRESAR</a>
+	<h1>Datos personales </h1>
+	</header>
+	<nav>
+	<a href="academica.html"> Estudios </a>
+	<a href="contacto.html"> Contacto </a>
+	</nav>
+	<main>
+		<section>
+			
+			<article>
+				<h2>Dylan Arturo Parra Avila</h2>
+			</article>
+			
+			<article>
+				<h3> Dirección: Av. Ribera de San Cosme 124, San Rafael, Cuauhtémoc, CDMX</h3>
+				<h3> Telefóno: 55 4279 2235</h3>
+				<h3> CURP:  PAAD081218HDFRVXC5</h3>
+				<audio controls>
+					<source src="audio.mp3">
+				</audio>
+			</article>
+			
+			
+	
+		</section>
+		<aside align="center">
+			<img src="foto.jpg" width="430" height="410"/>
+		</aside>
+	</main>
+	<footer>
+	<p>&copy; 2025 Mi Sitio Web | Todos los derechos reservados </p>
+	</footer>
+ </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="clinictyle.css" content="text/css">
+    <title>Inicio de Sesión</title>
+</head>
+
+<body id="bodDoc">
+
+    <nav id="navDoc">
+        <ul>
+            <li><a href="doctorMain.jsp">
+                    <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
+                    <span>Inicio</span></a></li>
+            <li><a href="patientManagement.html">
+                    <img src="imgs/patient-svgrepo-com.svg">
+                    <span>Pacientes</span></a></li>
+            <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
+                    <span>Historial</span></a></li></a></li>
+            <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
+                    <span>Citas</span></a></li></a></li>
+            <li><a href="docTreatments.html">
+                    <img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
+                    <span>Tratamientos</span></a></li>
+            <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
+                    <span>Perfil</span></a></li>
+        </ul>
+    </nav>
+<header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
+
+        <h1>ClinicApp</h1>
+    </header>
+
+    <main id="genDoc2">
+      
+        <section id="regist1">
+            <article>
+                <h2>Agendar Nueva Cita</h2>
+                <p>Aquí se pueden agregar nuevas citas que se le mostrarán tanto a usted como al paciente.</p>
+                <button type="button" class="boton" id="agCitas" onclick="location.href='addAppt.html'">Agendar</button>
+            </article>
+
+            <article>
+                <h2>Modificar citas</h2>
+                <p>Aquí podrá modificar las citas previamente agendadas. Los cambios se generarán para el paciente
+                    también.</p>
+                <button type="button" class="boton" id="RegisPac" onclick="location.href='editAppt.jsp'">Reagendar</button>
+            </article>
+            <article>
+                <h2>Cancelar Citas</h2>
+                <p>Aquí podrá cancelar citas que ya tenía programadas. Se le informará al paciente de esto.</p>
+                <button type="button" class="boton" onclick="location.href='deleteAppt.jsp'">Eliminar</button>
+            </article>
+
+            <article>
+                <h2>Visualizar Citas</h2>
+                <p>Aquí podrá visualizar las proximas citas que tenga.</p>
+                <button type="button" class="boton" onclick="location.href='viewAppt.jsp'">Ver</button>
+            </article>
+        </section>
+        
+      
+    </main>
+</body>
+
+</html>
