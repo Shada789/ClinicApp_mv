@@ -5,7 +5,6 @@
 <%@page import="java.sql.SQLException"%>
 
 <%
-// Declaración de variables
 String id_usuario = "";
 String nombres = "";
 String apP = "";
@@ -16,7 +15,6 @@ String password = "";
 String user = "";
 String confirmar = "";
 
-// Obtener parámetros del formulario
 id_usuario = request.getParameter("id_usuario");
 nombres = request.getParameter("nombre");
 apP = request.getParameter("apellidoP");
