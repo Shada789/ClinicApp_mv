@@ -87,7 +87,7 @@
 String pac = request.getParameter("paciente");
 String fecha = request.getParameter("fecha");
 String hora = request.getParameter("hora");
-String tipo = request.getParameter("tipo");
+String notas = request.getParameter("descripcion");
 
 String fecha_hora = fecha + " " + hora;
 
@@ -115,7 +115,7 @@ try {
 
     // Validación
     stCheck = conecta.prepareStatement(
-        "SELECT COUNT(*) FROM citas WHERE fecha_hora = ?"
+        "SELECT COUNT(*) FROM cita WHERE fecha_hora = ?"
     );
 
     stCheck.setString(1, fecha_hora);
@@ -209,12 +209,12 @@ try {
 
     <section>
 
-        <!-- MENSAJE -->
+
         <p class="<%= claseMensaje %>">
             <%= mensaje %>
         </p>
 
-        <!-- TABLA -->
+
         <table id="tablasDia">
 
             <thead>
