@@ -19,7 +19,6 @@
 
         StringBuilder sb = new StringBuilder();
 
-        // ── 1. Citas del paciente ──────────────────────────────────────────
         PreparedStatement psCitas = con.prepareStatement(
             "SELECT c.fecha_hora, c.estado, c.notas, tc.nombre AS tipo " +
             "FROM cita c " +
@@ -46,7 +45,6 @@
         }
         if (!hayCitas) sb.append("Sin citas registradas.\n");
 
-        // ── 2. Tratamientos asignados ──────────────────────────────────────
         PreparedStatement psTrat = con.prepareStatement(
             "SELECT t.nombre, t.descripcion, pt.fecha_inicio, pt.fecha_fin, pt.observaciones " +
             "FROM paciente_tratamiento pt " +
@@ -74,7 +72,6 @@
         }
         if (!hayTrat) sb.append("Sin tratamientos asignados.\n");
 
-        // ── 3. Notas del médico ────────────────────────────────────────────
         PreparedStatement psNotas = con.prepareStatement(
             "SELECT notas_medico, registrado_en " +
             "FROM historial " +
