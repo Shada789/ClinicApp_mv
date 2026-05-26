@@ -11,7 +11,7 @@
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC",
+                "jdbc:mysql://127.0.0.1:3306/chambs?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
                 "root", "n0m3l0"
             );
 

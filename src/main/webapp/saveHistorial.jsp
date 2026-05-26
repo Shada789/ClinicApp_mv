@@ -1,60 +1,51 @@
-<%@ page import="java.sql.*" %>
-
+<%@page contentType="text/plain" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*"%>
 <%
-String idCliente = request.getParameter("idCliente");
-String texto = request.getParameter("texto");
+    Integer idMedico = (Integer) session.getAttribute("id_medico");
+    if (idMedico == null) { out.print("ERROR: sesión inválida"); return; }
 
-try{
-    Class.forName("com.mysql.cj.jdbc.Driver");
-    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/chambs", "root", "n0m3l0");
+    String idPacStr = request.getParameter("idPaciente");
+    String texto    = request.getParameter("texto");
 
-    // Verificar si el cliente ya tiene historial
-    String sql = "SELECT id_historial FROM infoCliente WHERE id_cliente=?";
-    PreparedStatement ps = c.prepareStatement(sql);
-    ps.setInt(1, Integer.parseInt(idCliente));
-    ResultSet rs = ps.executeQuery();
+    if (idPacStr == null || texto == null) { out.print("ERROR: datos incompletos"); return; }
 
-    if(rs.next()){
-        // SI EXISTE → actualizar
-        int idHist = rs.getInt("id_historial");
+    int idPaciente = Integer.parseInt(idPacStr);
+    Connection con = null;
 
-        String update = "UPDATE historial SET descripcion=? WHERE id_historial=?";
-        PreparedStatement up = c.prepareStatement(update);
-        up.setString(1, texto);
-        up.setInt(2, idHist);
-        up.executeUpdate();
-        up.close();
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC",
+            "root", "n0m3l0"
+        );
 
-    } else {
-        // SI NO EXISTE → crear y vincular
-        String insert = "INSERT INTO historial (descripcion) VALUES (?)";
-        PreparedStatement ins = c.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-        ins.setString(1, texto);
-        ins.executeUpdate();
+        // Verifica que el paciente pertenece a este médico antes de guardar
+        PreparedStatement chk = con.prepareStatement(
+            "SELECT id_paciente FROM paciente WHERE id_paciente = ? AND id_medico = ? LIMIT 1"
+        );
+        chk.setInt(1, idPaciente);
+        chk.setInt(2, idMedico);
+        ResultSet rs = chk.executeQuery();
 
-        ResultSet gen = ins.getGeneratedKeys();
-        int nuevoHist = 0;
-        if(gen.next()) nuevoHist = gen.getInt(1);
+        if (!rs.next()) {
+            out.print("ERROR: paciente no autorizado");
+            return;
+        }
 
-        gen.close();
-        ins.close();
+        // Inserta nueva nota en historial
+        PreparedStatement ps = con.prepareStatement(
+            "INSERT INTO historial (id_paciente, id_medico, notas_medico) VALUES (?, ?, ?)"
+        );
+        ps.setInt(1, idPaciente);
+        ps.setInt(2, idMedico);
+        ps.setString(3, texto);
+        ps.executeUpdate();
 
-        // Vincular al cliente
-        String vinc = "INSERT INTO infoCliente (id_medico, id_historial, id_cliente) VALUES (NULL, ?, ?)";
-        PreparedStatement v = c.prepareStatement(vinc);
-        v.setInt(1, nuevoHist);
-        v.setInt(2, Integer.parseInt(idCliente));
-        v.executeUpdate();
-        v.close();
+        out.print("OK");
+
+    } catch (Exception e) {
+        out.print("Error: " + e.getMessage());
+    } finally {
+        if (con != null) try { con.close(); } catch (Exception ignored) {}
     }
-
-    rs.close();
-    ps.close();
-    c.close();
-}catch(Exception e){
-    out.print("Error: " + e.getMessage());
-    return;
-}
-
-out.print("OK");
 %>
