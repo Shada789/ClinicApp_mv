@@ -1,86 +1,104 @@
-create database chambs;
-use chambs;
-/* Crea las tablas segun el orden de los numeros */
-/*Tipo de usuario    1*/
-create table usuarioTipo (
-    id_tipo int AUTO_INCREMENT PRIMARY KEY,
-    tipo VARCHAR (50) NOT NULL
+CREATE DATABASE chambs;
+USE chambs;
+CREATE TABLE usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(80) NOT NULL,
+    paterno VARCHAR(80) NOT NULL,
+    materno VARCHAR(80) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    contrasena VARCHAR(50) NOT NULL,
+    rol ENUM('medico', 'paciente') NOT NULL,
+    fecha_nac DATE
 );
-INSERT INTO usuarioTipo (id_tipo, tipo)
-VALUES (1, 'paciente'),
-    (2, 'medico');
-/*Usuario    2*/
-create table usuario (
-    id_usuario int AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR (50) NOT NULL,
-    paterno varchar (50) NOT NULL,
-    materno varchar (50) NOT NULL,
-    gmail varchar (50) NOT NULL,
-    usuario varchar (50) not null,
-    contrasena varchar (50) not null,
-    cedula varchar (50),
-    fechaNac date,
-    id_tipo int,
-    FOREIGN KEY (id_tipo) REFERENCES usuarioTipo (id_tipo)
+CREATE TABLE medico (
+    id_medico INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL UNIQUE,
+    cedula VARCHAR(50),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE
 );
-/*Tratamientos     3*/
-create table tratamientos (
-    id_tratamiento int AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR (50) NOT NULL,
-    precio int,
-    descripcion text NOT NULL
+CREATE TABLE paciente (
+    id_paciente INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL UNIQUE,
+    id_medico INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_medico) REFERENCES medico(id_medico)
 );
-/*Citas      4*/
-create table citas (
-    id_cita int AUTO_INCREMENT PRIMARY KEY,
-    fecha_hora datetime (6) NOT NULL,
-    nombre varchar(100) not null,
-    tipo ENUM('consulta', 'control', 'urgencia') NOT NULL
+CREATE TABLE tipo_cita (
+    id_tipo_cita INT AUTO_INCREMENT PRIMARY KEY,
+    id_medico INT NOT NULL,
+    nombre VARCHAR(80) NOT NULL,
+    FOREIGN KEY (id_medico) REFERENCES medico(id_medico) ON DELETE CASCADE
 );
-/*Historial      5*/
-create table historial (
-    id_historial int AUTO_INCREMENT PRIMARY KEY,
-    id_tratamiento int,
-    id_cita int,
+CREATE TABLE cita (
+    id_cita INT AUTO_INCREMENT PRIMARY KEY,
+    id_medico INT NOT NULL,
+    id_paciente INT NOT NULL,
+    id_tipo_cita INT NOT NULL,
+    fecha_hora DATETIME NOT NULL,
+    notas TEXT,
+    estado ENUM('programada', 'completada', 'cancelada') NOT NULL DEFAULT 'programada',
+    FOREIGN KEY (id_medico) REFERENCES medico(id_medico),
+    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente),
+    FOREIGN KEY (id_tipo_cita) REFERENCES tipo_cita(id_tipo_cita)
+);
+SET GLOBAL event_scheduler = ON;
+CREATE EVENT actualizar_estado_citas ON SCHEDULE EVERY 1 MINUTE DO
+UPDATE cita
+SET estado = 'completada'
+WHERE estado = 'programada'
+    AND DATE_ADD(fecha_hora, INTERVAL 60 MINUTE) <= NOW();
+CREATE TRIGGER after_cita_update
+AFTER
+UPDATE ON cita FOR EACH ROW BEGIN IF NEW.estado IN ('completada', 'cancelada') THEN
+UPDATE historial
+SET notas_medico = CONCAT(
+        IFNULL(notas_medico, ''),
+        ' | Estado: ',
+        NEW.estado
+    )
+WHERE id_cita = NEW.id_cita;
+END IF;
+END;
+CREATE TABLE tratamiento (
+    id_tratamiento INT AUTO_INCREMENT PRIMARY KEY,
+    id_medico INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    precio INT,
     descripcion TEXT NOT NULL,
-    id_cliente int,
-    id_medico int,
-    FOREIGN key (id_cliente) REFERENCES cliente(id_cliente),
-    FOREIGN key (id_medico) REFERENCES medico (id_medico),
-    FOREIGN KEY (id_tratamiento) REFERENCES tratamientos (id_tratamiento),
-    FOREIGN KEY (id_cita) REFERENCES citas (id_cita)
+    FOREIGN KEY (id_medico) REFERENCES medico(id_medico) ON DELETE CASCADE
 );
-/*Medico     6*/
-create table medico (
-    id_medico int AUTO_INCREMENT PRIMARY KEY,
-    id_usuario int,
-    FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
+CREATE TABLE paciente_tratamiento (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_paciente INT NOT NULL,
+    id_tratamiento INT NOT NULL,
+    id_medico INT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE,
+    observaciones TEXT,
+    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente),
+    FOREIGN KEY (id_tratamiento) REFERENCES tratamiento(id_tratamiento),
+    FOREIGN KEY (id_medico) REFERENCES medico(id_medico)
 );
-/*Cliente     7*/
-create table cliente (
-    id_cliente int AUTO_INCREMENT PRIMARY KEY,
-    id_usuario int,
-    FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
+CREATE TABLE historial (
+    id_historial INT AUTO_INCREMENT PRIMARY KEY,
+    id_paciente INT NOT NULL,
+    id_medico INT NOT NULL,
+    id_cita INT,
+    id_tratamiento INT,
+    notas_medico TEXT,
+    registrado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente),
+    FOREIGN KEY (id_medico) REFERENCES medico(id_medico),
+    FOREIGN KEY (id_cita) REFERENCES cita(id_cita) ON DELETE
+    SET NULL,
+        FOREIGN KEY (id_tratamiento) REFERENCES tratamiento(id_tratamiento) ON DELETE
+    SET NULL
 );
-/*Información del Medico     8*/
-create table infoMedico (
-    id_infoMed int AUTO_INCREMENT PRIMARY KEY,
-    id_tratamiento int,
-    FOREIGN KEY (id_tratamiento) REFERENCES tratamientos (id_tratamiento),
-    id_cita int,
-    FOREIGN KEY (id_cita) REFERENCES citas (id_cita),
-    id_cliente int,
-    FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente),
-    id_medico int,
-    FOREIGN KEY (id_medico) REFERENCES medico (id_medico)
-);
-/*Información del Cliente     9*/
-create table infoCliente (
-    id_infoCli int AUTO_INCREMENT PRIMARY KEY,
-    id_medico int,
-    FOREIGN KEY (id_medico) REFERENCES medico (id_medico),
-    id_historial int,
-    FOREIGN KEY (id_historial) REFERENCES historial (id_historial),
-    id_cliente int,
-    FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente)
+CREATE TABLE insumo (
+    id_insumo INT AUTO_INCREMENT PRIMARY KEY,
+    id_medico INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    cantidad_actual INT NOT NULL DEFAULT 0,
+    FOREIGN KEY (id_medico) REFERENCES medico(id_medico) ON DELETE CASCADE
 );
