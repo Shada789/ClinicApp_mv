@@ -1,54 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+    Integer idMedico = (Integer) session.getAttribute("id_medico");
+    if (idMedico == null) {
+        response.sendRedirect("index.html");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
     <title>Registro de Paciente</title>
 </head>
-
 <body id="bodDoc">
-    <nav id="navDoc">
-        <ul>
-            <li><a href="doctorMain.jsp">
-                    <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
-                    <span>Inicio</span></a></li>
-            <li><a href="patientManagement.html">
-                    <img src="imgs/patient-svgrepo-com.svg">
-                    <span>Pacientes</span></a></li>
-            <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
-                    <span>Historial</span></a></li></a></li>
-            <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
-                    <span>Citas</span></a></li></a></li>
-            <li><a href="docTreatments.html">
-                    <img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
-                    <span>Tratamientos</span></a></li>
-            <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
-                    <span>Perfil</span></a></li>
-        </ul>
-    </nav>
-<header class="nave">
-        <img class="logo" src="imgs/image.png" alt="Logo">
 
+    <%@ include file="navDoctor.jsp" %>
+
+    <header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
         <h1>Paciente Nuevo</h1>
     </header>
 
     <main id="genDoc2">
-        
         <section>
             <article id="registroPaciente">
                 <form id="formRegistroDoctor" action="registroPaciente.jsp" method="post">
+
                     <label for="name"><b>Nombre(s):</b></label>
                     <input type="text" id="name" name="nombre" placeholder="Nombre(s)" required>
 
                     <label for="paterno"><b>Apellido Paterno:</b></label>
-                    <input type="text" id="paterno" name="apellidoP" placeholder=" Paterno" required>
+                    <input type="text" id="paterno" name="apellidoP" placeholder="Paterno" required>
 
                     <label for="materno"><b>Apellido Materno:</b></label>
-                    <input type="text" id="materno" name="apellidoM" placeholder=" Materno" required>
+                    <input type="text" id="materno" name="apellidoM" placeholder="Materno" required>
 
                     <label for="correo"><b>Correo Electrónico:</b></label>
-                    <input type="email" id="correo" name="correo" placeholder="Correo " required>
+                    <input type="email" id="correo" name="correo" placeholder="Correo" required>
 
                     <label for="fechanac"><b>Fecha de Nacimiento:</b></label>
                     <input type="date" id="fechanac" name="nacimiento" required>
@@ -62,16 +52,17 @@
                     <label for="confirm"><b>Confirmar contraseña:</b></label>
                     <input type="password" id="confirm" name="confirmar" placeholder="Confirm Password" required>
 
-                   <button type="submit" class="botonImportante">Registrar</button>
+                    <button type="submit" class="botonImportante">Registrar</button>
                 </form>
-                <button type="button" class="boton" onclick="location.href='patientManagement.html'">Regresar </button> 
+
+                <button type="button" class="boton" onclick="location.href='patientManagement.jsp'">Regresar</button>
             </article>
         </section>
-<footer>
+
+        <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
         </footer>
     </main>
 
 </body>
-
 </html>

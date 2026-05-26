@@ -3,7 +3,7 @@
             <li><a href="doctorMain.jsp">
                     <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
                     <span>Inicio</span></a></li>
-            <li><a href="patientManagement.html">
+            <li><a href="patientManagement.jsp">
                     <img src="imgs/patient-svgrepo-com.svg">
                     <span>Pacientes</span></a></li>
             <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
