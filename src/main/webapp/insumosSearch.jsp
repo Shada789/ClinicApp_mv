@@ -4,21 +4,21 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 
-<html>
-	<head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="clinic.css" type="text/css">
-	<title>Eliminación de Tratamiento</title>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="clinic.css" type="text/css">
+    <title>Busqueda de Insumos</title>
 	<script src="https://kit.fontawesome.com/f8d03bf483.js" crossorigin="anonymous"></script>
-	</head>
-	<body id="bodDoc">
-	<nav id="navDoc">
+</head>
+
+<body id="bodDoc">
+    <nav id="navDoc">
         <ul>
             <li><a href="doctorMain.jsp">
                     <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
                     <span>Inicio</span></a></li>
-            <li><a href="patientManagement.html">
-                    <img src="imgs/patient-svgrepo-com.svg">
+            <li><a href="patientManagement.html"><img src="imgs/patient-svgrepo-com.svg">
                     <span>Pacientes</span></a></li>
             <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
                     <span>Historial</span></a></li></a></li>
@@ -26,7 +26,7 @@
                     <span>Citas</span></a></li></a></li>
             <li><a href="docTreatments.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
                     <span>Tratamientos</span></a></li>
-			<li><a href="insumos.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
+            <li><a href="insumos.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
                     <span>Insumos</span></a></li>
             <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
                     <span>Perfil</span></a></li>
@@ -35,59 +35,57 @@
 	
 	<header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
-        <h1>Eliminar Tratamiento</h1>
+        <h1>Lista de Insumos</h1>
     </header>
 	
-	<main id="genDoc2">
-        <section id="tratamientosProceso">
-		
-            <h2>Tratamientos Listados</h2>
-            <table style="width:100%;" id="tablasNoche">
+    <main id="genDoc2">
+	
+        <section id="buscarTratamiento">
+            <article>
+                <h2>Buscar Insumo</h2>
+                    <form action="insumosSearch2.jsp" method="post">
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre de Insumo...">
+                        <button type="submit" id="code">
+							<i class="fa-solid fa-magnifying-glass"></i>
+						</button>
+                    </form>
+            </article>
+			<br>
+            
+			
+            <table style="width: 100%;" id="tablasNoche">
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Descripción</th>
-						<th></th>
+                        <th>Cantidad</th>
                     </tr>
 					
 					<%
-					String name;
-					String marc;
-					double price;
-		
+					
 					Connection conecta;
 					PreparedStatement st;
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
-					st = conecta.prepareStatement("SELECT * FROM tratamientos");
-		
+					st = conecta.prepareStatement("SELECT * FROM tratamiento");
+					
 					ResultSet rs = st.executeQuery();
 					while(rs.next()){
+					int code = rs.getInt("id_tratamiento");
 					%>	
 					
 					<tr>
 						<td style="width: 25%;"><%=rs.getString("nombre")%></td>
-						<td style="width: 10%;"><%=rs.getString("precio")%></td>
-						<td style="width: 65%;"><%=rs.getString("descripcion")%></td>
-						<td><a href="deleteTreatment.jsp?id_tratamiento=<%=rs.getString("id_tratamiento")%>" onclick="return confirm('¿Esta seguro de querer eliminar este tratamiento?')">
-						<button type="submit" class="boton" id="code" >
-						<i class="fa-solid fa-trash"></i>Eliminar</td>
+						<td style="width: 10%;">$<%=rs.getString("precio")%>.0</td>
+						<td style="border:none;"></td>
 					</tr>
 					<%
 					}
 					%>
                 </thead>
-					
-                <tbody>
-					
-                </tbody>
             </table>
-			<br>
-			<button type="button" onclick="location.href='docTreatments.html'" class="boton">Regresar</button>
+		<br>
+		<button type="button" onclick="location.href='insumos.html'" class="boton">Regresar</button>
         </section>
-        
     </main>
-
-	</body>
+</body>
 </html>
