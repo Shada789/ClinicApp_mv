@@ -31,7 +31,6 @@
 
                 if (rol.equals("medico")) {
 
-                    // ── Obtener id_medico y guardarlo en sesión ────────────
                     PreparedStatement psMed = con.prepareStatement(
                         "SELECT id_medico FROM medico WHERE id_usuario = ? LIMIT 1"
                     );
@@ -44,7 +43,6 @@
 
                 } else if (rol.equals("paciente")) {
 
-                    // ── Obtener id_paciente y guardarlo en sesión ──────────
                     PreparedStatement psPac = con.prepareStatement(
                         "SELECT id_paciente FROM paciente WHERE id_usuario = ? LIMIT 1"
                     );
