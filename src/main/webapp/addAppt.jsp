@@ -73,7 +73,7 @@
         }
 
         .mensajeExito {
-            color: green;
+            color: purple;
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 15px;
