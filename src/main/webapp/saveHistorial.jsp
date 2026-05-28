@@ -1,3 +1,4 @@
+<!--saveHistorial.jsp-->
 <%@page contentType="text/plain" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%
@@ -15,11 +16,10 @@
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC",
-            "root", "n0m3l0"
-        );
+    "jdbc:mysql://127.0.0.1:3306/chambs?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+    "root", "n0m3l0"
+);
 
-        // Verifica que el paciente pertenece a este médico antes de guardar
         PreparedStatement chk = con.prepareStatement(
             "SELECT id_paciente FROM paciente WHERE id_paciente = ? AND id_medico = ? LIMIT 1"
         );
@@ -32,7 +32,6 @@
             return;
         }
 
-        // Inserta nueva nota en historial
         PreparedStatement ps = con.prepareStatement(
             "INSERT INTO historial (id_paciente, id_medico, notas_medico) VALUES (?, ?, ?)"
         );

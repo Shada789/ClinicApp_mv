@@ -1,104 +1,129 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.SQLException"%>
-<%@ page import="java.sql.*" %>
+<%@page import="java.sql.*"%>
+
+<%
+    Integer idPaciente = (Integer) session.getAttribute("id_paciente");
+    if (idPaciente == null) {
+        response.sendRedirect("index.html");
+        return;
+    }
+
+    Connection con = null;
+    StringBuilder historial = new StringBuilder();
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(
+            "jdbc:mysql://127.0.0.1:3306/chambs?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+            "root", "n0m3l0"
+        );
+
+        PreparedStatement psCitas = con.prepareStatement(
+            "SELECT c.fecha_hora, c.estado, c.notas, tc.nombre AS tipo " +
+            "FROM cita c " +
+            "JOIN tipo_cita tc ON c.id_tipo_cita = tc.id_tipo_cita " +
+            "WHERE c.id_paciente = ? " +
+            "ORDER BY c.fecha_hora DESC"
+        );
+        psCitas.setInt(1, idPaciente);
+        ResultSet rsCitas = psCitas.executeQuery();
+
+        historial.append("<h3>Citas</h3>");
+        boolean hayCitas = false;
+        while (rsCitas.next()) {
+            hayCitas = true;
+            historial.append("<p><b>").append(rsCitas.getString("fecha_hora")).append("</b>")
+                     .append(" — ").append(rsCitas.getString("tipo"))
+                     .append(" | Estado: ").append(rsCitas.getString("estado"));
+            String notas = rsCitas.getString("notas");
+            if (notas != null && !notas.trim().isEmpty()) {
+                historial.append("<br><i>").append(notas).append("</i>");
+            }
+            historial.append("</p><hr>");
+        }
+        if (!hayCitas) historial.append("<p>Sin citas registradas.</p>");
+        rsCitas.close(); psCitas.close();
+
+        PreparedStatement psTrat = con.prepareStatement(
+            "SELECT t.nombre, t.descripcion, pt.fecha_inicio, pt.fecha_fin, pt.observaciones " +
+            "FROM paciente_tratamiento pt " +
+            "JOIN tratamiento t ON pt.id_tratamiento = t.id_tratamiento " +
+            "WHERE pt.id_paciente = ? " +
+            "ORDER BY pt.fecha_inicio DESC"
+        );
+        psTrat.setInt(1, idPaciente);
+        ResultSet rsTrat = psTrat.executeQuery();
+
+        historial.append("<h3>Tratamientos</h3>");
+        boolean hayTrat = false;
+        while (rsTrat.next()) {
+            hayTrat = true;
+            historial.append("<p><b>").append(rsTrat.getString("nombre")).append("</b>")
+                     .append(" | Inicio: ").append(rsTrat.getString("fecha_inicio"));
+            String fin = rsTrat.getString("fecha_fin");
+            if (fin != null) historial.append(" | Fin: ").append(fin);
+            String obs = rsTrat.getString("observaciones");
+            if (obs != null && !obs.trim().isEmpty()) {
+                historial.append("<br><i>").append(obs).append("</i>");
+            }
+            historial.append("</p><hr>");
+        }
+        if (!hayTrat) historial.append("<p>Sin tratamientos asignados.</p>");
+        rsTrat.close(); psTrat.close();
+
+        PreparedStatement psNotas = con.prepareStatement(
+            "SELECT notas_medico, registrado_en " +
+            "FROM historial " +
+            "WHERE id_paciente = ? " +
+            "AND id_cita IS NULL AND id_tratamiento IS NULL " +
+            "ORDER BY registrado_en DESC"
+        );
+        psNotas.setInt(1, idPaciente);
+        ResultSet rsNotas = psNotas.executeQuery();
+
+        historial.append("<h3>Notas del Médico</h3>");
+        boolean hayNotas = false;
+        while (rsNotas.next()) {
+            hayNotas = true;
+            historial.append("<p><b>[").append(rsNotas.getString("registrado_en")).append("]</b><br>")
+                     .append(rsNotas.getString("notas_medico")).append("</p><hr>");
+        }
+        if (!hayNotas) historial.append("<p>Sin notas registradas.</p>");
+        rsNotas.close(); psNotas.close();
+
+    } catch (Exception e) {
+        historial.append("Error al cargar historial: ").append(e.getMessage());
+    } finally {
+        if (con != null) try { con.close(); } catch (Exception ignored) {}
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
     <title>Mi Historial</title>
 </head>
-
 <body id="bodDoc">
 
-       <%@ include file="navDoctor.jsp" %>
+    <%@ include file="navPaciente.jsp" %>
 
-<header class="nave">
+    <header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
-
-        <h1>ClinicApp</h1>
+        <h1>Mi Historial</h1>
     </header>
+
     <main id="genDoc2">
-       
-        <%
-    Integer usuarioID = (Integer) session.getAttribute("usuario");
+        <section>
+            <article id="historialPaciente">
+                <%= historial.toString() %>
+            </article>
+        </section>
 
-    String historialTexto = "Tu médico aún no agrega tu historial.";
-
-    if (usuarioID != null) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/chambs",
-                "root",
-                "n0m3l0"
-            );
-
-            // Obtener el id_cliente del usuario
-            PreparedStatement ps1 = con.prepareStatement(
-                "SELECT id_cliente FROM cliente WHERE id_usuario = ?"
-            );
-            ps1.setInt(1, usuarioID);
-            ResultSet rs1 = ps1.executeQuery();
-
-            if (rs1.next()) {
-                int idCliente = rs1.getInt("id_cliente");
-
-                // Obtener el historial asociado
-                PreparedStatement ps2 = con.prepareStatement(
-                    "SELECT h.descripcion " +
-                    "FROM historial h " +
-                    "INNER JOIN infoCliente ic ON h.id_historial = ic.id_historial " +
-                    "WHERE ic.id_cliente = ? LIMIT 1"
-                );
-                ps2.setInt(1, idCliente);
-                ResultSet rs2 = ps2.executeQuery();
-
-                if (rs2.next()) {
-                    String desc = rs2.getString("descripcion");
-                    if (desc != null && !desc.trim().isEmpty()) {
-                        historialTexto = desc.replace("\n", "<br>");
-                    }
-                }
-
-                rs2.close();
-                ps2.close();
-            }
-
-            rs1.close();
-            ps1.close();
-            con.close();
-
-        } catch (Exception e) {
-            historialTexto = "Error al cargar historial: " + e.getMessage();
-        }
-    }
-%>
-
-<section>
-    <h1>Mi Historial</h1>
-    <article id="historialPaciente" style="
-        background:white;
-        padding:20px;
-        border-radius:14px;
-        box-shadow:0 0 10px rgba(0,0,0,0.1);
-        font-size:18px;
-        line-height:1.5;
-    ">
-        <%= historialTexto %>
-    </article>
-</section>
         <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
         </footer>
     </main>
 
-
 </body>
-
 </html>

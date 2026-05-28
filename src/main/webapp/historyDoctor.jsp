@@ -2,7 +2,6 @@
 <%@page import="java.sql.*"%>
 
 <%
-    // ── Protección de ruta ─────────────────────────────────────────────────
     Integer idMedico = (Integer) session.getAttribute("id_medico");
     if (idMedico == null) {
         response.sendRedirect("login.jsp");
@@ -97,11 +96,10 @@
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC",
-                "root", "n0m3l0"
-            );
+    "jdbc:mysql://127.0.0.1:3306/chambs?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+    "root", "n0m3l0"
+);
 
-            // Busca pacientes que pertenezcan a este médico
             st = con.prepareStatement(
                 "SELECT u.nombre, u.paterno, u.materno, u.email, u.fecha_nac, p.id_paciente " +
                 "FROM usuario u " +
@@ -191,12 +189,22 @@
 %>
         </section>
 
-        <!-- Sección de historial del paciente seleccionado -->
         <section id="historialBox">
-            <h2>Historial del Paciente</h2>
-            <textarea id="areaHistorial"></textarea>
-            <button class="botonImportante" id="btnGuardar" onclick="guardarHistorial()">Guardar</button>
-        </section>
+    <h2>Historial del Paciente</h2>
+
+    <div id="infoPaciente" style="
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        font-size: 15px;
+        line-height: 1.6;
+    "></div>
+
+    <h3>Notas del médico</h3>
+    <textarea id="areaHistorial" placeholder="Escribe aquí tus notas sobre el paciente..."></textarea>
+    <button class="botonImportante" id="btnGuardar" onclick="guardarHistorial()">Guardar nota</button>
+</section>
 
     </main>
 
@@ -208,6 +216,13 @@ let pacienteActual = null;
 function cargarHistorial(idPaciente) {
     pacienteActual = idPaciente;
 
+    fetch("getInfoPaciente.jsp?idPaciente=" + idPaciente)
+        .then(r => r.text())
+        .then(t => {
+            document.getElementById("infoPaciente").innerHTML = t;
+        });
+
+    // Cargar solo las notas en el textarea
     fetch("getHistorial.jsp?idPaciente=" + idPaciente)
         .then(r => r.text())
         .then(t => {
@@ -217,7 +232,11 @@ function cargarHistorial(idPaciente) {
 }
 
 function guardarHistorial() {
-    let texto = document.getElementById("areaHistorial").value;
+    let texto = document.getElementById("areaHistorial").value.trim();
+    if (!texto) {
+        mostrarToast("Escribe una nota antes de guardar.");
+        return;
+    }
 
     fetch("saveHistorial.jsp", {
         method: "POST",
@@ -226,7 +245,14 @@ function guardarHistorial() {
     })
     .then(r => r.text())
     .then(t => {
-        mostrarToast(t.trim() === "OK" ? "Historial guardado correctamente" : "Error: " + t);
+        if (t.trim() === "OK") {
+            mostrarToast("Nota guardada correctamente.");
+            fetch("getHistorial.jsp?idPaciente=" + pacienteActual)
+                .then(r => r.text())
+                .then(t => document.getElementById("areaHistorial").value = t);
+        } else {
+            mostrarToast("Error: " + t);
+        }
     });
 }
 

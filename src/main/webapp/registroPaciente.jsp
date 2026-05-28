@@ -8,7 +8,6 @@
         return;
     }
 
-    // Si no viene del formulario, redirigir
     String password = request.getParameter("contrasenia");
     if (password == null) {
         response.sendRedirect("registropac.jsp");
