@@ -27,7 +27,6 @@
         "root", "n0m3l0"
         );
         
-        // ── Verificar que el paciente pertenece a este médico ──────────────
         PreparedStatement chk = conecta.prepareStatement(
         "SELECT id_paciente FROM paciente WHERE id_paciente = ? AND id_medico = ? LIMIT 1"
         );
@@ -39,7 +38,6 @@
             return;
         }
         
-        // ── Procesar POST ──────────────────────────────────────────────────
         if (request.getMethod().equalsIgnoreCase("POST")) {
             String nombre    = request.getParameter("nombre");
             String paterno   = request.getParameter("apellidoP");
@@ -53,7 +51,6 @@
             if (!contrasena.equals(confirmar)) {
                 mensaje = "Las contraseñas no coinciden.";
             } else {
-                // Obtener id_usuario del paciente
                 PreparedStatement stIdUsr = conecta.prepareStatement(
                 "SELECT id_usuario FROM paciente WHERE id_paciente = ? LIMIT 1"
                 );
@@ -79,7 +76,6 @@
             }
         }
         
-        // ── Cargar datos actuales del paciente ─────────────────────────────
         st = conecta.prepareStatement(
         "SELECT u.id_usuario, u.nombre, u.paterno, u.materno, u.email, " +
         "u.fecha_nac, u.usuario, u.contrasena " +
@@ -93,6 +89,7 @@
     } catch (Exception e) {
         mensaje = "Error: " + e.getMessage();
     }
+    String mensajeJS = mensaje.replace("\"", "\\\"");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -198,14 +195,19 @@
 
         <div id="toast" class="toast"></div>
         <script>
-            <% if (!mensaje.isEmpty()) { %>
-            window.onload = function() {
+            function mostrarToast(msg) {
                 const toast = document.getElementById("toast");
-                toast.innerText = "<%= mensaje.replace("\"", "\\\"") %>";
+                toast.innerText = msg;
                 toast.classList.add("show");
                 setTimeout(() => toast.classList.remove("show"), 3000);
-            };
-            <% } %>
+            }
+
+            var mensajeServidor = "<%= mensajeJS %>";
+            if (mensajeServidor) {
+                window.onload = function() {
+                    mostrarToast(mensajeServidor);
+                };
+            }
         </script>
 
     </body>
