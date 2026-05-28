@@ -8,7 +8,7 @@
                     <span>Historial</span></a></li></a></li>
             <li><a href="docAppts.jsp"><img src="imgs/calendar-symbol-svgrepo-com.svg">
                     <span>Citas</span></a></li></a></li>
-            <li><a href="docTreatments.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
+            <li><a href="docAppts.jsp"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
                     <span>Tratamientos</span></a></li>
                 <li><a href="insumos.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
                     <span>Insumos</span></a></li>
