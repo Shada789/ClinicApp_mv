@@ -222,7 +222,6 @@ function cargarHistorial(idPaciente) {
             document.getElementById("infoPaciente").innerHTML = t;
         });
 
-    // Cargar solo las notas en el textarea
     fetch("getHistorial.jsp?idPaciente=" + idPaciente)
         .then(r => r.text())
         .then(t => {
