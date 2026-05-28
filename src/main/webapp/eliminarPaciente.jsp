@@ -1,6 +1,63 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
+<%
+    Integer idMedico = (Integer) session.getAttribute("id_medico");
+    if (idMedico == null) {
+        response.sendRedirect("index.html");
+        return;
+    }
+
+    String idPacStr = request.getParameter("id");
+    if (idPacStr == null) {
+        response.sendRedirect("buscarPaciente.jsp");
+        return;
+    }
+    int idPaciente = Integer.parseInt(idPacStr);
+
+    String mensaje = "";
+    Connection conecta = null;
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        conecta = DriverManager.getConnection(
+            "jdbc:mysql://127.0.0.1:3306/chambs?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+            "root", "n0m3l0"
+        );
+
+        // ── Verificar que el paciente pertenece a este médico ──────────────
+        PreparedStatement chk = conecta.prepareStatement(
+            "SELECT id_usuario FROM paciente WHERE id_paciente = ? AND id_medico = ? LIMIT 1"
+        );
+        chk.setInt(1, idPaciente);
+        chk.setInt(2, idMedico);
+        ResultSet rsChk = chk.executeQuery();
+
+        if (!rsChk.next()) {
+            mensaje = "No tienes permiso para eliminar este paciente.";
+        } else {
+            int idUsuario = rsChk.getInt("id_usuario");
+
+            // Con ON DELETE CASCADE en la BD, eliminar usuario
+            // borra automáticamente el registro en paciente
+            PreparedStatement st = conecta.prepareStatement(
+                "DELETE FROM usuario WHERE id_usuario = ?"
+            );
+            st.setInt(1, idUsuario);
+            int filas = st.executeUpdate();
+            st.close();
+
+            mensaje = filas > 0
+                ? "Paciente eliminado correctamente."
+                : "No se pudo eliminar el paciente.";
+        }
+
+    } catch (Exception e) {
+        mensaje = "Error: " + e.getMessage();
+    } finally {
+        if (conecta != null) try { conecta.close(); } catch (Exception ignored) {}
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,82 +80,22 @@
             transition: all 0.6s ease;
             z-index: 2000;
         }
-        .toast.show {
-            right: 30px;
-            opacity: 1;
-        }
+        .toast.show { right: 30px; opacity: 1; }
     </style>
 </head>
 <body>
-<div id="toast" class="toast"></div>
-
-<%
-    String id = request.getParameter("id");
-
-    if(id != null){
-        Connection conecta = null;
-        PreparedStatement st = null;
-        String mensaje = "";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs", "root", "n0m3l0");
-
-            // 1. Eliminar registros de infocliente
-            st = conecta.prepareStatement(
-                "DELETE FROM infocliente WHERE id_cliente = (SELECT id_cliente FROM cliente WHERE id_usuario=?)"
-            );
-            st.setString(1, id);
-            st.executeUpdate();
-            st.close();
-
-            // 2. Eliminar cliente
-            st = conecta.prepareStatement("DELETE FROM cliente WHERE id_usuario = ?");
-            st.setString(1, id);
-            st.executeUpdate();
-            st.close();
-
-            // 3. Eliminar usuario
-            st = conecta.prepareStatement("DELETE FROM usuario WHERE id_usuario = ?");
-            st.setString(1, id);
-            int filasAfectadas = st.executeUpdate();
-            st.close();
-
-            if(filasAfectadas > 0) {
-                mensaje = "Paciente eliminado correctamente";
-            } else {
-                mensaje = "Error: No se pudo eliminar el paciente";
-            }
-
-            conecta.close();
-
-        } catch(Exception e) {
-            mensaje = "ERROR: " + e.getMessage();
+    <div id="toast" class="toast"></div>
+    <script>
+        function mostrarToast(msg, redirect) {
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+                window.location.href = redirect;
+            }, 3000);
         }
-%>
-
-<script>
-    function mostrarToast(msg, redirect = null) {
-        const toast = document.getElementById("toast");
-        toast.innerText = msg;
-        toast.classList.add("show");
-        setTimeout(() => {
-            toast.classList.remove("show");
-            if(redirect) window.location.href = redirect;
-        }, 3000);
-    }
-
-    mostrarToast("<%= mensaje %>", "buscarPaciente.jsp");
-</script>
-
-<%
-    } else {
-%>
-<script>
-    mostrarToast("ID de paciente no proporcionado", "buscarPaciente.jsp");
-</script>
-<%
-    }
-%>
+        mostrarToast("<%= mensaje.replace("\"", "\\\"") %>", "buscarPaciente.jsp");
+    </script>
 </body>
 </html>
