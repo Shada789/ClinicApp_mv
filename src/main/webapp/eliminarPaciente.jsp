@@ -95,7 +95,7 @@
                 window.location.href = redirect;
             }, 3000);
         }
-        mostrarToast("<%= mensaje.replace("\"", "\\\"") %>", "buscarPaciente.jsp");
+        mostrarToast("<%= mensajeJS %>", "buscarPaciente.jsp");
     </script>
 </body>
 </html>
