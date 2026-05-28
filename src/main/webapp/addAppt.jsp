@@ -204,7 +204,7 @@ rs = stSelect.executeQuery();
 
                 <tr>
                     <td><%= rs.getString("id_cita") %></td>
-                    <td><%= rs.getString("nombre") %></td>
+                    <td><%= rs.getString("paciente") %></td>
                     <td><%= rs.getString("fecha_hora") %></td>
                     <td><%= rs.getString("tipo") %></td>
                 </tr>
