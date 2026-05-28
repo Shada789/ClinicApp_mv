@@ -10,6 +10,7 @@
 	<title>Eliminación de Tratamiento</title>
 	</head>
 	<body id="bodDoc">
+		
 		<%Integer idMedico = (Integer) session.getAttribute("id_medico");
     if (idMedico == null) {
         response.sendRedirect("index.html");

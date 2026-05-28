@@ -86,6 +86,7 @@
     </style>
 </head>
 <body>
+    <%@ include file="navDoctor.jsp" %>
     <div id="toast" class="toast"></div>
     <script>
         function mostrarToast(msg, redirect) {
