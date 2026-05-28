@@ -87,70 +87,100 @@ try {
         "n0m3l0"
     );
 
-    stSelect = conecta.prepareStatement("SELECT * FROM citas ORDER BY fecha_hora");
-    rs = stSelect.executeQuery();
-
+    stSelect = conecta.prepareStatement(
+    "SELECT c.id_cita, u.nombre AS paciente, c.fecha_hora, c.notas, c.tipo " +
+    "FROM cita c " +
+    "JOIN paciente p ON c.id_paciente = p.id_paciente " +
+    "JOIN usuario u ON p.id_usuario = u.id_usuario " +
+    "WHERE c.id_medico = ? " +
+    "ORDER BY c.fecha_hora"
+);
+stSelect.setInt(1, idMedico);
+rs = stSelect.executeQuery();
 } catch (Exception e) {
-    out.println("<p>Error: " + e.getMessage() + "</p>");
-} finally {
-
+    mensaje = "Error: " + e.getMessage();
+    claseMensaje = "mensajeError";
 }
 %>
 
-<nav id="navDoc">
-    <ul>
-        <li><a href="doctorMain.jsp"><img src="imgs/Codementor--Streamline-Simple-Icons.svg"><span>Inicio</span></a></li>
-        <li><a href="patientManagement.html"><img src="imgs/patient-svgrepo-com.svg"><span>Pacientes</span></a></li>
-        <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg"><span>Historial</span></a></li>
-        <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg"><span>Citas</span></a></li>
-        <li><a href="docTreatments.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg"><span>Tratamientos</span></a></li>
-        <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg"><span>Perfil</span></a></li>
-    </ul>
-</nav>
+<%@ include file="navDoctor.jsp" %>
 
 <header class="nave">
     <img class="logo" src="imgs/image.png" alt="Logo">
-    <h1>Visualizar Citas</h1>
+    <h1>ClinicApp</h1>
 </header>
 
 <main id="genDoc2">
+
     <section>
+
         <table id="tablasDia">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Paciente</th>
-            <th>Fecha</th>
-            <th>Tipo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% if (rs != null) { while (rs.next()) { %>
-        <tr>
-            <td><%= rs.getString("id_cita") %></td>
-            <td><%= rs.getString("nombre") %></td>
-            <td><%= rs.getString("fecha_hora") %></td>
-            <td><%= rs.getString("tipo") %></td>
-        </tr>
-        <% }} %>
-    </tbody>
-</table>
-<button type="button" onclick="location.href='docAppts.html'" class="boton" id="Regreso">Regresar</button>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Paciente</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            <%
+            if (rs != null) {
+
+                while (rs.next()) {
+            %>
+
+                <tr>
+                    <td><%= rs.getString("id_cita") %></td>
+                    <td><%= rs.getString("paciente") %></td>
+                    <td><%= rs.getString("fecha_hora") %></td>
+                    <td><%= rs.getString("tipo") %></td>
+                </tr>
+
+            <%
+                }
+            }
+            %>
+
+            </tbody>
+
+        </table>
+
+        <br>
+
+        <button
+            type="button"
+            onclick="location.href='addAppt1.jsp'"
+            class="boton"
+            id="Regreso">
+
+            Regresar
+
+        </button>
+
     </section>
 
     <footer>
         <p>&copy; 2025 ClinicApp | Todos los derechos</p>
     </footer>
+
 </main>
 
 <%
+
+
     if (rs != null) rs.close();
+    if (rsCheck != null) rsCheck.close();
+
     if (stInsert != null) stInsert.close();
     if (stSelect != null) stSelect.close();
+    if (stCheck != null) stCheck.close();
+
     if (conecta != null) conecta.close();
 %>
-
-
 
 </body>
 </html>
