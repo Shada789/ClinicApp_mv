@@ -8,12 +8,12 @@ String fecha = request.getParameter("fecha");
 String hora = request.getParameter("hora");
 String descripcion = request.getParameter("descripcion");
 String tipo = request.getParameter("tipo");
-Integer id_medico = (Integer) session.getAttribute("id_medico");
-if (id_medico == null) {
+Integer idMedicoObj = (Integer) session.getAttribute("id_medico");
+if (idMedicoObj == null) {
     response.sendRedirect("login.jsp");
     return;
 }
-int id_medico = id_medico;
+int idMedico = idMedicoObj;
 
 String fecha_hora = fecha + " " + hora;
 
@@ -39,7 +39,7 @@ try {
     stCheck = conecta.prepareStatement(
         "SELECT COUNT(*) FROM cita WHERE id_medico = ? AND fecha_hora = ?"
         );
-        stCheck.setInt(1, id_medico);
+        stCheck.setInt(1, idMedico);
         stCheck.setString(2, fecha_hora);
 
     rsCheck = stCheck.executeQuery();
@@ -57,7 +57,7 @@ try {
         stInsert = conecta.prepareStatement(
     "INSERT INTO cita (id_medico, id_paciente, fecha_hora, notas, tipo) VALUES (?,?,?,?,?)"
         );
-        stInsert.setInt(1, id_medico);
+        stInsert.setInt(1, idMedico);
         stInsert.setInt(2, Integer.parseInt(idPaciente));
         stInsert.setString(3, fecha_hora);
         stInsert.setString(4, descripcion);
@@ -76,7 +76,7 @@ try {
     "WHERE c.id_medico = ? " +
     "ORDER BY c.fecha_hora"
 );
-stSelect.setInt(1, id_medico);
+stSelect.setInt(1, idMedico);
 rs = stSelect.executeQuery();
 
 } catch (Exception e) {
