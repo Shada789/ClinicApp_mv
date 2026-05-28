@@ -33,7 +33,7 @@
                     su perfil como una cuenta para que ellos inicien sesión y puedan ver
                     su información.
                 </p>
-                <button type="button" class="boton" onclick="location.href='registroPaciente.jsp'">Registrar</button>
+                <button type="button" class="boton" onclick="location.href='registropac.jsp'">Registrar</button>
             </article>
 
             <article>

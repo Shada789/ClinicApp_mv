@@ -12,6 +12,27 @@
 %>
 <!DOCTYPE html>
 <html lang="es">
+<style>
+    tr { background: white; }
+    #tablasDia {
+        width: 20%;
+        border-collapse: collapse;
+        display: table !important;
+        float: none !important;
+    }
+    #tablasDia thead, #tablasDia tbody {
+        display: table-row-group !important;
+    }
+    #tablasDia th, #tablasDia td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+    #tablasDia th {
+        background: linear-gradient(90deg, #8b0b44, #1c3a7e);
+        color: white;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">

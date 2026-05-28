@@ -8,13 +8,19 @@
         return;
     }
 
-    String nombres  = request.getParameter("nombre");
-    String apP      = request.getParameter("apellidoP");
-    String apM      = request.getParameter("apellidoM");
-    String email    = request.getParameter("correo");
-    String fechaN   = request.getParameter("nacimiento");
-    String user     = request.getParameter("usuario");
+    // Si no viene del formulario, redirigir
     String password = request.getParameter("contrasenia");
+    if (password == null) {
+        response.sendRedirect("registropac.jsp");
+        return;
+    }
+
+    String nombres   = request.getParameter("nombre");
+    String apP       = request.getParameter("apellidoP");
+    String apM       = request.getParameter("apellidoM");
+    String email     = request.getParameter("correo");
+    String fechaN    = request.getParameter("nacimiento");
+    String user      = request.getParameter("usuario");
     String confirmar = request.getParameter("confirmar");
 
     if (!password.equals(confirmar)) {
@@ -42,6 +48,7 @@
             out.println("<script>alert('Ese usuario ya existe'); window.history.back();</script>");
             return;
         }
+        rsChk.close(); chk.close();
 
         st = conecta.prepareStatement(
             "INSERT INTO usuario (nombre, paterno, materno, email, fecha_nac, usuario, contrasena, rol) " +
@@ -60,7 +67,6 @@
         ResultSet keys = st.getGeneratedKeys();
         if (keys.next()) {
             int idUsuario = keys.getInt(1);
-
             stPac = conecta.prepareStatement(
                 "INSERT INTO paciente (id_usuario, id_medico) VALUES (?, ?)"
             );
@@ -68,6 +74,7 @@
             stPac.setInt(2, idMedico);
             stPac.executeUpdate();
         }
+        keys.close();
 
         out.println("<script>");
         out.println("alert('Paciente registrado exitosamente');");
@@ -75,10 +82,10 @@
         out.println("</script>");
 
     } catch (SQLException e) {
-        out.println("<script>alert('Error de base de datos: " + e.getMessage().replace("'", "\\'") + "'); window.history.back();</script>");
+        out.println("<script>alert('Error: " + e.getMessage().replace("'", "\\'") + "'); window.history.back();</script>");
     } finally {
-        if (st   != null) try { st.close();      } catch (Exception ignored) {}
-        if (stPac != null) try { stPac.close();   } catch (Exception ignored) {}
+        if (st      != null) try { st.close();      } catch (Exception ignored) {}
+        if (stPac   != null) try { stPac.close();   } catch (Exception ignored) {}
         if (conecta != null) try { conecta.close(); } catch (Exception ignored) {}
     }
 %>
