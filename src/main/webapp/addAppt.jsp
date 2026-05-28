@@ -31,10 +31,9 @@ try {
 
     // Validar si ya existe cita en esa fecha/hora para ese médico
     stCheck = conecta.prepareStatement(
-        "SELECT COUNT(*) FROM cita WHERE id_medico = ? AND fecha_hora = ?"
+        "SELECT COUNT(*) FROM cita WHERE AND fecha_hora = ?"
     );
-    stCheck.setInt(1, idMedico);
-    stCheck.setString(2, fecha_hora);
+    stCheck.setString(1, fecha_hora);
     rsCheck = stCheck.executeQuery();
 
     boolean existe = false;
