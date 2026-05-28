@@ -6,8 +6,13 @@ String idPaciente = request.getParameter("paciente");
 String fecha = request.getParameter("fecha");
 String hora = request.getParameter("hora");
 String descripcion = request.getParameter("descripcion");
-String idmed = request.getParameter("idMedico");
-int idMedico = Integer.parseInt(idmed);
+String tipo = request.getParameter("tipo");
+Integer idMedicoObj = (Integer) session.getAttribute("idMedico");
+if (idMedicoObj == null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
+int idMedico = idMedicoObj;
 
 String fecha_hora = fecha + " " + hora;
 
@@ -31,10 +36,10 @@ try {
 
     // Validar si ya existe cita en esa fecha/hora para ese médico
     stCheck = conecta.prepareStatement(
-        "SELECT COUNT(*) FROM cita WHERE AND fecha_hora = ?"
-    );
-    stCheck.setString(1, fecha_hora);
-    rsCheck = stCheck.executeQuery();
+        "SELECT COUNT(*) FROM cita WHERE id_medico = ? AND fecha_hora = ?"
+        );
+        stCheck.setInt(1, idMedico);
+        stCheck.setString(2, fecha_hora);
 
     boolean existe = false;
     if (rsCheck.next()) {
@@ -47,12 +52,13 @@ try {
     } else {
 
         stInsert = conecta.prepareStatement(
-            "INSERT INTO cita (id_medico, id_paciente, fecha_hora, notas) VALUES (?,?,?,?)"
+    "INSERT INTO cita (id_medico, id_paciente, fecha_hora, notas, tipo) VALUES (?,?,?,?,?)"
         );
         stInsert.setInt(1, idMedico);
         stInsert.setInt(2, Integer.parseInt(idPaciente));
         stInsert.setString(3, fecha_hora);
         stInsert.setString(4, descripcion);
+        stInsert.setString(5, tipo);
         stInsert.executeUpdate();
 
         mensaje = "Cita agregada correctamente.";
@@ -60,13 +66,15 @@ try {
     }
 
     stSelect = conecta.prepareStatement(
-        "SELECT c.id_cita, u.nombre AS paciente, c.fecha_hora, c.notas " +
-        "FROM cita c " +
-        "JOIN paciente p ON c.id_paciente = p.id_paciente " +
-        "JOIN usuario u ON p.id_usuario = u.id_usuario " +
-        "ORDER BY c.fecha_hora"
-    );
-    rs = stSelect.executeQuery();
+    "SELECT c.id_cita, u.nombre AS paciente, c.fecha_hora, c.notas, c.tipo " +
+    "FROM cita c " +
+    "JOIN paciente p ON c.id_paciente = p.id_paciente " +
+    "JOIN usuario u ON p.id_usuario = u.id_usuario " +
+    "WHERE c.id_medico = ? " +
+    "ORDER BY c.fecha_hora"
+);
+stSelect.setInt(1, idMedico);
+rs = stSelect.executeQuery();
 
 } catch (Exception e) {
     mensaje = "Error: " + e.getMessage();
@@ -84,6 +92,7 @@ try {
             <th>Paciente</th>
             <th>Fecha</th>
             <th>Descripción</th>
+            <th>Tipo</th>
         </tr>
     </thead>
     <tbody>
@@ -96,6 +105,7 @@ try {
             <td><%= rs.getString("paciente") %></td>
             <td><%= rs.getString("fecha_hora") %></td>
             <td><%= rs.getString("notas") %></td>
+            <td><%= rs.getString("tipo") %></td>
         </tr>
         <%
             }

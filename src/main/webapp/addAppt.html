@@ -57,9 +57,6 @@
             <article >
                 <form id="formCita" action="addAppt.jsp" method="post">
 
-                    <input type="hidden" name="idMedico" value="1">
-
-
                         <label for="paciente">Paciente:</label>
                         <input type="text" id="paciente" name="paciente" placeholder="Nombre del paciente" required><br><br>
 
@@ -71,6 +68,13 @@
                         <label for="hora">Hora de la cita:</label>
                         <input type="time" id="hora" name="hora" required><br><br>
 
+                        <label for="tipo">Tipo de cita:</label>
+                        <select id="tipo" name="tipo" required>
+                            <option value="">Selecciona tipo</option>
+                            <option value="consulta">Consulta</option>
+                            <option value="control">Control</option>
+                            <option value="urgencia">Urgencia</option>
+                        </select><br><br>
 
                         <label for="descripcion">Descripción de la cita:</label><br>
                         <textarea id="descripcion" name="descripcion" placeholder="Escribe aquí de qué tratará la cita" required></textarea><br><br>
