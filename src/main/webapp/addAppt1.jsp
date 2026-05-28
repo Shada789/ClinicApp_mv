@@ -122,13 +122,13 @@
                                 if(rsPac != null) rsPac.close();
                                 if(psPac != null) psPac.close();
                                 if(con != null) con.close();} %>
-                    </select>
+                    </select><br><br>
 
                     <label for="fecha">Fecha de la cita:</label>
-                    <input type="date" id="fecha" name="fecha" required>
+                    <input type="date" id="fecha" name="fecha" required><br><br>
 
-                    <label for="hora">Hora de la cita:</label>
-                    <input type="time" id="hora" name="hora" required>
+                    <label for="hora"> Hora de la cita que desee:</label>
+                    <input type="time" id="hora" name="hora" required><br><br>
 
                     <label for="tipo">Tipo de cita:</label>
                     <select id="tipo" name="tipo" required>
