@@ -1,8 +1,8 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page import="java.sql.*"%>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es">    
 
 <head>
 
