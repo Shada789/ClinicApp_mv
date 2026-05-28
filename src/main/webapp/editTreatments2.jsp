@@ -48,7 +48,7 @@
 		}
 	%>
 		<article>
-			<form id="formRegistroDoctor" action="editTreamtents3.jsp" method="post">
+			<form id="formRegistroDoctor" action="editTreatments3.jsp" method="post">
 	
 				<label style="display: none;">Código:</label>
 				<input style="display: none;" type="text" name="id_tratamiento" value="<%= codigo %>" readonly>

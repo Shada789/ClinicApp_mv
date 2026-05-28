@@ -69,7 +69,7 @@
                 </tbody>
             </table>
 			<br>
-			<button type="button" onclick="location.href='docTreatments.html'" class="boton">Regresar</button>
+			<button type="button" onclick="location.href='docTreatments.jsp'" class="boton">Regresar</button>
         </section>
         
     </main>

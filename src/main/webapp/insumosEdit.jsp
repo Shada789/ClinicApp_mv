@@ -67,7 +67,7 @@
                 </tbody>
             </table>
 			<br>
-			<button type="button" onclick="location.href='insumos.html'" class="boton">Regresar</button>
+			<button type="button" onclick="location.href='insumos.jsp'" class="boton">Regresar</button>
         </section>
         
     </main>
