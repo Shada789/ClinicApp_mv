@@ -12,6 +12,27 @@
 %>
 <!DOCTYPE html>
 <html lang="es">
+<style>
+    tr { background: white; }
+    #tablasDia {
+        width: 20%;
+        border-collapse: collapse;
+        display: table !important;
+        float: none !important;
+    }
+    #tablasDia thead, #tablasDia tbody {
+        display: table-row-group !important;
+    }
+    #tablasDia th, #tablasDia td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+    #tablasDia th {
+        background: linear-gradient(90deg, #8b0b44, #1c3a7e);
+        color: white;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
@@ -40,31 +61,8 @@
 </head>
 <body id="bodDoc">
 
-    <nav id="navDoc">
-        <ul>
-            <li><a href="doctorMain.jsp">
-                <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
-                <span>Inicio</span></a></li>
-            <li><a href="patientManagement.jsp">
-                <img src="imgs/patient-svgrepo-com.svg">
-                <span>Pacientes</span></a></li>
-            <li><a href="historyDoctor.jsp">
-                <img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
-                <span>Historial</span></a></li>
-            <li><a href="docAppts.jsp">
-                <img src="imgs/calendar-symbol-svgrepo-com.svg">
-                <span>Citas</span></a></li>
-            <li><a href="docTreatments.jsp">
-                <img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
-                <span>Tratamientos</span></a></li>
-            <li><a href="myProfile.jsp">
-                <img src="imgs/profile-1341-svgrepo-com.svg">
-                <span>Perfil</span></a></li>
-            <li><a href="logout.jsp">
-                <img src="imgs/logout-svgrepo-com.svg">
-                <span>Cerrar sesión</span></a></li>
-        </ul>
-    </nav>
+      <%@ include file="navDoctor.jsp" %>
+
 
     <header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">

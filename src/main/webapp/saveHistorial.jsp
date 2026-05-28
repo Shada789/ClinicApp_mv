@@ -1,4 +1,3 @@
-<!--saveHistorial.jsp-->
 <%@page contentType="text/plain" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%
