@@ -12,6 +12,15 @@
 	<script src="https://kit.fontawesome.com/f8d03bf483.js" crossorigin="anonymous"></script>
 	</head>
 	<body id="bodDoc">
+		<%Integer idMedico = (Integer) session.getAttribute("id_medico");
+    if (idMedico == null) {
+        response.sendRedirect("index.html");
+        return;
+    }
+
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);%>
 	<%@ include file="navDoctor.jsp" %>
 	
 	<header class="nave">
