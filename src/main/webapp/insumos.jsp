@@ -42,7 +42,7 @@
             <article>
                 <h2>Registrar insumo</h2>
                 <p>Aquí podrá agregar insumos nuevos.</p>
-                <button type="button" class="boton" id="RegisTrat" onclick="location.href='insumosAdd.html'">Registrar</button>
+                <button type="button" class="boton" id="RegisTrat" onclick="location.href='insumosAdd.jsp'">Registrar</button>
             </article>
 
 			<article>

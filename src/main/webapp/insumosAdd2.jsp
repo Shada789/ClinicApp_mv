@@ -46,7 +46,7 @@
         <section id="formTrat">
 			<h1>Registro realizado con exito<h1>
 			<button type="button" class="boton" onclick="location.href='insumosSearch.jsp'">Lista de Insumos
-			<button type="button" class="boton" onclick="location.href='insumosAdd.html'">Seguir Registrando
+			<button type="button" class="boton" onclick="location.href='insumosAdd.jsp'">Seguir Registrando
         </section>
     </main>
 	
