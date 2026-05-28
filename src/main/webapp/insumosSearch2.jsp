@@ -68,7 +68,7 @@
 	%>
 		<tr>
 			<td style="width: 70%;"><%=rs.getString("nombre")%></td>
-			<td style="width: 15%;"><%=rs.getString("cantidad_actual")%></td>
+			<td style="width: 30%;"><%=rs.getString("cantidad_actual")%></td>
 			<td style="border:none;"></td>
 		</tr>
 	<%}
