@@ -70,6 +70,12 @@ String pac = request.getParameter("paciente");
 String fecha = request.getParameter("fecha");
 String hora = request.getParameter("hora");
 String tipo = request.getParameter("tipo");
+Integer idMedicoObj = (Integer) session.getAttribute("id_medico");
+if (idMedicoObj == null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
+int idMedico = idMedicoObj;
 
 String fecha_hora = fecha + " " + hora;
 
