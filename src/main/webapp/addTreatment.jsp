@@ -16,41 +16,30 @@
 		nom=request.getParameter("nombre");
 		price=Integer.parseInt(request.getParameter("precio"));
 		desc=request.getParameter("descripcion");
+
+                Integer idMedico = (Integer) session.getAttribute("id_medico");
+                if (idMedico == null) {
+                        response.sendRedirect("index.html");
+                        return;
+                }
 		
 		Connection conecta;
 		PreparedStatement st;
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
-		st=conecta.prepareStatement("Insert into tratamientos (nombre,precio,descripcion) values(?,?,?)");
+		st=conecta.prepareStatement("Insert into tratamiento (id_medico,nombre,precio,descripcion) values(?,?,?,?)");
 		
-		st.setString(1,nom);
-		st.setInt(2,price);
-		st.setString(3,desc);
+		st.setInt(1,idMedico);
+		st.setString(2,nom);
+		st.setInt(3,price);
+		st.setString(4,desc);
 		st.executeUpdate();
 		
 	%>
 	
 <body id="bodDoc">
 
-    <nav id="navDoc">
-        <ul>
-            <li><a href="doctorMain.jsp">
-                    <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
-                    <span>Inicio</span></a></li>
-            <li><a href="patientManagement.html">
-                    <img src="imgs/patient-svgrepo-com.svg">
-                    <span>Pacientes</span></a></li>
-            <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
-                    <span>Historial</span></a></li></a></li>
-            <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
-                    <span>Citas</span></a></li></a></li>
-            <li><a href="docTreatments.html">
-                    <img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
-                    <span>Tratamientos</span></a></li>
-            <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
-                    <span>Perfil</span></a></li>
-        </ul>
-    </nav>
+    <%@ include file="navDoctor.jsp" %>
 	
 	<header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">

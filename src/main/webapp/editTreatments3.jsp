@@ -11,25 +11,7 @@
 	</head>
 	
     <body id="bodDoc">
-	<nav id="navDoc">
-		<ul>
-			<li><a href="doctorMain.html">
-					<img src="imgs/Codementor--Streamline-Simple-Icons.svg">
-					<span>Inicio</span></a></li>
-			<li><a href="patientManagement.html">
-					<img src="imgs/patient-svgrepo-com.svg">
-					<span>Pacientes</span></a></li>
-			<li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
-					<span>Historial</span></a></li></a></li>
-			<li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
-					<span>Citas</span></a></li></a></li>
-			<li><a href="docTreatments.html">
-					<img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
-					<span>Tratamientos</span></a></li>
-			<li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
-					<span>Perfil</span></a></li>
-		</ul>
-	</nav>
+	<%@ include file="navDoctor.jsp" %>
 		
 	<header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
@@ -52,7 +34,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
 	
-		PreparedStatement st = conecta.prepareStatement("UPDATE tratamientos SET nombre=?, precio=?, descripcion=? WHERE id_tratamiento=?");
+		PreparedStatement st = conecta.prepareStatement("UPDATE tratamiento SET nombre=?, precio=?, descripcion=? WHERE id_tratamiento=?");
 	
 		st.setString(1,nom);
 		st.setInt(2,precio);
@@ -62,7 +44,7 @@
 	%>
 		<h1>Modificación realizada con exito<h1>
 			<button type="button" class="boton" onclick="location.href='searchTreatment1.jsp'">Lista de Tratamientos
-			<button type="button" class="boton" onclick="location.href='editTreatments.jsp'">Seguir Modificando
+			<button type="button" class="boton" onclick="location.href='editTreatments1.jsp'">Seguir Modificando
         </section>
     </main>
 	</body>
