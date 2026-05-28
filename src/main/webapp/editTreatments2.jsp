@@ -11,26 +11,8 @@
 	<title>Modificación Tratamientos</title>
 	</head>
     
-<body id="bodDoc">
-    <nav id="navDoc">
-        <ul>
-            <li><a href="doctorMain.jsp">
-                    <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
-                    <span>Inicio</span></a></li>
-            <li><a href="patientManagement.html">
-                    <img src="imgs/patient-svgrepo-com.svg">
-                    <span>Pacientes</span></a></li>
-            <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
-                    <span>Historial</span></a></li></a></li>
-            <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
-                    <span>Citas</span></a></li></a></li>
-            <li><a href="docTreatments.html">
-                    <img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
-                    <span>Tratamientos</span></a></li>
-            <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
-                    <span>Perfil</span></a></li>
-        </ul>
-    </nav>
+	<body id="bodDoc">
+    <%@ include file="navDoctor.jsp" %>
 	
 	<header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
@@ -49,7 +31,7 @@
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
-			PreparedStatement st = conecta.prepareStatement("SELECT * FROM tratamientos WHERE id_tratamiento=?");
+			PreparedStatement st = conecta.prepareStatement("SELECT * FROM tratamiento WHERE id_tratamiento=?");
 			st.setInt(1, Integer.parseInt(codigo));
 
 			ResultSet rs = st.executeQuery();
@@ -66,7 +48,7 @@
 		}
 	%>
 		<article>
-			<form id="formRegistroDoctor" action="editTreamtents2.jsp" method="post">
+			<form id="formRegistroDoctor" action="editTreamtents3.jsp" method="post">
 	
 				<label style="display: none;">Código:</label>
 				<input style="display: none;" type="text" name="id_tratamiento" value="<%= codigo %>" readonly>
@@ -84,7 +66,7 @@
 				<button type="submit" class="botonImportante" id="code">Guardar Cambios</button>
 			
 			</form>
-			<button type="button" onclick="location.href='editTreatments.jsp'" class="boton">Regresar</button>
+			<button type="button" onclick="location.href='editTreatments1.jsp'" class="boton">Regresar</button>
 		</article>
 		
 		</section>
