@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
+
 <%
 String idPaciente = request.getParameter("paciente");
 String fecha = request.getParameter("fecha");
@@ -41,10 +42,12 @@ try {
         stCheck.setInt(1, idMedico);
         stCheck.setString(2, fecha_hora);
 
+    rsCheck = stCheck.executeQuery();
     boolean existe = false;
     if (rsCheck.next()) {
         existe = rsCheck.getInt(1) > 0;
     }
+    
 
     if (existe) {
         mensaje = "Ya existe una cita en esa fecha y hora.";
