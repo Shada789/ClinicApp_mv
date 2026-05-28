@@ -49,7 +49,7 @@
         <section id="formTrat">
 			<h1>Registro realizado con exito<h1>
 			<button type="button" class="boton" onclick="location.href='searchTreatment1.jsp'">Lista de Tratamientos
-			<button type="button" class="boton" onclick="location.href='addTreatment.html'">Seguir Registrando
+			<button type="button" class="boton" onclick="location.href='addTreatment.jsp'">Seguir Registrando
         </section>
     </main>
 	
