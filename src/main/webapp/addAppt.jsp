@@ -222,7 +222,7 @@ rs = stSelect.executeQuery();
 
         <button
             type="button"
-            onclick="location.href='addAppt.html'"
+            onclick="location.href='addAppt1.jsp'"
             class="boton"
             id="Regreso">
 
