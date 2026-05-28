@@ -8,7 +8,7 @@ String fecha = request.getParameter("fecha");
 String hora = request.getParameter("hora");
 String descripcion = request.getParameter("descripcion");
 String tipo = request.getParameter("tipo");
-Integer idMedicoObj = (Integer) session.getAttribute("idMedico");
+Integer idMedicoObj = (Integer) session.getAttribute("id_medico");
 if (idMedicoObj == null) {
     response.sendRedirect("login.jsp");
     return;
