@@ -1,7 +1,87 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="clinictyle.css" content="text/css">
+    <title>Agregar Cita</title>
+
+    <style>
+        #formCita label,
+        #formCita input,
+        #formCita select {
+            border: none;
+            color: black;
+            font-size: 16px;
+            background-color: transparent;
+        }
+
+        #formCita button {
+            grid-column: 1 / -1;
+            justify-self: center;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+
+        #tablasDia {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            display: table !important;
+            float: none !important;
+        }
+
+        #tablasDia th,
+        #tablasDia td {
+            border: 1px solid #ccc !important;
+            padding: 10px !important;
+            text-align: left !important;
+        }
+
+        #tablasDia th {
+            background: linear-gradient(90deg, #8b0b44, #1c3a7e) !important;
+            color: white !important;
+        }
+
+        #tablasDia th:nth-child(1),
+        #tablasDia td:nth-child(1) {
+            width: 20%;
+        }
+
+        #tablasDia th:nth-child(2),
+        #tablasDia td:nth-child(2) {
+            width: 30%;
+        }
+
+        #tablasDia th:nth-child(3),
+        #tablasDia td:nth-child(3) {
+            width: 25%;
+        }
+
+        #tablasDia th:nth-child(4),
+        #tablasDia td:nth-child(4) {
+            width: 25%;
+        }
+
+        .mensajeError {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .mensajeExito {
+            color: green;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body id="bodDoc">
 <%
 String idPaciente = request.getParameter("paciente");
 String fecha = request.getParameter("fecha");
@@ -35,7 +115,7 @@ try {
         "n0m3l0"
     );
 
-    // Validar si ya existe cita en esa fecha/hora para ese médico
+    // Validar si ya existe cita en esa fecha/hora
     stCheck = conecta.prepareStatement(
         "SELECT COUNT(*) FROM cita WHERE id_medico = ? AND fecha_hora = ?"
         );
@@ -86,36 +166,57 @@ rs = stSelect.executeQuery();
 %>
 
 
-<p class="<%= claseMensaje %>"><%= mensaje %></p>
+<%@ include file="navDoctor.jsp" %>
 
-<table id="tablasDia">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Paciente</th>
-            <th>Fecha</th>
-            <th>Descripción</th>
-            <th>Tipo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <%
-        if (rs != null) {
-            while (rs.next()) {
-        %>
-        <tr>
-            <td><%= rs.getInt("id_cita") %></td>
-            <td><%= rs.getString("paciente") %></td>
-            <td><%= rs.getString("fecha_hora") %></td>
-            <td><%= rs.getString("notas") %></td>
-            <td><%= rs.getString("tipo") %></td>
-        </tr>
-        <%
+<header class="nave">
+    <img class="logo" src="imgs/image.png" alt="Logo">
+    <h1>ClinicApp</h1>
+</header>
+
+<main id="genDoc2">
+
+    <section>
+
+
+        <p class="<%= claseMensaje %>">
+            <%= mensaje %>
+        </p>
+
+
+        <table id="tablasDia">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Paciente</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            <%
+            if (rs != null) {
+
+                while (rs.next()) {
+            %>
+
+                <tr>
+                    <td><%= rs.getString("id_cita") %></td>
+                    <td><%= rs.getString("nombre") %></td>
+                    <td><%= rs.getString("fecha_hora") %></td>
+                    <td><%= rs.getString("tipo") %></td>
+                </tr>
+
+            <%
+                }
             }
-        }
-        %>
-    </tbody>
-</table>
+            %>
+
+            </tbody>
+
+        </table>
 
         <br>
 
