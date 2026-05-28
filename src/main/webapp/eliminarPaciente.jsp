@@ -52,12 +52,14 @@
                 : "No se pudo eliminar el paciente.";
         }
 
-    } catch (Exception e) {
+} catch (Exception e) {
         mensaje = "Error: " + e.getMessage();
     } finally {
         if (conecta != null) try { conecta.close(); } catch (Exception ignored) {}
     }
+    String mensajeJS = mensaje.replace("\"", "\\\"");
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
