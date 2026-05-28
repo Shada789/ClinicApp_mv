@@ -55,10 +55,32 @@
         <section>
             <article >
                 <form id="formCita" action="addAppt.jsp" method="post">
-
-                        <label for="paciente">Paciente:</label>
-                        <input type="text" id="paciente" name="paciente" placeholder="Nombre del paciente" required><br><br>
-
+<label for="paciente">Paciente:</label>
+<select id="paciente" name="paciente" required>
+    <%
+    Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC",
+        "root", "n0m3l0"
+    );
+    PreparedStatement psPac = con.prepareStatement(
+        "SELECT p.id_paciente, u.nombre, u.paterno, u.materno " +
+        "FROM paciente p JOIN usuario u ON p.id_usuario = u.id_usuario " +
+        "WHERE p.id_medico = ?"
+    );
+    psPac.setInt(1, (Integer)session.getAttribute("idMedico"));
+    ResultSet rsPac = psPac.executeQuery();
+    while(rsPac.next()){
+    %>
+        <option value="<%= rsPac.getInt("id_paciente") %>">
+            <%= rsPac.getString("nombre") %> <%= rsPac.getString("paterno") %> <%= rsPac.getString("materno") %>
+        </option>
+    <%
+    }
+    rsPac.close();
+    psPac.close();
+    con.close();
+    %>
+</select>
 
                         <label for="fecha">Fecha de la cita:</label>
                         <input type="date" id="fecha" name="fecha" required><br>
@@ -80,7 +102,7 @@
                    
                     <button type="submit" class="botonImportante">Agregar Cita</button>
                 </form>
-                
+
                 <button type="button" onclick="location.href='docAppts.html'" class="boton">Regresar</button>
 
             </article>
