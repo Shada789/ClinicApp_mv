@@ -7,20 +7,22 @@
     <title>Inicio de Sesión</title>
     <style>
         #formCita label,
-#formCita input, #formCita select {
+        #formCita input,
+        #formCita select {
 
-    border: none;
-    color: black;
-    font-size: 16px;
-        background-color: transparent;
+            border: none;
+            color: black;
+            font-size: 16px;
+            background-color: transparent;
 
-}
-#formCita button{
-    grid-column: 1 / -1;
-    justify-self: center;
-    padding: 10px 20px;
-    font-size: 18px;
-}
+        }
+
+        #formCita button {
+            grid-column: 1 / -1;
+            justify-self: center;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
     </style>
 </head>
 
@@ -38,7 +40,7 @@
                     <span>Citas</span></a></li></a></li>
             <li><a href="docTreatments.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
                     <span>Tratamientos</span></a></li>
-                <li><a href="insumos.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
+            <li><a href="insumos.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
                     <span>Insumos</span></a></li>
             <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
                     <span>Perfil</span></a></li>
@@ -53,34 +55,56 @@
     <main id="genDoc2">
 
         <section>
-            <article >
+            <article>
                 <form id="formCita" action="addAppt.jsp" method="post">
 
-                        <label for="paciente">Paciente:</label>
-                        <input type="text" id="paciente" name="paciente" placeholder="Nombre del paciente" required><br><br>
+                    <label for="paciente">Paciente:</label>
+
+                    <select id="paciente" name="paciente" required>
+
+                        <option value="">Seleccione un paciente</option>
+                        <% Connection
+                            con=DriverManager.getConnection( "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC"
+                            , "root" , "n0m3l0" ); PreparedStatement
+                            psPac=con.prepareStatement( "SELECT p.id_paciente, u.nombre, u.paterno, u.materno "
+                            + "FROM paciente p " + "JOIN usuario u ON p.id_usuario = u.id_usuario "
+                            + "WHERE p.id_medico = ?" ); psPac.setInt(1, (Integer)session.getAttribute("id_medico"));
+                            ResultSet rsPac=psPac.executeQuery(); while(rsPac.next()){ %>
+
+                            <option value="<%= rsPac.getInt(" id_paciente") %>">
+
+                                <%= rsPac.getString("nombre") %>
+                                    <%= rsPac.getString("paterno") %>
+                                        <%= rsPac.getString("materno") %>
+
+                            </option>
+
+                            <% } rsPac.close(); psPac.close(); con.close(); %>
+
+                    </select><br><br>
+
+                    <label for="fecha">Fecha de la cita:</label>
+                    <input type="date" id="fecha" name="fecha" required><br>
 
 
-                        <label for="fecha">Fecha de la cita:</label>
-                        <input type="date" id="fecha" name="fecha" required><br>
+                    <label for="hora">Hora de la cita:</label>
+                    <input type="time" id="hora" name="hora" required><br><br>
 
+                    <label for="tipo">Tipo de cita:</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="">Selecciona tipo</option>
+                        <option value="consulta">Consulta</option>
+                        <option value="control">Control</option>
+                        <option value="urgencia">Urgencia</option>
+                    </select><br><br>
 
-                        <label for="hora">Hora de la cita:</label>
-                        <input type="time" id="hora" name="hora" required><br><br>
+                    <label for="descripcion">Descripción de la cita:</label><br>
+                    <textarea id="descripcion" name="descripcion" placeholder="Escribe aquí de qué tratará la cita"
+                        required></textarea><br><br>
 
-                        <label for="tipo">Tipo de cita:</label>
-                        <select id="tipo" name="tipo" required>
-                            <option value="">Selecciona tipo</option>
-                            <option value="consulta">Consulta</option>
-                            <option value="control">Control</option>
-                            <option value="urgencia">Urgencia</option>
-                        </select><br><br>
-
-                        <label for="descripcion">Descripción de la cita:</label><br>
-                        <textarea id="descripcion" name="descripcion" placeholder="Escribe aquí de qué tratará la cita" required></textarea><br><br>
-                   
                     <button type="submit" class="botonImportante">Agregar Cita</button>
                 </form>
-                
+
                 <button type="button" onclick="location.href='docAppts.html'" class="boton">Regresar</button>
 
             </article>
@@ -99,7 +123,7 @@
                 </tbody>
             </table>
         </section>
-    <footer>
+        <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos </p>
         </footer>
     </main>
