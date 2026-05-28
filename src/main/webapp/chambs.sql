@@ -24,23 +24,17 @@ CREATE TABLE paciente (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE,
     FOREIGN KEY (id_medico) REFERENCES medico(id_medico)
 );
-CREATE TABLE tipo_cita (
-    id_tipo_cita INT AUTO_INCREMENT PRIMARY KEY,
-    id_medico INT NOT NULL,
-    nombre VARCHAR(80) NOT NULL,
-    FOREIGN KEY (id_medico) REFERENCES medico(id_medico) ON DELETE CASCADE
-);
+
 CREATE TABLE cita (
     id_cita INT AUTO_INCREMENT PRIMARY KEY,
     id_medico INT NOT NULL,
     id_paciente INT NOT NULL,
-    id_tipo_cita INT NOT NULL,
     fecha_hora DATETIME NOT NULL,
     notas TEXT,
+    tipo ENUM('consulta','control','urgencia') NOT NULL,
     estado ENUM('programada', 'completada', 'cancelada') NOT NULL DEFAULT 'programada',
     FOREIGN KEY (id_medico) REFERENCES medico(id_medico),
-    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente),
-    FOREIGN KEY (id_tipo_cita) REFERENCES tipo_cita(id_tipo_cita)
+    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente)
 );
 SET GLOBAL event_scheduler = ON;
 CREATE EVENT actualizar_estado_citas ON SCHEDULE EVERY 1 MINUTE DO

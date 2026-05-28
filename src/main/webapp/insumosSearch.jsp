@@ -13,25 +13,7 @@
 </head>
 
 <body id="bodDoc">
-    <nav id="navDoc">
-        <ul>
-            <li><a href="doctorMain.jsp">
-                    <img src="imgs/Codementor--Streamline-Simple-Icons.svg">
-                    <span>Inicio</span></a></li>
-            <li><a href="patientManagement.html"><img src="imgs/patient-svgrepo-com.svg">
-                    <span>Pacientes</span></a></li>
-            <li><a href="historyDoctor.jsp"><img src="imgs/clinic-history-folder-with-plus-sign-svgrepo-com.svg">
-                    <span>Historial</span></a></li></a></li>
-            <li><a href="docAppts.html"><img src="imgs/calendar-symbol-svgrepo-com.svg">
-                    <span>Citas</span></a></li></a></li>
-            <li><a href="docTreatments.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
-                    <span>Tratamientos</span></a></li>
-            <li><a href="insumos.html"><img src="imgs/tooth-with-mouthwash-svgrepo-com.svg">
-                    <span>Insumos</span></a></li>
-            <li><a href="myProfile.html"><img src="imgs/profile-1341-svgrepo-com.svg">
-                    <span>Perfil</span></a></li>
-        </ul>
-    </nav>
+    <%@ include file="navDoctor.jsp" %>
 	
 	<header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
@@ -66,16 +48,16 @@
 					PreparedStatement st;
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
-					st = conecta.prepareStatement("SELECT * FROM tratamiento");
+					st = conecta.prepareStatement("SELECT * FROM insumo");
 					
 					ResultSet rs = st.executeQuery();
 					while(rs.next()){
-					int code = rs.getInt("id_tratamiento");
+					int code = rs.getInt("id_insumo");
 					%>	
 					
 					<tr>
-						<td style="width: 25%;"><%=rs.getString("nombre")%></td>
-						<td style="width: 10%;">$<%=rs.getString("precio")%>.0</td>
+						<td style="width: 70%;"><%=rs.getString("nombre")%></td>
+						<td style="width: 30%;"><%=rs.getString("cantidad_actual")%></td>
 						<td style="border:none;"></td>
 					</tr>
 					<%
