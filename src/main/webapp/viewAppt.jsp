@@ -73,6 +73,9 @@ String tipo = request.getParameter("tipo");
 
 String fecha_hora = fecha + " " + hora;
 
+String mensaje = "";
+String claseMensaje = "";
+
 Connection conecta = null;
 PreparedStatement stInsert = null;
 PreparedStatement stSelect = null;
@@ -169,18 +172,6 @@ rs = stSelect.executeQuery();
 
 </main>
 
-<%
-
-
-    if (rs != null) rs.close();
-    if (rsCheck != null) rsCheck.close();
-
-    if (stInsert != null) stInsert.close();
-    if (stSelect != null) stSelect.close();
-    if (stCheck != null) stCheck.close();
-
-    if (conecta != null) conecta.close();
-%>
 
 </body>
 </html>
