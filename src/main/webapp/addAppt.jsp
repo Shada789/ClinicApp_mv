@@ -6,6 +6,8 @@ String idPaciente = request.getParameter("paciente");
 String fecha = request.getParameter("fecha");
 String hora = request.getParameter("hora");
 String descripcion = request.getParameter("descripcion");
+String idmed = request.getParameter("idMedico");
+int idMedico = Integer.parseInt(idmed);
 
 String fecha_hora = fecha + " " + hora;
 
