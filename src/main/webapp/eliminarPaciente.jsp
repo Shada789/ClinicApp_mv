@@ -25,6 +25,7 @@
             "root", "n0m3l0"
         );
 
+        // ── Verificar que el paciente pertenece a este médico ──────────────
         PreparedStatement chk = conecta.prepareStatement(
             "SELECT id_usuario FROM paciente WHERE id_paciente = ? AND id_medico = ? LIMIT 1"
         );
@@ -37,6 +38,8 @@
         } else {
             int idUsuario = rsChk.getInt("id_usuario");
 
+            // Con ON DELETE CASCADE en la BD, eliminar usuario
+            // borra automáticamente el registro en paciente
             PreparedStatement st = conecta.prepareStatement(
                 "DELETE FROM usuario WHERE id_usuario = ?"
             );
@@ -54,8 +57,6 @@
     } finally {
         if (conecta != null) try { conecta.close(); } catch (Exception ignored) {}
     }
-
-    String mensajeJS = mensaje.replace("\"", "\\\"");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -94,7 +95,7 @@
                 window.location.href = redirect;
             }, 3000);
         }
-        mostrarToast("<%= mensajeJS %>", "buscarPaciente.jsp");
+        mostrarToast("<%= mensaje.replace("\"", "\\\"") %>", "buscarPaciente.jsp");
     </script>
 </body>
 </html>
