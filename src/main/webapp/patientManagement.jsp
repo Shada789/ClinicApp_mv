@@ -6,6 +6,10 @@
         response.sendRedirect("index.html");
         return;
     }
+     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,6 +17,13 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
     <title>Gestión de Pacientes</title>
+    <meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<script>
+    window.onpageshow = function(e) {
+        if (e.persisted) window.location.reload();
+    };
+</script>
 </head>
 <body id="bodDoc">
 

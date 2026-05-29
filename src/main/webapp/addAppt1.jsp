@@ -20,7 +20,13 @@
         <title>Agendar Cita</title>
 
         <link rel="stylesheet" href="clinictyle.css">
-
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<script>
+    window.onpageshow = function(e) {
+        if (e.persisted) window.location.reload();
+    };
+</script>
         <style>
             
             #formCita{
@@ -94,7 +100,6 @@
                                     "JOIN usuario u ON p.id_usuario = u.id_usuario " +
                                     "WHERE p.id_medico = ?"
                                     );
-                                    Integer idMedico = (Integer)session.getAttribute("id_medico");
                                     psPac.setInt(1, idMedico);
                                     rsPac = psPac.executeQuery();
                                     while(rsPac.next()){

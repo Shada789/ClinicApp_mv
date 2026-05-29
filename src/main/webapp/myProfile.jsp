@@ -50,6 +50,14 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
     <title>Mi Perfil</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<script>
+    window.onpageshow = function(e) {
+        if (e.persisted) window.location.reload();
+    };
+</script>
 </head>
 <body id="bodDoc">
 

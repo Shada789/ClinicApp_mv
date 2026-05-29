@@ -7,7 +7,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="clinictyle.css" content="text/css">
     <title>Inicio de Sesión</title>
-
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<script>
+    window.onpageshow = function(e) {
+        if (e.persisted) window.location.reload();
+    };
+</script>
     <style>
         #formCita label,
         #formCita input,
@@ -72,7 +78,7 @@ String hora = request.getParameter("hora");
 String tipo = request.getParameter("tipo");
 Integer idMedicoObj = (Integer) session.getAttribute("id_medico");
 if (idMedicoObj == null) {
-    response.sendRedirect("login.jsp");
+    response.sendRedirect("login.html");
     return;
 }
 int idMedico = idMedicoObj;

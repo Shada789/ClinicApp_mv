@@ -120,6 +120,13 @@
         }
         .toast.show { right: 30px; opacity: 1; }
     </style>
+    <meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<script>
+    window.onpageshow = function(e) {
+        if (e.persisted) window.location.reload();
+    };
+</script>
 </head>
 <body id="bodDoc">
 
