@@ -18,8 +18,7 @@
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);%>
 
-             <%@ include file="navDoctor.jsp" %>
-
+    <%@ include file="navDoctor.jsp" %>
 	
 	<header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">

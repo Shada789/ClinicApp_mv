@@ -56,6 +56,51 @@
         if (conecta != null) try { conecta.close(); } catch (Exception ignored) {}
     }
 
+<<<<<<< HEAD
     response.sendRedirect("buscarPaciente.jsp?msg=" +
         java.net.URLEncoder.encode(mensaje, "UTF-8"));
 %>
+=======
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="clinictyle.css">
+    <title>Eliminar Paciente</title>
+    <style>
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: -300px;
+            background: linear-gradient(135deg, #A80139, rgb(16, 51, 121));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 0 18px rgba(0,0,0,0.25);
+            opacity: 0;
+            transition: all 0.6s ease;
+            z-index: 2000;
+        }
+        .toast.show { right: 30px; opacity: 1; }
+    </style>
+</head>
+<body>
+    <%@ include file="navDoctor.jsp" %>
+    <div id="toast" class="toast"></div>
+    <script>
+        function mostrarToast(msg, redirect) {
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+                window.location.href = redirect;
+            }, 3000);
+        }
+        mostrarToast("<%= mensajeJS %>", "buscarPaciente.jsp");
+    </script>
+</body>
+</html>
+>>>>>>> c275f38d1d5cb68b737450564e06322749428bce

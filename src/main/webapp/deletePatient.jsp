@@ -9,8 +9,12 @@
 
 <body id="bodDoc">
     
+<<<<<<< HEAD:src/main/webapp/deletePatient.jsp
          <%@ include file="navDoctor.jsp" %>
 
+=======
+    <%@ include file="navDoctor.jsp" %>
+>>>>>>> c275f38d1d5cb68b737450564e06322749428bce:src/main/webapp/deletePatient.html
 <header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
 

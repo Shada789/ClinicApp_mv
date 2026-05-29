@@ -45,6 +45,7 @@
 </head>
 <body id="bodDoc">
 
+
     <nav id="navDoc">
         <ul>
             <li><a href="patientMain.jsp">

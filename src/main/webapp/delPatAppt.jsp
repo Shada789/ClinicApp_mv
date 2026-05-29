@@ -66,6 +66,7 @@
 </head>
 
 <body id="bodDoc">
+    <%@ include file="navDoctor.jsp" %>
 <%
 String pac = (String) session.getAttribute("nombrePaciente");
 String fecha = request.getParameter("fecha");

@@ -8,6 +8,7 @@
 </head>
 
 <body id="bodDoc">
+    <%@ include file="navDoctor.jsp" %>
 
      <%@ include file="navDoctor.jsp" %>
 

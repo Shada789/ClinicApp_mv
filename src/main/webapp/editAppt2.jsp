@@ -28,6 +28,7 @@
 </head>
 
 <body id="bodDoc">
+    <%@ include file="navDoctor.jsp" %>
 <%
 String id = request.getParameter("id_cita");
 String pac = "";
