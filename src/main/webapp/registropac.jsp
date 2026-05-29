@@ -6,6 +6,13 @@
         response.sendRedirect("index.html");
         return;
     }
+
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    String msgToast = request.getParameter("msg");
+    String msgJS = (msgToast != null) ? msgToast.replace("\"", "\\\"") : "";
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,6 +20,24 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
     <title>Registro de Paciente</title>
+    <style>
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: -300px;
+            background: linear-gradient(135deg, #A80139, rgb(16, 51, 121));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 0 18px rgba(0,0,0,0.25);
+            opacity: 0;
+            transition: all 0.6s ease;
+            z-index: 2000;
+        }
+        .toast.show { right: 30px; opacity: 1; }
+    </style>
 </head>
 <body id="bodDoc">
 
@@ -63,6 +88,18 @@
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
         </footer>
     </main>
+
+    <div id="toast" class="toast"></div>
+    <script>
+        window.onload = function() {
+            const msg = "<%= msgJS %>";
+            if (!msg || msg.trim() === "") return;
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        };
+    </script>
 
 </body>
 </html>

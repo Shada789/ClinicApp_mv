@@ -79,8 +79,7 @@
         }
         keys.close();
 
-        response.sendRedirect("patientManagement.jsp?msg=" + java.net.URLEncoder.encode("Paciente registrado exitosamente.", "UTF-8"));
-
+response.sendRedirect("registropac.jsp?msg=" + java.net.URLEncoder.encode("Paciente registrado exitosamente.", "UTF-8"));
     } catch (SQLException e) {
         response.sendRedirect("registropac.jsp?msg=" + java.net.URLEncoder.encode("Error: " + e.getMessage(), "UTF-8"));
     } finally {
@@ -115,19 +114,28 @@
 </head>
 <body>
  <%
-    String msgToast = request.getParameter("msg");
-    String msgJS = (msgToast != null) ? msgToast.replace("\"", "\\\"") : "";
+String msgToast = request.getParameter("msg");
+String msgJS = (msgToast != null)
+    ? msgToast.replace("\"", "\\\"")
+    : "";
 %>
+
 <div id="toast" class="toast"></div>
+
 <script>
-    function mostrarToast(msg) {
-        if (!msg) return;
-        const toast = document.getElementById("toast");
-        toast.innerText = msg;
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 3000);
-    }
-    mostrarToast("<%= msgJS %>");
+function mostrarToast(msg) {
+    if (!msg) return;
+
+    const toast = document.getElementById("toast");
+    toast.innerText = msg;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+
+mostrarToast("<%= msgJS %>");
 </script>
 </body>
 </html>
