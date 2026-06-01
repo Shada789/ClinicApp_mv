@@ -49,21 +49,27 @@
 }
 #tablasDia th:nth-child(1),
 #tablasDia td:nth-child(1) {
-    width: 20%;  
+     width: 10%; 
 }
 
 #tablasDia th:nth-child(2),
-#tablasDia td:nth-child(2) {
-    width: 30%;  
+#tablasDia td:nth-child(2) { 
+    width: 20%; 
 }
 
 #tablasDia th:nth-child(3),
-#tablasDia td:nth-child(3) {
-    width: 25%;   
+#tablasDia td:nth-child(3) { 
+    width: 25%; 
 }
+
 #tablasDia th:nth-child(4),
-#tablasDia td:nth-child(4) {
-    width: 25%;   
+#tablasDia td:nth-child(4) { 
+    width: 30%; 
+}
+
+#tablasDia th:nth-child(5),
+#tablasDia td:nth-child(5) { 
+    width: 15%; 
 }
 
     </style>
@@ -136,6 +142,7 @@ rs = stSelect.executeQuery();
                     <th>ID</th>
                     <th>Paciente</th>
                     <th>Fecha</th>
+                    <th>Descripción</th>
                     <th>Tipo</th>
                 </tr>
             </thead>
@@ -149,9 +156,10 @@ rs = stSelect.executeQuery();
             %>
 
                 <tr>
-                    <td><%= rs.getString("id_cita") %></td>
+                    <td><%= rs.getInt("id_cita") %></td>
                     <td><%= rs.getString("paciente") %></td>
                     <td><%= rs.getString("fecha_hora") %></td>
+                    <td><%= rs.getString("notas") %></td>
                     <td><%= rs.getString("tipo") %></td>
                 </tr>
 
