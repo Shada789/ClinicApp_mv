@@ -44,7 +44,7 @@
             <article>
                 <h2>Cancelar Citas</h2>
                 <p>Aquí podrá cancelar citas que ya tenía programadas. Se le informará al paciente de esto.</p>
-                <button type="button" class="boton" onclick="location.href='deleteAppt.jsp'">Eliminar</button>
+                <button type="button" class="boton" onclick="location.href='deleteAppt1.jsp'">Eliminar</button>
             </article>
 
             <article>
