@@ -97,16 +97,13 @@ try {
     );
 
     stSelect = conecta.prepareStatement(
-            "SELECT c.id_cita,
-            u.nombre AS paciente,
-            c.fecha_hora,
-            c.tipo
-        FROM cita c
-        JOIN paciente p ON c.id_paciente = p.id_paciente
-        JOIN usuario u ON p.id_usuario = u.id_usuario
-        WHERE c.id_medico = ?
-        AND c.estado = 'programada'
-        ORDER BY c.fecha_hora"
+            "SELECT c.id_cita, u.nombre AS paciente, c.fecha_hora, c.tipo" +
+        " FROM cita c" +
+        " JOIN paciente p ON c.id_paciente = p.id_paciente" +
+        " JOIN usuario u ON p.id_usuario = u.id_usuario" +
+        " WHERE c.id_medico = ?" +
+        " AND c.estado = 'programada'" +
+        " ORDER BY c.fecha_hora"
 );
 stSelect.setInt(1, idMedico);
 rs = stSelect.executeQuery();
