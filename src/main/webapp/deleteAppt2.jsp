@@ -29,24 +29,49 @@
     <body id="bodDoc">
         <%@ include file="navDoctor.jsp" %>
 		<%
-		String id;
-		id = request.getParameter("id_cita");
-		if(id!=null){
-			try{
-				Connection conecta;
-				PreparedStatement st;
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				
-				conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
-				st = conecta.prepareStatement("Delete from citas where id_cita = ?");
-				st.setString(1, id);
-				st.executeUpdate();
-			} catch (Exception e){
-				out.println("Mensaje de excepción" + e.getMessage());
-			}
-			out.println("Eliminado correctamente");
-		}
-	%>
+        String id = request.getParameter("id_cita");
+
+        if(id != null){
+
+            Connection conecta = null;
+            PreparedStatement st = null;
+
+            try{
+
+                Class.forName("com.mysql.cj.jdbc.Driver");
+
+                conecta = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/chambs",
+                    "root",
+                    "n0m3l0"
+                );
+
+                st = conecta.prepareStatement(
+                    "UPDATE cita SET estado='cancelada' WHERE id_cita=?"
+                );
+
+                st.setInt(1, Integer.parseInt(id));
+
+                int filas = st.executeUpdate();
+
+                if(filas > 0){
+                    out.println("<p>Cita cancelada correctamente.</p>");
+                }else{
+                    out.println("<p>No se encontró la cita.</p>");
+                }
+
+            }catch(Exception e){
+
+                out.println("<p>Error: " + e.getMessage() + "</p>");
+
+            }finally{
+
+                if(st != null) st.close();
+                if(conecta != null) conecta.close();
+
+            }
+        }
+        %>
          <%@ include file="navDoctor.jsp" %>
 
      <header class="nave">
