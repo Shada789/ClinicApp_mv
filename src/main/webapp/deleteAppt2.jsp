@@ -84,7 +84,7 @@
         <section>
 		<h1>Cancelación de citas</h1>
 		<p>Cita cancelada con exito</p>
-		<button type="button" class="boton" onclick="location.href='deleteAppt.jsp'">Regresar </button>
+		<button type="button" class="boton" onclick="location.href='docAppts.jsp'">Regresar </button>
         </section>
         <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
