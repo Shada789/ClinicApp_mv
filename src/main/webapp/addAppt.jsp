@@ -173,24 +173,17 @@ try {
 </head>
 <body id="bodDoc">
 <%@ include file="navDoctor.jsp" %>
-
 <header class="nave">
     <img class="logo" src="imgs/image.png" alt="Logo">
     <h1>ClinicApp</h1>
 </header>
-
 <main id="genDoc2">
-
     <section>
-
-
         <p class="<%= claseMensaje %>">
             <%= mensaje %>
         </p>
 
-
         <table id="tablasDia">
-
             <thead>
                 <tr>
                     <th>ID</th>
@@ -199,45 +192,31 @@ try {
                     <th>Tipo</th>
                 </tr>
             </thead>
-
             <tbody>
-
             <%
             if (rs != null) {
-
                 while (rs.next()) {
             %>
-
                 <tr>
                     <td><%= rs.getString("id_cita") %></td>
                     <td><%= rs.getString("paciente") %></td>
                     <td><%= rs.getString("fecha_hora") %></td>
                     <td><%= rs.getString("tipo") %></td>
                 </tr>
-
             <%
                 }
             }
             %>
-
             </tbody>
-
-        </table>
-
-        <br>
-
+        </table> <br>
         <button
             type="button"
             onclick="location.href='docAppts.jsp'"
             class="boton"
             id="Regreso">
-
             Regresar
-
         </button>
-
     </section>
-
     <footer>
         <p>&copy; 2025 ClinicApp | Todos los derechos</p>
     </footer>
@@ -245,8 +224,6 @@ try {
 </main>
 
 <%
-
-
     if (rs != null) rs.close();
     if (rsCheck != null) rsCheck.close();
 
