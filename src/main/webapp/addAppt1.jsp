@@ -28,39 +28,7 @@
     };
 </script>
         <style>
-            
-            #formCita{
-                display: flex;
-                flex-direction: column;
-                width: 400px;
-                gap: 10px;
-            }
-            
-            #formCita label,
-            #formCita input,
-            #formCita select,
-            #formCita textarea{
-                
-                border: none;
-                color: black;
-                font-size: 16px;
-                background-color: transparent;
-                
-            }
-            
-            #formCita textarea{
-                border: 1px solid #ccc;
-                padding: 10px;
-                resize: none;
-                height: 100px;
-            }
-            
-            #formCita button{
-                
-                padding: 10px 20px;
-                font-size: 18px;
-                
-            }
+           
             
         </style>
 
@@ -79,7 +47,7 @@
                     <form id="formCita" action="addAppt.jsp" method="post">
 
                         <label>Paciente:</label>
-                        <select id="paciente" name="paciente" required>
+                        <select  name="paciente" required>
                             <option value="">Seleccione un paciente</option>
                             <%
                                 Connection con = null;
@@ -119,26 +87,26 @@
                             if(con != null) con.close();} %>
                         </select>
 
-                        <label for="fecha">Fecha de la cita:</label>
-                        <input type="date" id="fecha" name="fecha" required>
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" name="fecha" required>
 
-                        <label for="hora"> Hora de la cita que desee:</label>
-                        <input type="time" id="hora" name="hora" required>
+                        <label for="hora"> Hora:</label>
+                        <input type="time"  name="hora" required>
 
-                        <label for="tipo">Tipo de cita:</label>
-                        <select id="tipo" name="tipo" required>
+                        <label for="tipo">Tipo:</label>
+                        <select name="tipo" required>
                             <option value="">Selecciona tipo</option>
                             <option value="consulta">Consulta</option>
                             <option value="control">Control</option>
                             <option value="urgencia">Urgencia</option>
                         </select>
 
-                        <label for="descripcion">Descripción:</label>
-                        <textarea id="descripcion" name="descripcion" rows="5" cols="40" placeholder="Escribe aquí la descripción"></textarea>
-                        <button type="submit" class="botonImportante">
+
+                        <textarea name="descripcion" rows="5" cols="40" placeholder="Escribe aquí la descripción"></textarea><br>
+                        <br><button type="submit" class="botonImportante">
                             Agregar Cita
                         </button>
-                    </form><br>
+                    </form>
                     <button
                     type="button"
                     onclick="location.href='docAppts.jsp'"

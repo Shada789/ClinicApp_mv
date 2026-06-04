@@ -144,7 +144,7 @@ rs = stSelect.executeQuery();
             <td><%= rs.getString("tipo") %></td>
             <td><form action="deleteAppt2.jsp" method="post">
                 <input type="hidden" name="id_cita" value="<%= rs.getInt("id_cita") %>">
-                <button type="submit">
+                <button type="submit" class="botonImportante">
                     Cancelar
                 </button>
             </form></td>
