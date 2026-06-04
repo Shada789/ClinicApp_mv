@@ -45,7 +45,7 @@ String pac = "";
         );
 
         PreparedStatement st = conecta.prepareStatement(
-            "SELECT * FROM citas WHERE id_cita=?"
+            "SELECT * FROM cita WHERE id_cita=?"
         );
         st.setInt(1, Integer.parseInt(id));
 
