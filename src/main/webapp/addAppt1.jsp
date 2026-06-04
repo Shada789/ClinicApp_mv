@@ -134,7 +134,7 @@
                         </select>
 
                         <label for="descripcion">Descripción:</label>
-                        <textarea id="descripcion" name="descripcion" placeholder="Escribe aquí la descripción"></textarea>
+                        <textarea id="descripcion" name="descripcion" rows="5" cols="40" placeholder="Escribe aquí la descripción"></textarea>
                         <button type="submit" class="botonImportante">
                             Agregar Cita
                         </button>
