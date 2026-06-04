@@ -66,15 +66,22 @@
 </head>
 
 <body id="bodDoc">
-    <%@ include file="navDoctor.jsp" %>
 <%
 String pac = request.getParameter("paciente");
 String fecha = request.getParameter("fecha");
 String hora = request.getParameter("hora");
 String tipo = request.getParameter("tipo");
+Integer idMedicoObj = (Integer) session.getAttribute("id_medico");
+if (idMedicoObj == null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
+int idMedico = idMedicoObj;
 
 String fecha_hora = fecha + " " + hora;
 
+String mensaje = "";
+String claseMensaje = "";
 Connection conecta = null;
 PreparedStatement stInsert = null;
 PreparedStatement stSelect = null;
@@ -89,23 +96,30 @@ try {
         "n0m3l0"
     );
 
-    stSelect = conecta.prepareStatement("SELECT * FROM citas");
-    rs = stSelect.executeQuery();
-
+    stSelect = conecta.prepareStatement(
+            "SELECT c.id_cita, u.nombre AS paciente, c.fecha_hora, c.tipo" +
+        " FROM cita c" +
+        " JOIN paciente p ON c.id_paciente = p.id_paciente" +
+        " JOIN usuario u ON p.id_usuario = u.id_usuario" +
+        " WHERE c.id_medico = ?" +
+        " AND c.estado = 'programada'" +
+        " ORDER BY c.fecha_hora"
+);
+stSelect.setInt(1, idMedico);
+rs = stSelect.executeQuery();
 } catch (Exception e) {
-    out.println("<p>Error: " + e.getMessage() + "</p>");
-} finally {
-
+    mensaje = "Error: " + e.getMessage();
+    claseMensaje = "mensajeError";
 }
 %>
+%>
 
-             <%@ include file="navDoctor.jsp" %>
-
+    <%@ include file="navDoctor.jsp" %>
 
     <header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
 
-        <h1>Modificar Cita</h1>
+        <h1>Editar Cita</h1>
     </header>
     <main id="genDoc2">
 
@@ -125,15 +139,20 @@ try {
         <% if (rs != null) { while (rs.next()) { %>
         <tr>
             <td><%= rs.getString("id_cita") %></td>
-            <td><%= rs.getString("nombre") %></td>
+            <td><%= rs.getString("paciente") %></td>
             <td><%= rs.getString("fecha_hora") %></td>
             <td><%= rs.getString("tipo") %></td>
-            <td><a href="editAppt2.jsp?id_cita=<%= rs.getInt("id_cita") %>">Modificar</a></td>
+            <td><form action="editAppt2.jsp" method="post">
+                <input type="hidden" name="id_cita" value="<%= rs.getInt("id_cita") %>">
+                <button type="submit">
+                    Editar
+                </button>
+            </form></td>
         </tr>
         <% }} %>
     </tbody>
 </table>
-    <button type="button" onclick="location.href='docAppts.html'" class="boton">Regresar</button>
+    <button type="button" onclick="location.href='docAppts.jsp'" class="boton">Regresar</button>
     </section>
 
     <footer>

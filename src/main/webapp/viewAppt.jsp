@@ -114,6 +114,7 @@ try {
     "JOIN paciente p ON c.id_paciente = p.id_paciente " +
     "JOIN usuario u ON p.id_usuario = u.id_usuario " +
     "WHERE c.id_medico = ? " +
+     " AND c.estado = 'programada'" +
     "ORDER BY c.fecha_hora"
 );
 stSelect.setInt(1, idMedico);
