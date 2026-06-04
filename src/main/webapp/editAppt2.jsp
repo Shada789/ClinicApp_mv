@@ -60,8 +60,7 @@
 
                     <input type="hidden" name="id_cita" value="<%= id %>">
 
-                    <label>ID:</label>
-                    <input type="text" value="<%= id %>" readonly>
+                    <input type="hidden" value="<%= id %>" readonly>
 
                     <label>Paciente:</label>
                     <input type="text" value="<%= paciente %>" readonly>
@@ -88,9 +87,9 @@
                         </option>
                     </select>
 
-                    <label>Descripción:</label>
+
                     <textarea name="descripcion" rows="5" cols="40"><%= descripcion %></textarea>
-                    <br>
+                    <br><br>
 
                     <button type="submit" class="botonImportante">
                         Guardar Cambios
