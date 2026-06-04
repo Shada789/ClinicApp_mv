@@ -76,6 +76,7 @@
 
         <main id="genDoc2">
             <section>
+            <p>
                     <form id="formCita" action="addAppt.jsp" method="post">
 
                         <label>Paciente:</label>
@@ -138,7 +139,8 @@
                         <button type="submit" class="botonImportante">
                             Agregar Cita
                         </button>
-                    </form><br>
+                    </form>
+                    </p><br>
                     <button
                     type="button"
                     onclick="location.href='docAppts.jsp'"
