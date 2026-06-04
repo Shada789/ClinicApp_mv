@@ -76,10 +76,9 @@
 
         <main id="genDoc2">
             <section>
-                <article>
                     <form id="formCita" action="addAppt.jsp" method="post">
 
-                        <label for="paciente">Paciente:</label>
+                        <label>Paciente:</label>
                         <select id="paciente" name="paciente" required>
                             <option value="">Seleccione un paciente</option>
                             <%
@@ -147,7 +146,6 @@
 
                     Regresar
                 </button>
-            </article>
         </section>
         <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos</p>
