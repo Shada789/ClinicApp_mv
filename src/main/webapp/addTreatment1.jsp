@@ -41,12 +41,7 @@
 
     <%@ include file="navDoctor.jsp" %>
 	
-	<%Integer idMedico = (Integer) session.getAttribute("id_medico");
-    if (idMedico == null) {
-        response.sendRedirect("index.html");
-        return;
-    }
-
+	<%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);%>

@@ -2,18 +2,14 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
     <title>Página Principal</title>
 </head>
 
 <body id="bodDoc">
-    <%Integer idMedico = (Integer) session.getAttribute("id_medico");
-    if (idMedico == null) {
-        response.sendRedirect("index.html");
-        return;
-    }
-
+    <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);%>
@@ -31,7 +27,7 @@
             <article>
                 <h2>Registrar tratamiento</h2>
                 <p>Aquí podrá agregar tratamientos nuevos.</p>
-                <button type="button" class="boton" id="RegisTrat" onclick="location.href='addTreatment.html'">Registrar</button>
+                <button type="button" class="boton" id="RegisTrat" onclick="location.href='addTreatment.jsp'">Registrar</button>
             </article>
 
 			<article>
