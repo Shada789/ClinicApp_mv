@@ -76,10 +76,9 @@
 
         <main id="genDoc2">
             <section>
-                <article>
                     <form id="formCita" action="addAppt.jsp" method="post">
 
-                        <label for="paciente">Paciente:</label>
+                        <label>Paciente:</label>
                         <select id="paciente" name="paciente" required>
                             <option value="">Seleccione un paciente</option>
                             <%
@@ -118,13 +117,13 @@
                                 if(rsPac != null) rsPac.close();
                                 if(psPac != null) psPac.close();
                             if(con != null) con.close();} %>
-                        </select><br>
+                        </select>
 
                         <label for="fecha">Fecha de la cita:</label>
-                        <input type="date" id="fecha" name="fecha" required><br>
+                        <input type="date" id="fecha" name="fecha" required>
 
                         <label for="hora"> Hora de la cita que desee:</label>
-                        <input type="time" id="hora" name="hora" required><br>
+                        <input type="time" id="hora" name="hora" required>
 
                         <label for="tipo">Tipo de cita:</label>
                         <select id="tipo" name="tipo" required>
@@ -132,10 +131,10 @@
                             <option value="consulta">Consulta</option>
                             <option value="control">Control</option>
                             <option value="urgencia">Urgencia</option>
-                        </select><br>
+                        </select>
 
                         <label for="descripcion">Descripción:</label>
-                        <textarea id="descripcion" name="descripcion" placeholder="Escribe aquí la descripción"></textarea>><br>
+                        <textarea id="descripcion" name="descripcion" rows="5" cols="40" placeholder="Escribe aquí la descripción"></textarea>
                         <button type="submit" class="botonImportante">
                             Agregar Cita
                         </button>
@@ -147,7 +146,6 @@
 
                     Regresar
                 </button>
-            </article>
         </section>
         <footer>
             <p>&copy; 2025 ClinicApp | Todos los derechos</p>

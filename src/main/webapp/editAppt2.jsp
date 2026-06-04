@@ -1,45 +1,45 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%
-String id = request.getParameter("id_cita");
-String paciente = "";
-String fecha = "";
-String hora = "";
-String descripcion = "";
-String tipo = "";
-Connection con = null;
-PreparedStatement st = null;
-ResultSet rs = null;
-try{
-    Class.forName("com.mysql.cj.jdbc.Driver");
-    con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC",
-        "root",
-        "n0m3l0"
-    );
-    st = con.prepareStatement(
-        "SELECT c.id_cita, u.nombre AS paciente, " +
-        "c.fecha_hora, c.notas, c.tipo " +
-        "FROM cita c " +
-        "JOIN paciente p ON c.id_paciente = p.id_paciente " +
-        "JOIN usuario u ON p.id_usuario = u.id_usuario " +
-        "WHERE c.id_cita = ?"
-    );
-    st.setInt(1, Integer.parseInt(id));
-    rs = st.executeQuery();
-    if(rs.next()){
-        paciente = rs.getString("paciente");
-        descripcion = rs.getString("notas");
-        tipo = rs.getString("tipo");
+    String id = request.getParameter("id_cita");
+    String paciente = "";
+    String fecha = "";
+    String hora = "";
+    String descripcion = "";
+    String tipo = "";
+    Connection con = null;
+    PreparedStatement st = null;
+    ResultSet rs = null;
+    try{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC",
+            "root",
+            "n0m3l0"
+        );
+        st = con.prepareStatement(
+            "SELECT c.id_cita, u.nombre AS paciente, " +
+            "c.fecha_hora, c.notas, c.tipo " +
+            "FROM cita c " +
+            "JOIN paciente p ON c.id_paciente = p.id_paciente " +
+            "JOIN usuario u ON p.id_usuario = u.id_usuario " +
+            "WHERE c.id_cita = ?"
+        );
+        st.setInt(1, Integer.parseInt(id));
+        rs = st.executeQuery();
+        if(rs.next()){
+            paciente = rs.getString("paciente");
+            descripcion = rs.getString("notas");
+            tipo = rs.getString("tipo");
 
-        String fechaHora = rs.getString("fecha_hora");
+            String fechaHora = rs.getString("fecha_hora");
 
-        fecha = fechaHora.substring(0,10);
-        hora = fechaHora.substring(11,16);
+            fecha = fechaHora.substring(0,10);
+            hora = fechaHora.substring(11,16);
+        }
+    }catch(Exception e){
+        out.println("Error: " + e.getMessage());
     }
-}catch(Exception e){
-    out.println("Error: " + e.getMessage());
-}
 %>
 <!DOCTYPE html>
 <html lang="es">
