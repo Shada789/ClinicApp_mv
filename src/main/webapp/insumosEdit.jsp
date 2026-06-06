@@ -13,12 +13,7 @@
 	</head>
 	
 	<body id="bodDoc">
-		<%Integer idMedico = (Integer) session.getAttribute("id_medico");
-    if (idMedico == null) {
-        response.sendRedirect("index.html");
-        return;
-    }
-
+	<%
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);%>
@@ -43,10 +38,10 @@
 					
 					<%
 					Integer idMedico = (Integer) session.getAttribute("id_medico");
-                                        if (idMedico == null) {
-                                                response.sendRedirect("index.html");
-                                                return;
-                                        }
+                    if (idMedico == null) {
+                        response.sendRedirect("index.html");
+                        return;
+                    }
 
 					Connection conecta;
 					PreparedStatement st;

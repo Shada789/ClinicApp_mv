@@ -17,11 +17,11 @@
 		price=Integer.parseInt(request.getParameter("precio"));
 		desc=request.getParameter("descripcion");
 
-                Integer idMedico = (Integer) session.getAttribute("id_medico");
-                if (idMedico == null) {
-                        response.sendRedirect("index.html");
-                        return;
-                }
+        Integer idMedico = (Integer) session.getAttribute("id_medico");
+    	if (idMedico == null) {
+            response.sendRedirect("index.html");
+            return;
+        }
 		
 		Connection conecta;
 		PreparedStatement st;
