@@ -16,9 +16,8 @@
 </head>
 
 <body id="bodDoc">
-            <%@ include file="navPaciente.jsp" %>
+    <%@ include file="navPaciente.jsp" %>
 
-	
 	<header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">
         <h1>Tratamientos</h1>
@@ -27,43 +26,62 @@
     <main id="genDoc2">
         <section id="tratamientosProceso">
 		
-            <h2>Lista de Doctores</h2>
-            <table style="width:100%;"  id="tablasNoche">
+            <h2>Tratamientos Listados</h2>
+            <table style="width:100%;" id="tablasNoche">
                 <thead>
                     <tr>
-                        <th>Nombre(s)</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
-						<th></th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Descripción</th>
+						<th>Observaciones</th>
+						<th style="display: none;"></th>
                     </tr>
+					
+					<%
+					Integer idPaciente = (Integer) session.getAttribute("id_paciente");
+    				if (idPaciente == null) {
+        				response.sendRedirect("index.html");
+        				return;
+    				}
+
+					Connection conecta;
+					PreparedStatement st;
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
+					st = conecta.prepareStatement(
+						"SELECT pt.id, t.id_tratamiento, t.nombre, t.precio, t.descripcion, pt.observaciones "+ 
+						"FROM paciente_tratamiento pt " + 
+						"INNER JOIN tratamiento t " + 
+						"ON pt.id_tratamiento = t.id_tratamiento " + 
+						"WHERE pt.id_paciente = ?"
+					);
+                    
+                    st.setInt(1, idPaciente);
 		
-	<%
-		Connection conecta;
-		PreparedStatement st;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		conecta= DriverManager.getConnection("jdbc:mysql://localhost:3306/chambs","root","n0m3l0");
-		st = conecta.prepareStatement("SELECT * FROM usuario where id_tipo>=2");
-		
-		
-		ResultSet rs = st.executeQuery();
-		while(rs.next()){
-	%>
-		<tr>
-			<td style="width: 27%;"><%=rs.getString("nombre")%></td>
-			<td style="width: 27%;"><%=rs.getString("paterno")%></td>
-			<td style="width: 27%;"><%=rs.getString("materno")%></td>
-			<td style="width: 19%;"><a href="searchTreatmentP1.jsp?id_tratamiento=<%=rs.getString("id_usuario")%>">
-			<button type="submit" class="boton" id="code" >	Ver Tratamientos</td>
-		</tr>
-	<%}
-	%>
-			</thead>
+					ResultSet rs = st.executeQuery();
+					while(rs.next()){
+					%>	
+					
+					<tr>
+						<td style="width: 20%;"><%=rs.getString("nombre")%></td>
+						<td style="width: 15%;">$<%=rs.getString("precio")%>.0</td>
+						<td style="width: 30%;"><%=rs.getString("descripcion")%></td>
+						<td style="width: 29%;"><%=rs.getString("observaciones")%></td>
+						<td style="width: 1%; border: none;"></td>
+					</tr>
+					<%
+					}
+					%>
+                </thead>
+                <tbody>
+                </tbody>
+
             </table>
 			<br>
-			
-		<button type="button" onclick="location.href='patientTreatment.html'" class="boton">Regresar</button>	
+			<button type="button" onclick="location.href='patientTreatment.jsp'" class="boton">Regresar</button>
         </section>
     </main>
+
 </body>
 
 </html>
