@@ -47,6 +47,12 @@
                 <p>Aquí podrá seleccionar algún tratamiento y eliminarlo.</p>
                 <button type="button" class="boton" id="EliTrat" onclick="location.href='deleteTreatments.jsp'">Eliminar</button>
             </article>
+
+            <article>
+                <h2>Asignar tratamientos</h2>
+                <p>Aquí podrá gestionar los tratamientos asignados a los pacientes.</p>
+                <button type="button" class="boton" id="AsigTrat" onclick="location.href='assignTreatments.jsp'">Asignar</button>
+            </article>
 			
         </section>
     </main>
