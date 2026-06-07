@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<%@page import="java.sql.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="clinictyle.css">
+    <title>Modificar Cita</title>
+    <style>
+        #formCita label,
+#formCita input, #formCita select {
+
+    border: none;
+    color: black;
+    font-size: 16px;
+        background-color: transparent;
+
+
+}
+#formCita button{
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+    </style>
+</head>
+    <body id="bodDoc">
+        <%@ include file="navDoctor.jsp" %>
+		<%
+        String id = request.getParameter("id_cita");
+
+        if(id != null){
+
+            Connection conecta = null;
+            PreparedStatement st = null;
+
+            try{
+
+                Class.forName("com.mysql.cj.jdbc.Driver");
+
+                conecta = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/chambs",
+                    "root",
+                    "n0m3l0"
+                );
+
+                st = conecta.prepareStatement(
+                    "UPDATE cita SET estado='cancelada' WHERE id_cita=?"
+                );
+
+                st.setInt(1, Integer.parseInt(id));
+
+                int filas = st.executeUpdate();
+
+                if(filas > 0){
+                    out.println("<p>Cita cancelada correctamente.</p>");
+                }else{
+                    out.println("<p>No se encontró la cita.</p>");
+                }
+
+            }catch(Exception e){
+
+                out.println("<p>Error: " + e.getMessage() + "</p>");
+
+            }finally{
+
+                if(st != null) st.close();
+                if(conecta != null) conecta.close();
+
+            }
+        }
+        %>
+         <%@ include file="navDoctor.jsp" %>
+
+     <header class="nave">
+        <img class="logo" src="imgs/image.png" alt="Logo">
+
+        <h1>Cancelar Cita</h1>
+    </header>
+    <main id="genDoc2">
+      
+        <section>
+		<h1>Cancelación de citas</h1>
+		<button type="button" class="boton" onclick="location.href='patientAppts.jsp'">Regresar </button>
+        </section>
+        <footer>
+            <p>&copy; 2025 ClinicApp | Todos los derechos reservados</p>
+        </footer>
+    </main>
+</body>
+</html>

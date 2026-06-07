@@ -73,6 +73,12 @@ String hora = request.getParameter("hora");
 String tipo = request.getParameter("tipo");
 
 String fecha_hora = fecha + " " + hora;
+Integer idPaciente = (Integer) session.getAttribute("id_paciente");
+
+if(idPaciente == null){
+    response.sendRedirect("login.jsp");
+    return;
+}
 
 Connection conecta = null;
 PreparedStatement stInsert = null;
@@ -88,7 +94,18 @@ try {
         "n0m3l0"
     );
 
-    stSelect = conecta.prepareStatement("SELECT * FROM citas");
+    stSelect = conecta.prepareStatement(
+    "SELECT c.id_cita, c.fecha_hora, c.tipo, c.notas, " +
+    "u.nombre, u.paterno, u.materno " +
+    "FROM cita c " +
+    "JOIN medico m ON c.id_medico = m.id_medico " +
+    "JOIN usuario u ON m.id_usuario = u.id_usuario " +
+    "WHERE c.id_paciente = ? " +
+    "AND c.estado = 'programada' " +
+    "ORDER BY c.fecha_hora"
+    );
+
+    stSelect.setInt(1, idPaciente);
     rs = stSelect.executeQuery();
 
 } catch (Exception e) {
@@ -112,26 +129,35 @@ try {
             <table id="tablasDia">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Paciente</th>
+            <th>Medico</th>
             <th>Fecha</th>
             <th>Tipo</th>
+            <th>Descripción</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         <% if (rs != null) { while (rs.next()) { %>
         <tr>
-            <td><%= rs.getString("id_cita") %></td>
-            <td><%= rs.getString("nombre") %></td>
+            <td>
+            <%= rs.getString("nombre") %>
+            <%= rs.getString("paterno") %>
+            <%= rs.getString("materno") %>
+            </td>
             <td><%= rs.getString("fecha_hora") %></td>
             <td><%= rs.getString("tipo") %></td>
-            <td><a href="deleteAppt2.jsp?id_cita=<%= rs.getInt("id_cita") %>">Cancelar</a></td>
+            <td><%= rs.getString("notas") %></td>
+            <td><form action="BorrarCitaPac2.jsp" method="post">
+                <input type="hidden" name="id_cita" value="<%= rs.getInt("id_cita") %>">
+                <button type="submit" class="botonImportante">
+                    Cancelar
+                </button>
+            </form></td>
         </tr>
         <% }} %>
     </tbody>
 </table>
-    <button type="button" onclick="location.href='patientAppts.html'" class="boton">Regresar</button>
+    <button type="button" onclick="location.href='patientAppts.jsp'" class="boton">Regresar</button>
     </section>
 
     <footer>

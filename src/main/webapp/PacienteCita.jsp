@@ -70,6 +70,12 @@ String pac = (String) session.getAttribute("nombrePaciente");
 String fecha = request.getParameter("fecha");
 String hora = request.getParameter("hora");
 String tipo = request.getParameter("tipo");
+Integer idPaciente = (Integer) session.getAttribute("id_paciente");
+
+if(idPaciente == null){
+    response.sendRedirect("login.jsp");
+    return;
+}
 
 String fecha_hora = fecha + " " + hora;
 
@@ -87,9 +93,19 @@ try {
         "n0m3l0"
     );
 
-    stSelect = conecta.prepareStatement("SELECT * FROM citas WHERE nombre = ? ORDER BY fecha_hora");
-stSelect.setString(1, pac);
-rs = stSelect.executeQuery();
+    stSelect = conecta.prepareStatement(
+    "SELECT c.id_cita, c.fecha_hora, c.tipo, c.notas, " +
+    "u.nombre, u.paterno, u.materno " +
+    "FROM cita c " +
+    "JOIN medico m ON c.id_medico = m.id_medico " +
+    "JOIN usuario u ON m.id_usuario = u.id_usuario " +
+    "WHERE c.id_paciente = ? " +
+    "AND c.estado = 'programada' " +
+    "ORDER BY c.fecha_hora"
+    );
+
+    stSelect.setInt(1, idPaciente);
+    rs = stSelect.executeQuery();
 
 } catch (Exception e) {
     out.println("<p>Error: " + e.getMessage() + "</p>");
@@ -111,24 +127,28 @@ rs = stSelect.executeQuery();
         <table id="tablasDia">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Paciente</th>
+            <th>Médico</th>
             <th>Fecha</th>
             <th>Tipo</th>
+            <th>Descripción</th>
         </tr>
     </thead>
     <tbody>
         <% if (rs != null) { while (rs.next()) { %>
         <tr>
-            <td><%= rs.getString("id_cita") %></td>
-            <td><%= rs.getString("nombre") %></td>
+            <td>
+            <%= rs.getString("nombre") %>
+            <%= rs.getString("paterno") %>
+            <%= rs.getString("materno") %>
+            </td>
             <td><%= rs.getString("fecha_hora") %></td>
             <td><%= rs.getString("tipo") %></td>
+            <td><%= rs.getString("notas") %></td>
         </tr>
         <% }} %>
     </tbody>
 </table>
-<button type="button" onclick="location.href='patientAppts.html'" class="boton" id="Regreso">Regresar</button>
+<button type="button" onclick="location.href='patientAppts.jsp'" class="boton" id="Regreso">Regresar</button>
     </section>
 
     <footer>
