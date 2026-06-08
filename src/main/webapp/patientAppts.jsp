@@ -2,7 +2,12 @@
 <html lang="es">
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%
+    Integer idPaciente = (Integer) session.getAttribute("id_paciente");
+    if (idPaciente == null) { response.sendRedirect("index.html"); return; }
+    String msgToast = request.getParameter("msg");
+    String msgJS = (msgToast != null) ? msgToast.replace("\"", "\\\"") : "";
+%>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="clinictyle.css" type="text/css">
@@ -40,7 +45,18 @@
         </footer>
     </main>
 
-
+<div id="toast" class="toast"></div>
+<script>
+    window.onload = function() {
+        const msg = "<%= msgJS %>";
+        if (msg && msg.trim() !== "") {
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+    };
+</script>
 </body>
 
 </html>

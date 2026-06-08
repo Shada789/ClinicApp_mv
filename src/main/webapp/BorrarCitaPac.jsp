@@ -76,7 +76,7 @@ String fecha_hora = fecha + " " + hora;
 Integer idPaciente = (Integer) session.getAttribute("id_paciente");
 
 if(idPaciente == null){
-    response.sendRedirect("login.jsp");
+    response.sendRedirect("login.html");
     return;
 }
 
@@ -88,11 +88,10 @@ ResultSet rs = null;
 try {
     Class.forName("com.mysql.cj.jdbc.Driver");
 
-    conecta = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/chambs?useSSL=false&serverTimezone=UTC",
-        "root",
-        "n0m3l0"
-    );
+  conecta = DriverManager.getConnection(
+    "jdbc:mysql://127.0.0.1:3306/chambs?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+    "root", "n0m3l0"
+);
 
     stSelect = conecta.prepareStatement(
     "SELECT c.id_cita, c.fecha_hora, c.tipo, c.notas, " +
@@ -115,7 +114,7 @@ try {
 }
 %>
 
-     <%@ include file="navDoctor.jsp" %>
+     <%@ include file="navPaciente.jsp" %>
 
     <header class="nave">
         <img class="logo" src="imgs/image.png" alt="Logo">

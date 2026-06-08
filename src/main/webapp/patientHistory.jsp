@@ -19,12 +19,11 @@
         );
 
         PreparedStatement psCitas = con.prepareStatement(
-            "SELECT c.fecha_hora, c.estado, c.notas, tc.nombre AS tipo " +
-            "FROM cita c " +
-            "JOIN tipo_cita tc ON c.id_tipo_cita = tc.id_tipo_cita " +
-            "WHERE c.id_paciente = ? " +
-            "ORDER BY c.fecha_hora DESC"
-        );
+    "SELECT c.fecha_hora, c.estado, c.notas, c.tipo " +
+    "FROM cita c " +
+    "WHERE c.id_paciente = ? " +
+    "ORDER BY c.fecha_hora DESC"
+);
         psCitas.setInt(1, idPaciente);
         ResultSet rsCitas = psCitas.executeQuery();
 
